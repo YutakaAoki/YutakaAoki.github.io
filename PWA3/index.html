@@ -6,6 +6,15 @@
 	<meta charset="UTF-8">
 	<title>PWA3 Test</title>
 	<link rel="manifest" href="manifest.json">
+	<script>
+	if ( 'serviceWorker' in navigator ) {
+		navigator.serviceWorker.register('/serviceworker.js').then(
+			function() {
+				console.log( "YA, PWA3, Service Worker Registered." );
+			}
+		);
+	}
+	</script>
 </head>
 YA, awawa
 </html>
