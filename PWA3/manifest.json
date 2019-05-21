@@ -1,7 +1,7 @@
 {
-  "name"              : "PWA SAMPLE",
-  "short_name"        : "PWAS",
-  "description"       : "PWA‚ÌƒeƒXƒg",
+  "name"              : "PWA3 SAMPLE",
+  "short_name"        : "PWA3",
+  "description"       : "PWA3 test",
   "start_url"         : "PWA3/index.html?utm_source=homescreen",
   "display"           : "standalone",
   "orientation"       : "portrait",
