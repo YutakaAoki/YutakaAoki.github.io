@@ -1,0 +1,17 @@
+{
+  "name"              : "PWA SAMPLE",
+  "short_name"        : "PWAS",
+  "description"       : "PWA‚ÌƒeƒXƒg",
+  "start_url"         : "PWA3/index,html?utm_source=homescreen",
+  "display"           : "standalone",
+  "orientation"       : "portrait",
+  "background_color"  : "#000000",
+  "theme_color"       : "#ffffff",
+  "icons": [
+    {
+      "src"           : "app-icon-192.png",
+      "sizes"         : "192x192",
+      "type"          : "image/png"
+    }
+  ]
+}
