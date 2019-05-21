@@ -9,7 +9,7 @@
   "theme_color"       : "#ffffff",
   "icons": [
     {
-      "src"           : "app-icon-192.png",
+      "src"           : "/PWA3/app-icon-192.png",
       "sizes"         : "192x192",
       "type"          : "image/png"
     }
