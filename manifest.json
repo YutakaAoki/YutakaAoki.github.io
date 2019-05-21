@@ -1,7 +1,7 @@
 {
   "name"              : "PWA3 SAMPLE",
   "short_name"        : "PWA3",
-  "start_url"         : "/",
+  "start_url"         : "/index.html",
   "display"           : "standalone",
   "theme_color"       : "#ffffff",
   "icons": [
