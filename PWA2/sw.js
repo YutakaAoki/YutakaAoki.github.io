@@ -4,9 +4,9 @@
 // キャッシュ名とキャッシュファイルの指定
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
-	'/pwa/',
-	'/pwa/css/style.css',
-	'/pwa/drawer.js'
+	'/PWA2/',
+	'/PWA2/css/style.css',
+	'/PWA2/drawer.js'
 ];
 
 // インストール処理
