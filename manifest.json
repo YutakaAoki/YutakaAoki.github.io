@@ -1,0 +1,17 @@
+{
+  "name"              : "PWA3 SAMPLE",
+  "short_name"        : "PWA3",
+  "description"       : "PWA3 test",
+  "start_url"         : "/PWA3/",
+  "display"           : "standalone",
+  "orientation"       : "portrait",
+  "background_color"  : "#000000",
+  "theme_color"       : "#ffffff",
+  "icons": [
+    {
+      "src"           : "app-icon-192.png",
+      "sizes"         : "192x192",
+      "type"          : "image/png"
+    }
+  ]
+}
