@@ -2,7 +2,7 @@
   "name"              : "PWA SAMPLE",
   "short_name"        : "PWAS",
   "description"       : "PWA‚ÌƒeƒXƒg",
-  "start_url"         : "PWA3/index,html?utm_source=homescreen",
+  "start_url"         : "PWA3/index.html?utm_source=homescreen",
   "display"           : "standalone",
   "orientation"       : "portrait",
   "background_color"  : "#000000",
