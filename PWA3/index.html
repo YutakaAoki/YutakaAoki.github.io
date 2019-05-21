@@ -7,14 +7,18 @@
 	<title>PWA3 Test</title>
 	<link rel="manifest" href="manifest.json">
 	<script>
-	if ( 'serviceWorker' in navigator ) {
-		navigator.serviceWorker.register( 'serviceworker.js' ).then(
-			function() {
-				console.log( "YA, PWA3, Service Worker Registered." );
-			}
-		);
-	}
+	window.addEventListener('load', function() {
+	  if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register("serviceworker.js")
+		  .then(function(registration) {
+			console.log( "YA, PWA3, Service Worker Registered." );
+		  }).catch(function(error) {
+			console.warn("YA, PWA3, ServiceWorker can't be Registerd.", error);
+		  });
+	  }
+	});
 	</script>
+	
 </head>
 YA, awawa
 </html>
