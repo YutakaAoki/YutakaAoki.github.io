@@ -17,6 +17,9 @@ body {
 
 .main-text {
   white-space: nowrap;
+  position: absolute;
+  left: 0px;
+  top: 200px;
 }
 
 img {
@@ -33,7 +36,8 @@ img {
 
 .network-message {
   font-weight: 200;
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
+  position: absolute;
+  left: 0px;
+  top: 250px;
 }
+

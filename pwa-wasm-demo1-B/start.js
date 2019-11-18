@@ -19,18 +19,38 @@
 var import_func_s = {
 
 _jsfunc_MyStdcLib_1 : function ()
-{ 	g_wasm_stdout_buf = "";},
+{
+	g_wasm_stdout_buf = "";},
 
 _jsfunc_MyStdcLib_2 : function ()
-{ 	g_outarea.value += g_wasm_stdout_buf;
+{
+	g_outarea.value += g_wasm_stdout_buf;
 	g_outarea.scrollTop = g_outarea.scrollHeight;
 	g_wasm_stdout_buf = "";},
 
 _jsfunc_MyStdcLib_3 : function ($0)
-{ 	g_wasm_stdout_buf += String.fromCharCode($0);},
+{
+	g_wasm_stdout_buf += String.fromCharCode($0);},
+
+_jsfunc_basic_math_1 : function ($0)
+{
+	var a = $0;
+	return Math.floor( a );},
+
+_jsfunc_basic_math_2 : function ($0)
+{
+	var x = $0;
+	return Math.log10( x );},
+
+_jsfunc_basic_math_3 : function ($0, $1)
+{
+	var x = $0;
+	var y = $1;
+	return Math.pow( x, y );},
 
 _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var idxParent = $1;
 	var x = $2;
 	var y = $3;
@@ -95,12 +115,13 @@ _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 	return 1;},
 
 _jsfunc_Wnd_2 : function ($0, $1)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var sizeFont = $1;
 	var sxFont = sizeFont / 2.0;
 	var ctx = g_ctx_s[idxCanvas];
 	{
-	var font_name = "monospace";
+	var font_name = "MS Gothic";
 	ctx.font = "normal normal " + String(sizeFont) + "px " + font_name;
 	var sxTextX = ctx.measureText("X").width;
 	var ratio = sxTextX / sxFont;
@@ -111,7 +132,8 @@ _jsfunc_Wnd_2 : function ($0, $1)
 	return 1;},
 
 _jsfunc_Wnd_3 : function ($0, $1, $2)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var x = $1;
 	var y = $2;
 	var whole_div = g_whole_div_s[idxCanvas];
@@ -119,7 +141,8 @@ _jsfunc_Wnd_3 : function ($0, $1, $2)
 	whole_div.style.top = String(y) + "px";},
 
 _jsfunc_Wnd_4 : function ($0, $1, $2, $3, $4, $5, $6, $7)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var x = $1;
 	var y = $2;
 	var sx = $3;
@@ -163,20 +186,24 @@ _jsfunc_Wnd_4 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 	}},
 
 _jsfunc_Wnd_5 : function ($0, $1, $2)
-{ 	var whole_div = g_whole_div_s[$0];
+{
+	var whole_div = g_whole_div_s[$0];
 	whole_div.style.left = String($1) + "px";
 	whole_div.style.top = String($2) + "px";},
 
 _jsfunc_Wnd_6 : function ($0)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.save();},
 
 _jsfunc_Wnd_7 : function ($0)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.restore();},
 
 _jsfunc_Wnd_8 : function ($0)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var whole_div = g_whole_div_s[idxCanvas];
 	whole_div.parentNode.removeChild(whole_div);
 	g_whole_div_s[idxCanvas] = 0;
@@ -186,7 +213,8 @@ _jsfunc_Wnd_8 : function ($0)
 	return 1;},
 
 _jsfunc_Wnd_9 : function ($0, $1)
-{ 	var pTimer = $0;
+{
+	var pTimer = $0;
 	var millisec = $1;
 	var js_OnTimer = function() {
 	var rr = g_exports.wa_OnTimer( pTimer );
@@ -194,11 +222,13 @@ _jsfunc_Wnd_9 : function ($0, $1)
 	return setInterval( js_OnTimer, millisec );},
 
 _jsfunc_Wnd_10 : function ($0)
-{ 	var idTimer = $0;
+{
+	var idTimer = $0;
 	clearInterval( idTimer );},
 
 _jsfunc_Wnd_11 : function ($0, $1, $2, $3)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var idxCanvas_wgl = $1;
 	var sx = $2;
 	var sy = $3;
@@ -239,7 +269,8 @@ _jsfunc_Wnd_11 : function ($0, $1, $2, $3)
 	g_ctx_s[idxCanvas_wgl] = ctx_wgl;},
 
 _jsfunc_PrepDC_1 : function ($0, $1, $2, $3, $4)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var org_x = $1;
 	var org_y = $2;
 	var sx = $3;
@@ -251,7 +282,8 @@ _jsfunc_PrepDC_1 : function ($0, $1, $2, $3, $4)
 	ctx.clip();},
 
 _jsfunc_Caret_1 : function ($0, $1, $2, $3, $4, $5, $6)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var xCaret = $1;
 	var yCaret = $2;
 	var sxCaret = $3;
@@ -283,26 +315,33 @@ _jsfunc_Caret_1 : function ($0, $1, $2, $3, $4, $5, $6)
 	);},
 
 _jsfunc_NexFuncs_1 : function ($0)
-{ 	var s = Pointer_stringify($0);
+{
+	var s = Pointer_stringify($0);
 	alert(s);},
 
 _jsfunc_NexFuncs_2 : function ()
-{ 	document.body.style.cursor = "se-resize";},
+{
+	document.body.style.cursor = "se-resize";},
 
 _jsfunc_NexFuncs_3 : function ()
-{ 	document.body.style.cursor = "e-resize";},
+{
+	document.body.style.cursor = "e-resize";},
 
 _jsfunc_NexFuncs_4 : function ()
-{ 	document.body.style.cursor = "s-resize";},
+{
+	document.body.style.cursor = "s-resize";},
 
 _jsfunc_NexFuncs_5 : function ()
-{ 	document.body.style.cursor = "default";},
+{
+	document.body.style.cursor = "default";},
 
 _jsfunc_NexFuncs_6 : function ()
-{ 	g_input_tag.focus();},
+{
+	g_input_tag.focus();},
 
 _jsfunc_DC_1 : function ($0, $1, $2, $3, $4, $5, $6)
-{ 	var str = Pointer_stringify($5);
+{
+	var str = Pointer_stringify($5);
 	var ctx = g_ctx_s[$0];
 	ctx.beginPath();
 	ctx.lineWidth = $6;
@@ -314,13 +353,15 @@ _jsfunc_DC_1 : function ($0, $1, $2, $3, $4, $5, $6)
 	return 0;},
 
 _jsfunc_DC_2 : function ($0, $1, $2, $3, $4, $5)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.fillStyle = Pointer_stringify($5);
 	ctx.fillRect($1, $2, $3, $4);
 	return 0;},
 
 _jsfunc_DC_3 : function ($0, $1, $2, $3)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var str = Pointer_stringify($3);
 	ctx.fillStyle = "#000000";
 	ctx.textBaseline = "top";
@@ -328,7 +369,8 @@ _jsfunc_DC_3 : function ($0, $1, $2, $3)
 	ctx.fillText(str, $1, $2);},
 
 _jsfunc_DC_4 : function ($0, $1, $2, $3)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var str = String.fromCodePoint($3);
 	ctx.fillStyle = "#000000";
 	ctx.textBaseline = "top";
@@ -336,7 +378,8 @@ _jsfunc_DC_4 : function ($0, $1, $2, $3)
 	ctx.fillText(str, $1, $2);},
 
 _jsfunc_DC_5 : function ($0, $1, $2, $3, $4, $5)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var x = $1;
 	var y = $2;
 	var radius = $3;
@@ -348,16 +391,157 @@ _jsfunc_DC_5 : function ($0, $1, $2, $3, $4, $5)
 	ctx.stroke();},
 
 _jsfunc_BaseWnd_1 : function ()
-{ 	if ( document.activeElement != null ) {
+{
+	if ( document.activeElement != null ) {
 	document.activeElement.blur();
 	}},
 
+_jsfunc_TopWnd_1 : function ($0, $1)
+{
+	var ctx = g_ctx_s[$0];
+	var str = Pointer_stringify( $1 );
+	var metrics = ctx.measureText( str );
+	return metrics.width;},
+
+_jsfunc_TopWnd_2 : function ()
+{
+	printf_file_list = function(file_list) {
+	var i;
+	var num = file_list.length;
+	console.log( "num = " + num );
+	for ( i = 0; i < num; i++ ){
+	var file = file_list[i];
+	console.log( "i = " + i );
+	console.log( "name:" + file.name );
+	console.log( "size:" + file.size );
+	console.log( "type:" + file.type );
+	var reader = new FileReader();
+	reader.readAsText( file, 'UTF-8' );
+	reader.onload = function( readerEvent ) {
+	var content = readerEvent.target.result;
+	console.log( content );
+	}
+	}
+	}},
+
+_jsfunc_TopWnd_3 : function ()
+{
+	g_open_dlg_obj = new Object();
+	g_open_dlg_obj.m_file_list = null;
+	g_open_dlg_obj.m_bOk = 0;
+	var whole_div = document.createElement('div');
+	whole_div.style.position = "absolute";
+	whole_div.style.left = "50px";
+	whole_div.style.top = "20px";
+	whole_div.style["background-color"] = "#FF0000";
+	whole_div.style.border = "5px solid #00FF00";
+	whole_div.style.width = "300px";
+	whole_div.style.height = "110px";
+	whole_div.style.zIndex = "10000000";
+	document.body.appendChild( whole_div );
+	g_open_dlg_obj.m_whole_div = whole_div;
+	var title = document.createElement('span');
+	title.innerHTML = "File Open Dialog";
+	title.style.position = "absolute";
+	title.style.border = "2px solid #000000";
+	title.style.color = "#000000";
+	title.style["background-color"] = "#FFFF00";
+	title.style["text-align"] = "center";
+	title.style.left = "0px";
+	title.style.top = "0px";
+	title.style.width = "296px";
+	title.style.height = "25px";
+	whole_div.appendChild( title );
+	g_open_dlg_obj.m_title = title;
+	file_input_tag = document.createElement('input');
+	file_input_tag.type = 'file';
+	file_input_tag.name = 'name';
+	file_input_tag.multiple = 'multiple';
+	file_input_tag.innerHTML = "input element";
+	file_input_tag.style.position = "absolute";
+	file_input_tag.style.border = "2px solid #000000";
+	file_input_tag.style.left = "0px";
+	file_input_tag.style.top = "35px";
+	file_input_tag.style.width = "280px";
+	file_input_tag.style.height = "32px";
+	file_input_tag.style.color = "#000000";
+	file_input_tag.style["background-color"] = "#00FFFF";
+	whole_div.appendChild( file_input_tag );
+	g_open_dlg_obj.m_file_input_tag = file_input_tag;
+	CalcelToOpen = function() {
+	console.log( "CalcelToOpen() „Å´Êù•„Åü." );
+	g_exports.c_OpenDialogCanceled();
+	}
+	var cancel_button = document.createElement('button');
+	cancel_button.innerHTML = "Cancel";
+	cancel_button.style.position = "absolute";
+	cancel_button.style.left = "120px";
+	cancel_button.style.top = "80px";
+	file_input_tag.style.height = "24px";
+	cancel_button.onclick = CalcelToOpen;
+	whole_div.appendChild( cancel_button );
+	g_open_dlg_obj.m_cancel_button = cancel_button;
+	file_input_tag.onclick = function(event) {
+	console.log( "file_input_tag.onclick() is coming. " );
+	}
+	file_input_tag.onblur = function(event) {
+	console.log( "file_input_tag.onblur() is coming. " );
+	}
+	file_input_tag.onfocus = function(event) {
+	console.log( "file_input_tag.onfocus() is coming. " );
+	}
+	document.body.onfocus = function(event) {
+	console.log( "document.body.onfocus() is coming." );
+	}
+	document.body.onblur = function(event) {
+	console.log( "document.body.onblur() is coming." );
+	}
+	file_input_tag.onchange = function(event) {
+	console.log( "file_input_tag.onchange() is coming. " );
+	g_open_dlg_obj.m_bOk = 1;
+	var file_list = event.target.files;
+	g_open_dlg_obj.m_file_list = file_list;
+	g_exports.c_OpenDialogEnd();
+	}
+	file_input_tag.click();},
+
+_jsfunc_TopWnd_4 : function ()
+{
+	var whole_div = g_open_dlg_obj.m_whole_div;
+	document.body.removeChild( whole_div );},
+
+_jsfunc_TopWnd_5 : function ()
+{
+	var file_list = g_open_dlg_obj.m_file_list;
+	console.log( "g_open_dlg_obj.m_bOk = " + g_open_dlg_obj.m_bOk );
+	console.log( "file_list = " + file_list );
+	if ( file_list != null ) {
+	console.log( "begin of filelist(2)" );
+	printf_file_list(file_list);
+	console.log( "end of filelist(2)" );
+	}
+	else {
+	console.log( "file_list == null" );
+	}},
+
+_jsfunc_TopWnd_6 : function ()
+{
+	var atag = document.createElement('a');
+	atag.href = URL.createObjectURL(new Blob(['NWSTK, Hello Blob. Y.A.\n'], {type: 'text/plain'}));
+	atag.download = 'test-blob-NWSTK.txt';
+	atag.style.display = 'none';
+	document.body.appendChild(atag);
+	atag.click();
+	document.body.removeChild(atag);},
+
 _jsfunc_Image_1 : function ($0)
-{ 	var x = $0;
+{
+	var x = $0;
 	return Math.sin( x ) * 10000000.0 ;},
 
 _jsfunc_Image_2 : function ($0, $1)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var szPath = Pointer_stringify($1);
 	var img_pack = {};
 	var img = new Image();
@@ -378,31 +562,36 @@ _jsfunc_Image_2 : function ($0, $1)
 	}},
 
 _jsfunc_Image_3 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.naturalWidth;},
 
 _jsfunc_Image_4 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.naturalHeight;},
 
 _jsfunc_Image_5 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.clientWidth;},
 
 _jsfunc_Image_6 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.clientHeight;},
 
 _jsfunc_Image_7 : function ($0, $1, $2, $3)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	var ctx = g_ctx_s[$1];
@@ -424,23 +613,27 @@ _jsfunc_Image_7 : function ($0, $1, $2, $3)
 	);},
 
 _jsfunc_Image_8 : function ($0, $1, $2)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var org_x = $1;
 	var org_y = $2;
 	ctx.resetTransform();
 	ctx.translate( org_x, org_y );},
 
 _jsfunc_Image_9 : function ($0, $1)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var rad_x = $1;
 	ctx.rotate( rad_x );},
 
 _jsfunc_Image_10 : function ($0, $1, $2)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.translate( $1, $2 );},
 
 _jsfunc_NewEntry_1 : function ()
-{ 	g_log_cnt = 0;
+{
+	g_log_cnt = 0;
 	js_MyPrint = function( str ) {
 	console.log( "" + g_log_cnt + " : " + str );
 	g_log_cnt++;
@@ -451,12 +644,14 @@ _jsfunc_NewEntry_1 : function ()
 	return g_bTouchSupported;},
 
 _jsfunc_NewEntry_2 : function ($0, $1, $2)
-{ 	console.log( "start_from_js(), a=" + String($0) );
+{
+	console.log( "start_from_js(), a=" + String($0) );
 	console.log( "start_from_js(), b=" + String($1) );
 	console.log( "start_from_js(), c=" + String($2) );},
 
 _jsfunc_NewEntry_3 : function ()
-{ 	js_genshi_line = function(ctx, x1, y1, x2, y2, strCol, width) {
+{
+	js_genshi_line = function(ctx, x1, y1, x2, y2, strCol, width) {
 	ctx.beginPath();
 	ctx.lineWidth = width;
 	ctx.imageSmoothingEnabled = false;
@@ -552,7 +747,8 @@ _jsfunc_NewEntry_3 : function ()
 	);},
 
 _jsfunc_NewEntry_4 : function ()
-{ 	g_bIME = 0;
+{
+	g_bIME = 0;
 	g_bComposStarted = 0;
 	g_input_tag = null;
 	js_make_input_tag_caret_goto_btm = function() {
@@ -593,11 +789,13 @@ _jsfunc_NewEntry_4 : function ()
 	g_input_tag.focus();},
 
 _jsfunc_NewEntry_5 : function ()
-{ 	g_outarea = document.getElementById( "outarea" );
+{
+	g_outarea = document.getElementById( "outarea" );
 	g_js_img_hash = {};},
 
 _jsfunc_NewEntry_6 : function ()
-{ 	js_MyPrint( "window.devicePixelRatio = " + window.devicePixelRatio );
+{
+	js_MyPrint( "window.devicePixelRatio = " + window.devicePixelRatio );
 	var value;
 	if ( !g_bTouchSupported ) {
 	value = window.devicePixelRatio;
@@ -614,10 +812,12 @@ _jsfunc_NewEntry_6 : function ()
 	js_MyPrint( "g_scaling = " + g_scaling );},
 
 _jsfunc_NewEntry_7 : function ()
-{ 	return g_scaling * 10000.0;},
+{
+	return g_scaling * 10000.0;},
 
 _jsfunc_NewEntry_8 : function ()
-{ 	var canvas = document.createElement("canvas");
+{
+	var canvas = document.createElement("canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.font = "normal normal 32px monospace";
 	var sxTextX = ctx.measureText("X").width;
@@ -625,14 +825,16 @@ _jsfunc_NewEntry_8 : function ()
 	js_MyPrint( "sxTextX / 16.0 = " + (sxTextX / 16.0) );},
 
 _jsfunc_NewEntry_9 : function ()
-{ 	g_canvas_s = new Array(200 );
+{
+	g_canvas_s = new Array(200 );
 	g_whole_div_s = new Array(200 );
 	g_ctx_s = new Array(200 );
 	g_client_div_s = new Array(200 );
 	g_strFont_s = new Array(200 );},
 
 _jsfunc_NewEntry_10 : function ()
-{ 	g_js_bInputInputEvent = 0;
+{
+	g_js_bInputInputEvent = 0;
 	g_input_tag.addEventListener( 'keydown', js_keydown, {passive: false} );
 	g_input_tag.addEventListener( 'keyup', js_keyup, {passive: false} );
 	g_input_tag.addEventListener( 'input', js_input_input );
@@ -868,26 +1070,32 @@ _jsfunc_NewEntry_10 : function ()
 	}},
 
 _jsfunc_NewEntry_11 : function ()
-{ 	count = 0;
+{
+	count = 0;
 	function js_OnMainTimer() {
 	var rr = g_exports.wa_OnMainTimer(1);
 	}
 	setInterval(js_OnMainTimer, 20);},
 
 _jsfunc_NewEntry_12 : function ()
-{ 	g_bComposStarted = 1;},
+{
+	g_bComposStarted = 1;},
 
 _jsfunc_NewEntry_13 : function ()
-{ 	g_bComposStarted = 0;},
+{
+	g_bComposStarted = 0;},
 
 _jsfunc_NewEntry_14 : function ($0)
-{ 	return g_js_ime_unicode_s[$0];},
+{
+	return g_js_ime_unicode_s[$0];},
 
 _jsfunc_NewEntry_15 : function ()
-{ 	js_set_delay_input_tag_caret_goto_btm();},
+{
+	js_set_delay_input_tag_caret_goto_btm();},
 
 _jsfunc_NewEntry_16 : function ($0)
-{ 	g_bIME = $0;
+{
+	g_bIME = $0;
 	if ( g_bIME ) {
 	g_input_tag.style["background-color"] = "#ffffff";
 	g_input_tag.style.left = "220px";
@@ -897,421 +1105,32 @@ _jsfunc_NewEntry_16 : function ($0)
 	}},
 
 _jsfunc_NewEntry_17 : function ($0)
-{ 	var str1 = Pointer_stringify($0);
+{
+	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
 _jsfunc_NewEntry_18 : function ($0)
-{ 	g_outarea.value += String($0);
+{
+	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
 _jsfunc_NewEntry_19 : function ($0)
-{ 	g_outarea.value += String.fromCharCode($0);
+{
+	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
 _jsfunc_NewEntry_20 : function ($0, $1)
-{ 	alert( Pointer_stringify($0) + String($1) );},
+{
+	alert( Pointer_stringify($0) + String($1) );},
 
 _jsfunc_NewEntry_21 : function ()
-{ 	alert( "abort() is called." );},
+{
+	alert( "abort() is called." );},
 
 _jsfunc_NewEntry_22 : function ($0, $1)
-{ 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
-
-_jsfunc_main_1 : function ($0)
-{ 	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	var prg = g_prg;
-	gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-	gl.clearColor(0.0, 0.0, 0.0, 0.0);
-	gl.clearDepth(1.0);
-	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);},
-
-_jsfunc_main_2 : function ($0)
-{ 	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	var mMatrix = myMat_identity(g_mat_s[0]);
-	var vMatrix = myMat_identity(g_mat_s[1]);
-	var pMatrix = myMat_identity(g_mat_s[2]);
-	var tmpMatrix = myMat_identity(g_mat_s[3]);
-	var mvpMatrix = myMat_identity(g_mat_s[4]);
-	myMat_lookAt([0.0, 0.0, 3.0], [0, 0, 0], [0, 1, 0], vMatrix);
-	myMat_perspective(
-	40,
-	canvas_wgl.width / canvas_wgl.height,
-	0.1,
-	- (0.2 - ( 300 * 1.5 )) * 10.0 * 2.0,
-	pMatrix
-	);
-	myMat_multiply(pMatrix, vMatrix, tmpMatrix);
-	myMat_multiply(tmpMatrix, mMatrix, mvpMatrix);
-	gl.uniformMatrix4fv(g_uniLocation, false, mvpMatrix);},
-
-_jsfunc_main_3 : function ($0)
-{ 	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	gl.bindBuffer(gl.ARRAY_BUFFER, g_my_pos_vbo);
-	gl.bufferSubData(gl.ARRAY_BUFFER, 0, g_js_mesh3D);
-	gl.bindBuffer(gl.ARRAY_BUFFER, g_my_col_vbo);
-	gl.bufferSubData(gl.ARRAY_BUFFER, 0, g_js_color_array);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, g_my_ibo);
-	gl.bufferSubData(gl.ELEMENT_ARRAY_BUFFER, 0, g_js_wgl_index_s);},
-
-_jsfunc_main_4 : function ($0, $1)
-{ 	var idxCanvas_wgl = $0;
-	var num_indices = $1;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	gl.drawElements(gl.TRIANGLES, num_indices, gl.UNSIGNED_SHORT, 0);},
-
-_jsfunc_main_5 : function ($0)
-{ 	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	gl.flush();},
-
-_jsfunc_main_6 : function ($0)
-{ 	var a = $0;
-	return Math.floor( a ) * 100000.0 ;},
-
-_jsfunc_main_7 : function ($0)
-{ 	g_prg = null;
-	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var g_vs_text =
-	"attribute vec3 position;\x0A" +
-	"attribute vec4 color;\x0A" +
-	"uniform   mat4 mvpMatrix;\x0A" +
-	"varying   vec4 vColor;\x0A" +
-	"\x0A" +
-	"void main(void){\x0A" +
-	"\x09vColor = color;\x0A" +
-	"\x09gl_Position = mvpMatrix * vec4(position, 1.0);\x0A" +
-	"}\x0A" ;
-	var g_fs_text =
-	"precision mediump float;\x0A" +
-	"\x0A" +
-	"varying vec4 vColor;\x0A" +
-	"\x0A" +
-	"void main(void){\x0A" +
-	"\x09gl_FragColor = vColor;\x0A" +
-	"}\x0A" ;
-	function initShaders() {
-	var p = gl.createProgram();
-	var vs = gl.createShader(gl.VERTEX_SHADER);
-	var fs = gl.createShader(gl.FRAGMENT_SHADER);
-	gl.shaderSource(vs, g_vs_text);
-	gl.shaderSource(fs, g_fs_text);
-	gl.compileShader(vs);
-	gl.compileShader(fs);
-	gl.attachShader(p, vs);
-	gl.attachShader(p, fs);
-	gl.linkProgram(p);
-	gl.useProgram(p);
-	g_prg = p;
-	}
-	create_vbo2_core = function(f32array, usage) {
-	var vbo = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-	gl.bufferData(gl.ARRAY_BUFFER, f32array, usage);
-	gl.bindBuffer(gl.ARRAY_BUFFER, null);
-	return vbo;
-	};
-	create_ibo2_core = function(i16array, usage) {
-	var ibo = gl.createBuffer();
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
-	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, i16array, usage);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
-	return ibo;
-	};
-	create_vbo2_staic = function(f32array) {
-	return create_vbo2_core( f32array, gl.STATIC_DRAW );
-	};
-	create_vbo2_dynamic = function(f32array) {
-	return create_vbo2_core( f32array, gl.DYNAMIC_DRAW );
-	};
-	create_ibo2_static = function(i16array) {
-	return create_ibo2_core( i16array, gl.STATIC_DRAW );
-	};
-	create_ibo2_dynamic = function(i16array) {
-	return create_ibo2_core( i16array, gl.DYNAMIC_DRAW );
-	};
-	set_attribute = function(vbo, attL, attS) {
-	for (var i in vbo){
-	gl.bindBuffer(gl.ARRAY_BUFFER, vbo[i]);
-	gl.enableVertexAttribArray(attL[i]);
-	gl.vertexAttribPointer(attL[i], attS[i], gl.FLOAT, false, 0, 0);
-	}
-	};
-	initShaders();},
-
-_jsfunc_main_8 : function ($0)
-{ 	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	var prg = g_prg;
-	g_attLocation = new Array(2);
-	g_attLocation[0] = gl.getAttribLocation(prg, "position");
-	g_attLocation[1] = gl.getAttribLocation(prg, "color");
-	g_uniLocation = gl.getUniformLocation(prg, "mvpMatrix");
-	g_attStride = new Array(2);
-	g_attStride[0] = 3;
-	g_attStride[1] = 4;},
-
-_jsfunc_main_9 : function ($0, $1)
-{ 	var mesh3d_addr = $0;
-	var color_array_addr = $1;
-	var buffer = g_memory.buffer;
-	g_js_mesh3D = new Float32Array(
-	buffer,
-	mesh3d_addr,
-	3 * 100 * 300
-	);
-	g_js_color_array = new Float32Array(
-	buffer,
-	color_array_addr,
-	4 * 100 * 300
-	);},
-
-_jsfunc_main_10 : function ($0, $1)
-{ 	var index_addr = $0;
-	var num_indices = $1;
-	var buffer = g_memory.buffer;
-	g_js_wgl_index_s = new Int16Array(
-	buffer,
-	index_addr,
-	num_indices
-	);},
-
-_jsfunc_main_11 : function ($0)
-{ 	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	g_my_pos_vbo = create_vbo2_dynamic(g_js_mesh3D);
-	g_my_col_vbo = create_vbo2_dynamic(g_js_color_array);
-	set_attribute( [g_my_pos_vbo, g_my_col_vbo], g_attLocation, g_attStride );
-	g_my_ibo = create_ibo2_dynamic(g_js_wgl_index_s);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, g_my_ibo);},
-
-_jsfunc_main_12 : function ()
-{ 	myMat_create = function(){
-	return new Float32Array(16);
-	};
-	myMat_identity = function(dest){
-	dest[0] = 1; dest[1] = 0; dest[2] = 0; dest[3] = 0;
-	dest[4] = 0; dest[5] = 1; dest[6] = 0; dest[7] = 0;
-	dest[8] = 0; dest[9] = 0; dest[10] = 1; dest[11] = 0;
-	dest[12] = 0; dest[13] = 0; dest[14] = 0; dest[15] = 1;
-	return dest;
-	};
-	myMat_multiply = function(mat1, mat2, dest){
-	var a = mat1[0], b = mat1[1], c = mat1[2], d = mat1[3],
-	e = mat1[4], f = mat1[5], g = mat1[6], h = mat1[7],
-	i = mat1[8], j = mat1[9], k = mat1[10], l = mat1[11],
-	m = mat1[12], n = mat1[13], o = mat1[14], p = mat1[15],
-	A = mat2[0], B = mat2[1], C = mat2[2], D = mat2[3],
-	E = mat2[4], F = mat2[5], G = mat2[6], H = mat2[7],
-	I = mat2[8], J = mat2[9], K = mat2[10], L = mat2[11],
-	M = mat2[12], N = mat2[13], O = mat2[14], P = mat2[15];
-	dest[0] = A * a + B * e + C * i + D * m;
-	dest[1] = A * b + B * f + C * j + D * n;
-	dest[2] = A * c + B * g + C * k + D * o;
-	dest[3] = A * d + B * h + C * l + D * p;
-	dest[4] = E * a + F * e + G * i + H * m;
-	dest[5] = E * b + F * f + G * j + H * n;
-	dest[6] = E * c + F * g + G * k + H * o;
-	dest[7] = E * d + F * h + G * l + H * p;
-	dest[8] = I * a + J * e + K * i + L * m;
-	dest[9] = I * b + J * f + K * j + L * n;
-	dest[10] = I * c + J * g + K * k + L * o;
-	dest[11] = I * d + J * h + K * l + L * p;
-	dest[12] = M * a + N * e + O * i + P * m;
-	dest[13] = M * b + N * f + O * j + P * n;
-	dest[14] = M * c + N * g + O * k + P * o;
-	dest[15] = M * d + N * h + O * l + P * p;
-	return dest;
-	};
-	myMat_scale = function(mat, vec, dest){
-	dest[0] = mat[0] * vec[0];
-	dest[1] = mat[1] * vec[0];
-	dest[2] = mat[2] * vec[0];
-	dest[3] = mat[3] * vec[0];
-	dest[4] = mat[4] * vec[1];
-	dest[5] = mat[5] * vec[1];
-	dest[6] = mat[6] * vec[1];
-	dest[7] = mat[7] * vec[1];
-	dest[8] = mat[8] * vec[2];
-	dest[9] = mat[9] * vec[2];
-	dest[10] = mat[10] * vec[2];
-	dest[11] = mat[11] * vec[2];
-	dest[12] = mat[12];
-	dest[13] = mat[13];
-	dest[14] = mat[14];
-	dest[15] = mat[15];
-	return dest;
-	};
-	myMat_translate = function(mat, vec, dest){
-	dest[0] = mat[0]; dest[1] = mat[1]; dest[2] = mat[2]; dest[3] = mat[3];
-	dest[4] = mat[4]; dest[5] = mat[5]; dest[6] = mat[6]; dest[7] = mat[7];
-	dest[8] = mat[8]; dest[9] = mat[9]; dest[10] = mat[10]; dest[11] = mat[11];
-	dest[12] = mat[0] * vec[0] + mat[4] * vec[1] + mat[8] * vec[2] + mat[12];
-	dest[13] = mat[1] * vec[0] + mat[5] * vec[1] + mat[9] * vec[2] + mat[13];
-	dest[14] = mat[2] * vec[0] + mat[6] * vec[1] + mat[10] * vec[2] + mat[14];
-	dest[15] = mat[3] * vec[0] + mat[7] * vec[1] + mat[11] * vec[2] + mat[15];
-	return dest;
-	};
-	myMat_rotate = function(mat, angle, axis, dest){
-	var sq = Math.sqrt(axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]);
-	if(!sq){return null;}
-	var a = axis[0], b = axis[1], c = axis[2];
-	if(sq != 1){sq = 1 / sq; a *= sq; b *= sq; c *= sq;}
-	var d = Math.sin(angle), e = Math.cos(angle), f = 1 - e,
-	g = mat[0], h = mat[1], i = mat[2], j = mat[3],
-	k = mat[4], l = mat[5], m = mat[6], n = mat[7],
-	o = mat[8], p = mat[9], q = mat[10], r = mat[11],
-	s = a * a * f + e,
-	t = b * a * f + c * d,
-	u = c * a * f - b * d,
-	v = a * b * f - c * d,
-	w = b * b * f + e,
-	x = c * b * f + a * d,
-	y = a * c * f + b * d,
-	z = b * c * f - a * d,
-	A = c * c * f + e;
-	if(angle){
-	if(mat != dest){
-	dest[12] = mat[12]; dest[13] = mat[13];
-	dest[14] = mat[14]; dest[15] = mat[15];
-	}
-	} else {
-	dest = mat;
-	}
-	dest[0] = g * s + k * t + o * u;
-	dest[1] = h * s + l * t + p * u;
-	dest[2] = i * s + m * t + q * u;
-	dest[3] = j * s + n * t + r * u;
-	dest[4] = g * v + k * w + o * x;
-	dest[5] = h * v + l * w + p * x;
-	dest[6] = i * v + m * w + q * x;
-	dest[7] = j * v + n * w + r * x;
-	dest[8] = g * y + k * z + o * A;
-	dest[9] = h * y + l * z + p * A;
-	dest[10] = i * y + m * z + q * A;
-	dest[11] = j * y + n * z + r * A;
-	return dest;
-	};
-	myMat_lookAt = function(eye, center, up, dest){
-	var eyeX = eye[0], eyeY = eye[1], eyeZ = eye[2],
-	upX = up[0], upY = up[1], upZ = up[2],
-	centerX = center[0], centerY = center[1], centerZ = center[2];
-	if ( eyeX == centerX && eyeY == centerY && eyeZ == centerZ ) {
-	return myMat_identity(dest);
-	}
-	var x0, x1, x2, y0, y1, y2, z0, z1, z2, l;
-	z0 = eyeX - center[0]; z1 = eyeY - center[1]; z2 = eyeZ - center[2];
-	l = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
-	z0 *= l; z1 *= l; z2 *= l;
-	x0 = upY * z2 - upZ * z1;
-	x1 = upZ * z0 - upX * z2;
-	x2 = upX * z1 - upY * z0;
-	l = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
-	if(!l){
-	x0 = 0; x1 = 0; x2 = 0;
-	} else {
-	l = 1 / l;
-	x0 *= l; x1 *= l; x2 *= l;
-	}
-	y0 = z1 * x2 - z2 * x1; y1 = z2 * x0 - z0 * x2; y2 = z0 * x1 - z1 * x0;
-	l = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
-	if(!l){
-	y0 = 0; y1 = 0; y2 = 0;
-	} else {
-	l = 1 / l;
-	y0 *= l; y1 *= l; y2 *= l;
-	}
-	dest[0] = x0; dest[1] = y0; dest[2] = z0; dest[3] = 0;
-	dest[4] = x1; dest[5] = y1; dest[6] = z1; dest[7] = 0;
-	dest[8] = x2; dest[9] = y2; dest[10] = z2; dest[11] = 0;
-	dest[12] = -(x0 * eyeX + x1 * eyeY + x2 * eyeZ);
-	dest[13] = -(y0 * eyeX + y1 * eyeY + y2 * eyeZ);
-	dest[14] = -(z0 * eyeX + z1 * eyeY + z2 * eyeZ);
-	dest[15] = 1;
-	return dest;
-	};
-	myMat_perspective = function(fovy, aspect, near, far, dest){
-	var t = near * Math.tan(fovy * Math.PI / 360);
-	var r = t * aspect;
-	var a = r * 2, b = t * 2, c = far - near;
-	dest[0] = near * 2 / a;
-	dest[1] = 0;
-	dest[2] = 0;
-	dest[3] = 0;
-	dest[4] = 0;
-	dest[5] = near * 2 / b;
-	dest[6] = 0;
-	dest[7] = 0;
-	dest[8] = 0;
-	dest[9] = 0;
-	dest[10] = -(far + near) / c;
-	dest[11] = -1;
-	dest[12] = 0;
-	dest[13] = 0;
-	dest[14] = -(far * near * 2) / c;
-	dest[15] = 0;
-	return dest;
-	};
-	myMat_transpose = function(mat, dest){
-	dest[0] = mat[0]; dest[1] = mat[4];
-	dest[2] = mat[8]; dest[3] = mat[12];
-	dest[4] = mat[1]; dest[5] = mat[5];
-	dest[6] = mat[9]; dest[7] = mat[13];
-	dest[8] = mat[2]; dest[9] = mat[6];
-	dest[10] = mat[10]; dest[11] = mat[14];
-	dest[12] = mat[3]; dest[13] = mat[7];
-	dest[14] = mat[11]; dest[15] = mat[15];
-	return dest;
-	};
-	myMat_inverse = function(mat, dest){
-	var a = mat[0], b = mat[1], c = mat[2], d = mat[3],
-	e = mat[4], f = mat[5], g = mat[6], h = mat[7],
-	i = mat[8], j = mat[9], k = mat[10], l = mat[11],
-	m = mat[12], n = mat[13], o = mat[14], p = mat[15],
-	q = a * f - b * e, r = a * g - c * e,
-	s = a * h - d * e, t = b * g - c * f,
-	u = b * h - d * f, v = c * h - d * g,
-	w = i * n - j * m, x = i * o - k * m,
-	y = i * p - l * m, z = j * o - k * n,
-	A = j * p - l * n, B = k * p - l * o,
-	ivd = 1 / (q * B - r * A + s * z + t * y - u * x + v * w);
-	dest[0] = ( f * B - g * A + h * z) * ivd;
-	dest[1] = (-b * B + c * A - d * z) * ivd;
-	dest[2] = ( n * v - o * u + p * t) * ivd;
-	dest[3] = (-j * v + k * u - l * t) * ivd;
-	dest[4] = (-e * B + g * y - h * x) * ivd;
-	dest[5] = ( a * B - c * y + d * x) * ivd;
-	dest[6] = (-m * v + o * s - p * r) * ivd;
-	dest[7] = ( i * v - k * s + l * r) * ivd;
-	dest[8] = ( e * A - f * y + h * w) * ivd;
-	dest[9] = (-a * A + b * y - d * w) * ivd;
-	dest[10] = ( m * u - n * s + p * q) * ivd;
-	dest[11] = (-i * u + j * s - l * q) * ivd;
-	dest[12] = (-e * z + f * x - g * w) * ivd;
-	dest[13] = ( a * z - b * x + c * w) * ivd;
-	dest[14] = (-m * t + n * r - o * q) * ivd;
-	dest[15] = ( i * t - j * r + k * q) * ivd;
-	return dest;
-	};},
-
-_jsfunc_main_13 : function ()
-{ 	g_mat_s = new Array(5 );
-	for ( i = 0; i < 5 ; i++ ) {
-	g_mat_s[i] = myMat_create();
-	}},
-
-_jsfunc_main_14 : function ($0, $1)
-{ 	var text = Pointer_stringify($0);
-	js_MyPrint( text + $1 );},
+{
+	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
 // this is foot.js from here :
 };
@@ -1338,21 +1157,76 @@ function _js_on_grow_memory() {
 	HEAP8	= new Uint8Array(buffer);
 }
 
-function Pointer_stringify( pTop ) {
+
+function GetLengthOfPointerString( pTop ) {
 	var		ptr		= pTop;
-	var		str1	= "";
+	var		len		= 0;
 	for ( ;; ) {
 		var  code = HEAP8[ptr];
 		if ( code == 0 ) {
 			break;
 		}
-		
-		str1	+= String.fromCharCode(code);
+		ptr++;
+		len++;
+	}
+	
+	return	len;
+}
+
+//function Pointer_stringify( pTop ) {
+//	var		ptr		= pTop;
+//	var		str1	= "";
+//	for ( ;; ) {
+//		var  code = HEAP8[ptr];
+//		if ( code == 0 ) {
+//			break;
+//		}
+//		
+//		str1	+= String.fromCharCode(code);
+//		ptr++;
+//	}
+//	
+//	return	str1;
+//}
+
+
+//function Pointer_stringify( pTop ) {
+//	var		len			= GetLengthOfPointerString( pTop );
+//	var		u8array		= new Uint8Array(HEAP8, pTop, len);
+//	
+//	var		decoder		= new TextDecoder("utf-8");
+//	
+//	// utf8 ÇÃBYTE îzóÒÇ©ÇÁ JS ÇÃ utf16 ï∂éöóÒÇçÏÇÈ :
+//	var		decodedText = decoder.decode(u8array);
+//	
+//	return	decodedText;
+//}
+
+
+function Pointer_stringify( pTop ) {
+	var		len			= GetLengthOfPointerString( pTop );
+	var		u8array		= new Uint8Array(len);
+	
+	var		ptr		= pTop;
+	for ( var cnt = 0; cnt < len; cnt++ ) {
+		u8array[cnt]	= HEAP8[ptr];
 		ptr++;
 	}
 	
-	return	str1;
+	var		decoder		= new TextDecoder("utf-8");
+	
+	// utf8 ÇÃBYTE îzóÒÇ©ÇÁ JS ÇÃ utf16 ï∂éöóÒÇçÏÇÈ :
+	var		decodedText = decoder.decode(u8array);
+	
+	return	decodedText;
 }
+
+
+
+
+
+
+
 
 
 
@@ -1446,33 +1320,132 @@ for (var key in import_func_s) {
 // console.log( env );
 
 
+/*
 fetch("test.wasm")
 .then( response => response.arrayBuffer() )
 .then( buffer => WebAssembly.compile(buffer) )
 .then( module => WebAssembly.instantiate(module, imports) )
 .then( instance => {
-
-
-
-
-
-g_instance	= instance;
-g_exports	= instance.exports;
-g_memory	= g_exports.memory;
-
-
-// g_memory Ç…ëŒâûÇµÇƒÇ¢ÇÈ ArrayBuffer ÇÅAJS ÇÃ HEAP8[] îzóÒ
-// Ç…ìäâeÇ∑ÇÈ :
-_js_on_grow_memory();
-
-
-
-
-var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
-
+	g_instance	= instance;
+	g_exports	= instance.exports;
+	g_memory	= g_exports.memory;
+	
+	// g_memory Ç…ëŒâûÇµÇƒÇ¢ÇÈ ArrayBuffer ÇÅAJS ÇÃ HEAP8[] îzóÒ
+	// Ç…ìäâeÇ∑ÇÈ :
+	_js_on_grow_memory();
+	
+	var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
+	
 	//alert( "start_from_js() = " + String(ret) );
-
 });
+*/
 
 
-
+window.onload = function() {
+//	var		outarea		= document.getElementById( "outarea" );
+	
+	var		sx		= 300;
+	var		sy		= 70;
+	var		wx		= window.innerWidth;
+	var		wy		= window.innerHeight;
+	
+//	console.log( "window.parent.screen.height = " + window.parent.screen.height );
+//	console.log( "window.parent.screen.width = " + window.parent.screen.width );
+//	console.log( "window.innerWidth  = " + window.innerWidth );
+//	console.log( "window.innerHeight = " + window.innerHeight );
+	
+	div1 = document.createElement('div');
+	div1.style.border	= "2px solid #00FF00";
+	div1.style.position	= "absolute";
+	div1.style.left		= String((wx - sx) / 2) + "px";
+	div1.style.top		= String((wy - sy) / 2) + "px";
+	div1.style.width	= String(sx) + "px";
+	div1.style.height	= String(sy) + "px";
+	div1.style["background-color"]	= "#FFFFFF";
+	div1.style.zIndex		= "100";		// ílÇ™è¨Ç≥Ç¢ÇŸÇ«å„ÇÎë§(âúÇÃï˚)Ç…Ç†ÇÈÇ±Ç∆Ç…Ç»ÇÈÅB
+	document.body.appendChild( div1 );
+	
+	span1 = document.createElement('span');
+	span1.style.height	= "16px";
+	span1.innerHTML		= "NWSTK: Now loading a wasm module...";
+	div1.appendChild( span1 );
+	
+	prgrs	= document.createElement('progress');
+	prgrs.style.width	= "200px";
+	prgrs.style.height	= "16px";
+	div1.appendChild( prgrs );
+	
+	br1 = document.createElement('br');
+	div1.appendChild( br1 );
+	
+	span2 = document.createElement('span');
+	span2.style.height	= "16px";
+	div1.appendChild( span2 );
+	
+	
+	fetch("test.wasm")
+	.then( async response => {
+		// ëSÉoÉCÉgêî :
+		const	total = Number.parseInt(response.headers.get("Content-Length"));
+		
+		prgrs.max		= total;
+		prgrs.value		= 0;
+		
+		
+		var		buffer	= new ArrayBuffer(total);
+		var		u8arr	= new Uint8Array(buffer);
+		
+		let		sizeLoaded	= 0;		// éÛêMÇµÇΩÉoÉCÉgêî
+		
+		// è≠ÇµÇ∏Ç¬ì«Ç›çûÇÒÇ≈ ÉvÉçÉOÉåÉXÉoÅ[Ç∆ % ï\é¶Ç≈êiíªèÛãµÇï\é¶Ç∑ÇÈ :
+		const	reader	= response.body.getReader();
+		while ( true ) {
+			const {done, value} = await reader.read();
+			if (done) {
+				break;
+			}
+			// ì«ÇÒÇæÉfÅ[É^ÇÕÉoÉCÉiÉäÉfÅ[É^ÅiUint8ArrayÅjÇ≈ó^Ç¶ÇÁÇÍÇÈ :
+			
+			// value îzóÒÇ u8arr îzóÒÇÃ sizeLoaded ÇÃà íuÇ…ÉRÉsÅ[Ç∑ÇÈ :
+			u8arr.set( value, sizeLoaded );
+			
+			// ì«Ç›çûÇÒÇæÉoÉCÉgêîÇêœéZÇµÇƒÇ®Ç≠ :
+			sizeLoaded		+= value.length;
+			
+			// ÉvÉçÉOÉåÉXÉoÅ[Ç…ílÇê›íËÇµÇƒÇ®Ç≠ :
+			prgrs.value		= sizeLoaded;
+			
+			
+			// 12.3 ÇÃÇÊÇ§Ç…è¨êîì_à»â∫ 1 åÖÇ‹Ç≈ï\é¶Ç∑ÇÈ :
+			var		perc	= ((sizeLoaded * 100.0) / total).toFixed(1);
+			
+	//		console.log( `${perc}% : ${sizeLoaded} / ${total}` );
+	//		console.log( `value.length=${value.length}` );
+	//		console.log( `value=${value}` );
+			
+		//	outarea.value	= `${perc}% : ${sizeLoaded} / ${total}\n`;
+			span2.innerHTML	= `${perc}% :` + sizeLoaded.toLocaleString() + " / " + total.toLocaleString();
+		}
+		
+		// ÉvÉçÉOÉåÉXÉoÅ[ÇàÕÇ¡ÇƒÇ¢ÇÈ div óvëfëSëÃÇçÌèúÇµÇƒÇ®Ç≠ :
+		document.body.removeChild( div1 );
+		
+		
+		return	buffer;
+	})
+	.then( buffer => WebAssembly.compile(buffer) )
+	.then( module => WebAssembly.instantiate(module, imports) )
+	.then( instance => {
+		g_instance	= instance;
+		g_exports	= instance.exports;
+		g_memory	= g_exports.memory;
+		
+		// g_memory Ç…ëŒâûÇµÇƒÇ¢ÇÈ ArrayBuffer ÇÅAJS ÇÃ HEAP8[] îzóÒ
+		// Ç…ìäâeÇ∑ÇÈ :
+		_js_on_grow_memory();
+		
+		var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
+		
+		// alert( "start_from_js() = " + String(ret) );
+	});
+};
