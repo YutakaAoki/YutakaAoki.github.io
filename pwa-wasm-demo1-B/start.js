@@ -1320,7 +1320,6 @@ for (var key in import_func_s) {
 // console.log( env );
 
 
-/*
 fetch("test.wasm")
 .then( response => response.arrayBuffer() )
 .then( buffer => WebAssembly.compile(buffer) )
@@ -1338,9 +1337,9 @@ fetch("test.wasm")
 	
 	//alert( "start_from_js() = " + String(ret) );
 });
-*/
 
 
+/*
 window.onload = function() {
 //	var		outarea		= document.getElementById( "outarea" );
 	
@@ -1465,3 +1464,4 @@ window.onload = function() {
 		// alert( "start_from_js() = " + String(ret) );
 	});
 };
+*/
