@@ -1385,6 +1385,8 @@ window.onload = function() {
 	
 	fetch("test.wasm")
 	.then( async response => {
+		console.log( "response.headers=" + response.headers );
+		
 		// 全バイト数 :
 		const	total = Number.parseInt(response.headers.get("Content-Length"));
 		
