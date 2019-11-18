@@ -1,6 +1,6 @@
 
 console.log('Script loaded!')
-var cacheStorageKey = 'nwstk-pwa-B'
+var cacheStorageKey = 'nwstk-pwa-B2'
 
 var cacheList = [
   './',
