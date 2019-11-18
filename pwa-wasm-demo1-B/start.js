@@ -1387,10 +1387,15 @@ window.onload = function() {
 	.then( async response => {
 		console.log( "response.headers=" + response.headers );
 		
-		for (var key in response.headers) {
-			console.log( key + "=" + response.headers[key] );
+		for(var key of response.headers.keys()) {
+			console.log( "response.headers.get(" + key + ")=" +
+						  response.headers.get(key) );
 		}
-		
+		/*
+		for (var key in response.headers) {
+			console.log( "response.headers[" + key + "]=" + response.headers[key] );
+		}
+		*/
 		
 		// 全バイト数 :
 		const	total = Number.parseInt(response.headers.get("Content-Length"));
