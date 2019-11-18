@@ -8,7 +8,8 @@ var cacheList = [
   "./main.css",
   "./icon.png",
   
-  "./test.wasm",
+//  "./test.wasm",
+  
   "./hogo.js",
   "./start.js"
 ]
