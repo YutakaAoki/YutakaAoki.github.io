@@ -1391,6 +1391,7 @@ window.onload = function() {
 		prgrs.max		= total;
 		prgrs.value		= 0;
 		
+		console.log.( "total=" + total );
 		
 		var		buffer	= new ArrayBuffer(total);
 		var		u8arr	= new Uint8Array(buffer);
@@ -1405,6 +1406,9 @@ window.onload = function() {
 				break;
 			}
 			// 読んだデータはバイナリデータ（Uint8Array）で与えられる :
+			
+			console.log.( "sizeLoaded=" + sizeLoaded );
+			console.log.( "value.length=" + value.length );
 			
 			// value 配列を u8arr 配列の sizeLoaded の位置にコピーする :
 			u8arr.set( value, sizeLoaded );
