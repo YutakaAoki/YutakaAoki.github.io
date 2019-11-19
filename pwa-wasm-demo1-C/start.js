@@ -1426,12 +1426,18 @@ window.onload = function() {
 		// 全バイト数 :
 		const	total	= Number.parseInt(response.headers.get("Content-Length"));
 		
-	//	var		aaa		= response.headers.get("Content-Length"));
-		
+		/*
 		for (var key of response.headers.keys()) {
 			console.log( "response.headers.get(" + key + ")=" +
 						  response.headers.get(key) );
 		}
+		*/
+		
+		var		cnt_enc	= response.headers.get("content-encoding"));
+		
+		console.log( "cnt_enc=" + cnt_enc );
+		
+		
 		
 		prgrs.max		= total;
 		prgrs.value		= 0;
