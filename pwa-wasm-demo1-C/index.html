@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <title>NWSTK with NWSC, demo1-C</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="icon" href="icon.png" type="image/png" />
+  
+  
+  <style>
+    body {
+      font-family: arial;
+      margin: 0px;
+      padding: 0px;
+      
+      position: fixed;
+      top:  0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+    
+    #outarea {
+      width: 95%;
+      height: 160px;
+      margin: 0 auto;
+      margin-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      display: block;
+      background-color: black;
+      color: white;
+      font-family: 'Lucida Console', Monaco, monospace;
+      outline: none;
+      
+      position: absolute;
+      top : 0px;
+      left : 0px;
+    }
+  </style>
+  
+  <noscript>
+  JavaScript is not enabled.<br>
+  Enable JavaScript, to browse this site.
+  </noscript>
+  
+</head>
+
+<body style="height:250%;">
+
+  <div class="main-text">
+    PWA NWSTK
+  </div>
+  <div class="network-message">
+    Network:
+    <span id="network-status" class="">Good</span>
+  </div>
+  <script type="text/javascript">
+    if (navigator.serviceWorker != null) {
+      navigator.serviceWorker.register('sw.js')
+      .then(function(registration) {
+        console.log('Registered events at scope: ', registration.scope);
+      });
+    }
+
+//    fetch('data.json')
+
+    var statusEl = document.querySelector('#network-status')
+    if (!navigator.onLine) {
+      statusEl.classList = ['is-offline']
+      statusEl.innerText = 'Offline'
+    }
+  </script>
+
+  <script type="text/javascript" src="hogo.js"></script>
+  <script type="text/javascript" src="start.js"></script>
+
+  <textarea id="outarea" rows="5"></textarea>
+  
+  
+<!-- NINJA ANALYZE -->
+<script type="text/javascript">
+//<![CDATA[
+(function(d) {
+  var sc=d.createElement("script"),
+      ins=d.getElementsByTagName("script")[0];
+  sc.type="text/javascript";
+  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00432744&hash=92aec9f0&zone=36";
+  sc.async=true;
+  ins.parentNode.insertBefore(sc, ins);
+})(document);
+//]]>
+</script>
+<!-- /NINJA ANALYZE -->
+  
+  
+</body>
+</html>
