@@ -1379,6 +1379,29 @@ window.onload = function() {
 }
 */
 
+
+/*
+	in:		bufOld		= 昔の ArrayBuffer
+			sizeCopy	= 昔のバッファからコピーするバイト数
+			sizeNew		= 新しい ArrayBuffer のバイト数。
+	
+	・sizeNew >= sizeCopy
+	・sizeCopy >= (bufOld のサイズ)
+	
+	の条件を満たすものとする。ただし、
+		sizeNew < (bufOld のサイズ)
+	であってもよい。
+*/
+function resizeArrBuf(bufOld, sizeCopy, sizeNew) {
+	var		bufNew		= new ArrayBuffer(sizeNew);
+	var		u8arrNew	= new Uint8Array(bufNew);
+	var		u8arrOld	= new Uint8Array(bufOld, 0, sizeCopy);
+	
+	u8arrNew.set(u8arrOld);
+	
+	return	bufNew;
+}
+
 window.onload = function() {
 //	var		outarea		= document.getElementById( "outarea" );
 	
@@ -1423,8 +1446,17 @@ window.onload = function() {
 	
 	fetch("test.wasm")
 	.then( async response => {
-		// 全バイト数 :
+		// 全バイト数(非圧縮の場合にのみ正しい値) :
+		// Apache の mod_gzip モジュールで gzip 圧縮されている場合、この値は圧縮後の値であって、
+		// 元の *.wasm のサイズではない。ところが、reader.read() で読み込まれるデータは、
+		// 展開後のデータなので、元の *.wasm のサイズになってしまう。
+		// 圧縮前のデータのサイズを取得する方法は見つからなかった。
+		// なお、Request-Header に Accept-Encoding を指定することも禁止されている。
+		// Accept-Encoding は、"Forbidden Header Name" である。
+		// 注意が必要。
 		const	total	= Number.parseInt(response.headers.get("Content-Length"));
+		
+		console.log( `original total = $(total)` );
 		
 		/*
 		for (var key of response.headers.keys()) {
@@ -1443,8 +1475,9 @@ window.onload = function() {
 		prgrs.value		= 0;
 		
 		
-		var		buffer	= new ArrayBuffer(total);
-		var		u8arr	= new Uint8Array(buffer);
+		var		sizeBuf		= total;
+		var		buffer		= new ArrayBuffer(total);
+		var		u8arr		= new Uint8Array(buffer);
 		
 		let		sizeLoaded	= 0;		// 受信したバイト数
 		
@@ -1453,15 +1486,48 @@ window.onload = function() {
 		while ( true ) {
 			const {done, value} = await reader.read();
 			if (done) {
+				if ( sizeLoaded != sizeBuf ) {
+					// バッファサイズとロードしたサイズが異なっている場合 :
+					console.log( `At th end of fetch, resize from $(sizeBuf) to $(sizeLoaded)` );
+					
+					buffer	= resizeArrBuf(buffer, sizeLoaded, sizeLoaded);
+				}
 				break;
 			}
 			// 読んだデータはバイナリデータ（Uint8Array）で与えられる :
+			
+			// 今回ロードされたバイト数（増分値） :
+			var		sizeAdd			= value.length;
+			
+			// バッファに必要なバイト数 :
+			var		sizeNeedBuf		= sizeLoaded + sizeAdd;
+			if ( sizeNeedBuf > total ) {
+				// バッファが足りない場合(少し多めに確保しておく) :
+				var			sizeNew		= sizeLoaded + sizeAdd * 3;
+				console.log( `Resize ArrayBuffer from $(sizeBuf) to $(sizeNew)` );
+				
+				// バッファをサイズ変更しておく :
+				// sizeLoaded = コピーするバイト数、sizeNew = 新しいバッファのバイト数 :
+				buffer	= resizeArrBuf(buffer, sizeLoaded, sizeNew);
+				
+				// バッファの投影も新しいバッファのものに修正しておく :
+				u8arr	= new Uint8Array(buffer);
+				
+				// 予想される最大バイト数も適度に増やしておく :
+				total		= sizeLoaded + sizeAdd * 2;
+				// プログレスバーの最大値も修正しておく :
+				prgrs.max	= total;
+				
+				console.log( `new total = $(total)` );
+				
+				sizeBuf		= sizeNew;
+			}
 			
 			// value 配列を u8arr 配列の sizeLoaded の位置にコピーする :
 			u8arr.set( value, sizeLoaded );
 			
 			// 読み込んだバイト数を積算しておく :
-			sizeLoaded		+= value.length;
+			sizeLoaded		+= sizeAdd;
 			
 			// プログレスバーに値を設定しておく :
 			prgrs.value		= sizeLoaded;
@@ -1471,10 +1537,9 @@ window.onload = function() {
 			var		perc	= ((sizeLoaded * 100.0) / total).toFixed(1);
 			
 	//		console.log( `${perc}% : ${sizeLoaded} / ${total}` );
-	//		console.log( `value.length=${value.length}` );
+	//		console.log( `sizeAdd=${sizeAdd}` );
 	//		console.log( `value=${value}` );
 			
-		//	outarea.value	= `${perc}% : ${sizeLoaded} / ${total}\n`;
 			span2.innerHTML	= `${perc}% :` + sizeLoaded.toLocaleString() + " / " + total.toLocaleString();
 		}
 		
