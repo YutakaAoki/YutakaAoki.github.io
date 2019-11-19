@@ -12,7 +12,6 @@ body {
                         hsla(0,80%,100%,0.32) 0%,
                         hsla(0,80%,80%,0.16) 60%,
                         hsla(0,80%,80%,0) 95%);
-  color: #ccc;
 }
 
 .main-text {
@@ -20,6 +19,7 @@ body {
   position: absolute;
   left: 0px;
   top: 200px;
+  color: #ccc;
 }
 
 img {
@@ -32,6 +32,7 @@ img {
   position: fixed;
   top: 32px;
   left: 32px;
+  color: #ccc;
 }
 
 .network-message {
@@ -39,5 +40,6 @@ img {
   position: absolute;
   left: 0px;
   top: 250px;
+  color: #ccc;
 }
 

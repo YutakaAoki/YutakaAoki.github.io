@@ -1488,7 +1488,7 @@ window.onload = function() {
 			if (done) {
 				if ( sizeLoaded != sizeBuf ) {
 					// バッファサイズとロードしたサイズが異なっている場合 :
-					console.log( `At the end of fetch, sizeLoaded = ${sizeLoaded}, ` );
+					console.log( `At the end of fetch, final sizeLoaded = ${sizeLoaded}, ` );
 					console.log( `  resize from ${sizeBuf} to ${sizeLoaded}` );
 					
 					buffer	= resizeArrBuf(buffer, sizeLoaded, sizeLoaded);
