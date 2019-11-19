@@ -1366,5 +1366,5 @@ function ya_aaa(size)
 }
 
 window.onload = function() {
-	get_filesize( "test.wasm", ya_aaa(size) );
+	get_filesize( "test.wasm", ya_aaa );
 }
