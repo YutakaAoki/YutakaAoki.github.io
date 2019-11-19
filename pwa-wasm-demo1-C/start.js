@@ -1327,18 +1327,19 @@ for (var key in import_func_s) {
 	XMLHttpRequest.setRequestHeader( "xxx", "yyy" );
 */
 function get_filesize(url, callback) {
-    var xhr = new XMLHttpRequest();
-    
-	// xhr.setRequestHeader( "Accept-Encoding", "identity" );
-    
-    xhr.open("HEAD", url, true); // Notice "HEAD" instead of "GET",
-                                 //  to get only the header
-    xhr.onreadystatechange = function() {
-        if (this.readyState == this.DONE) {
-            callback(parseInt(xhr.getResponseHeader("Content-Length")));
-        }
-    };
-    xhr.send();
+	var xhr = new XMLHttpRequest();
+	
+	// gzip などで圧縮をせずに、そのままのファイルのサイズを返してもらいたい :
+	xhr.setRequestHeader( "Accept-Encoding", "identity" );
+	
+	xhr.open("HEAD", url, true); // Notice "HEAD" instead of "GET",
+								 //  to get only the header
+	xhr.onreadystatechange = function() {
+		if (this.readyState == this.DONE) {
+			callback(parseInt(xhr.getResponseHeader("Content-Length")));
+		}
+	};
+	xhr.send();
 }
 
 function ya_aaa(size)
