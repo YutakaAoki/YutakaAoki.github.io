@@ -1433,7 +1433,7 @@ window.onload = function() {
 		}
 		*/
 		
-		var		cnt_enc	= response.headers.get("content-encoding"));
+		var		cnt_enc	= response.headers.get("content-encoding");
 		
 		console.log( "cnt_enc=" + cnt_enc );
 		
