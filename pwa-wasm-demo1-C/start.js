@@ -1329,16 +1329,21 @@ for (var key in import_func_s) {
 function get_filesize(url, callback) {
 	var xhr = new XMLHttpRequest();
 	
+	xhr.open("HEAD", url, true); // Notice "HEAD" instead of "GET",
+								 //  to get only the header
+	
 	// gzip などで圧縮をせずに、そのままのファイルのサイズを返してもらいたい :
 	xhr.setRequestHeader( "Accept-Encoding", "identity" );
 	
-	xhr.open("HEAD", url, true); // Notice "HEAD" instead of "GET",
-								 //  to get only the header
+	// 状態が変化した時に呼び出される関数を登録しておく :
 	xhr.onreadystatechange = function() {
 		if (this.readyState == this.DONE) {
+			// コールバック関数にバイト数を実引数にして呼び出す :
 			callback(parseInt(xhr.getResponseHeader("Content-Length")));
 		}
 	};
+	
+	// 実際に XHR を発行する :
 	xhr.send();
 }
 
