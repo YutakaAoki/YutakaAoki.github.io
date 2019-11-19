@@ -1488,7 +1488,8 @@ window.onload = function() {
 			if (done) {
 				if ( sizeLoaded != sizeBuf ) {
 					// バッファサイズとロードしたサイズが異なっている場合 :
-					console.log( `At th end of fetch, resize from ${sizeBuf} to ${sizeLoaded}` );
+					console.log( `At the end of fetch, sizeLoaded = ${sizeLoaded}, ` );
+					console.log( `  resize from ${sizeBuf} to ${sizeLoaded}` );
 					
 					buffer	= resizeArrBuf(buffer, sizeLoaded, sizeLoaded);
 				}
@@ -1498,6 +1499,8 @@ window.onload = function() {
 			
 			// 今回ロードされたバイト数（増分値） :
 			var		sizeAdd			= value.length;
+			
+			console.log( `sizeAdd = ${sizeAdd}` );
 			
 			// バッファに必要なバイト数 :
 			var		sizeNeedBuf		= sizeLoaded + sizeAdd;
