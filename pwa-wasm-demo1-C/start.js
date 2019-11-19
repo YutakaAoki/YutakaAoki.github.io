@@ -1319,6 +1319,8 @@ for (var key in import_func_s) {
 
 // console.log( env );
 
+
+
 /*
 	Request Headers
 		Accept-Encoding: identity
@@ -1371,6 +1373,124 @@ function ya_aaa(size)
 	});
 }
 
+/*
 window.onload = function() {
 	get_filesize( "test.wasm", ya_aaa );
 }
+*/
+
+window.onload = function() {
+//	var		outarea		= document.getElementById( "outarea" );
+	
+	var		sx		= 300;
+	var		sy		= 70;
+	var		wx		= window.innerWidth;
+	var		wy		= window.innerHeight;
+	
+//	console.log( "window.parent.screen.height = " + window.parent.screen.height );
+//	console.log( "window.parent.screen.width = " + window.parent.screen.width );
+//	console.log( "window.innerWidth  = " + window.innerWidth );
+//	console.log( "window.innerHeight = " + window.innerHeight );
+	
+	div1 = document.createElement('div');
+	div1.style.border	= "2px solid #00FF00";
+	div1.style.position	= "absolute";
+	div1.style.left		= String((wx - sx) / 2) + "px";
+	div1.style.top		= String((wy - sy) / 2) + "px";
+	div1.style.width	= String(sx) + "px";
+	div1.style.height	= String(sy) + "px";
+	div1.style["background-color"]	= "#FFFFFF";
+	div1.style.zIndex		= "100";		// 値が小さいほど後ろ側(奥の方)にあることになる。
+	document.body.appendChild( div1 );
+	
+	span1 = document.createElement('span');
+	span1.style.height	= "16px";
+	span1.innerHTML		= "NWSTK: Now loading a wasm module...";
+	div1.appendChild( span1 );
+	
+	prgrs	= document.createElement('progress');
+	prgrs.style.width	= "200px";
+	prgrs.style.height	= "16px";
+	div1.appendChild( prgrs );
+	
+	br1 = document.createElement('br');
+	div1.appendChild( br1 );
+	
+	span2 = document.createElement('span');
+	span2.style.height	= "16px";
+	div1.appendChild( span2 );
+	
+	
+	fetch("test.wasm")
+	.then( async response => {
+		// 全バイト数 :
+		const	total	= Number.parseInt(response.headers.get("Content-Length"));
+		
+	//	var		aaa		= response.headers.get("Content-Length"));
+		
+		for (var key of response.headers.keys()) {
+			console.log( "response.headers.get(" + key + ")=" +
+						  response.headers.get(key) );
+		}
+		
+		prgrs.max		= total;
+		prgrs.value		= 0;
+		
+		
+		var		buffer	= new ArrayBuffer(total);
+		var		u8arr	= new Uint8Array(buffer);
+		
+		let		sizeLoaded	= 0;		// 受信したバイト数
+		
+		// 少しずつ読み込んで プログレスバーと % 表示で進捗状況を表示する :
+		const	reader	= response.body.getReader();
+		while ( true ) {
+			const {done, value} = await reader.read();
+			if (done) {
+				break;
+			}
+			// 読んだデータはバイナリデータ（Uint8Array）で与えられる :
+			
+			// value 配列を u8arr 配列の sizeLoaded の位置にコピーする :
+			u8arr.set( value, sizeLoaded );
+			
+			// 読み込んだバイト数を積算しておく :
+			sizeLoaded		+= value.length;
+			
+			// プログレスバーに値を設定しておく :
+			prgrs.value		= sizeLoaded;
+			
+			
+			// 12.3 のように小数点以下 1 桁まで表示する :
+			var		perc	= ((sizeLoaded * 100.0) / total).toFixed(1);
+			
+	//		console.log( `${perc}% : ${sizeLoaded} / ${total}` );
+	//		console.log( `value.length=${value.length}` );
+	//		console.log( `value=${value}` );
+			
+		//	outarea.value	= `${perc}% : ${sizeLoaded} / ${total}\n`;
+			span2.innerHTML	= `${perc}% :` + sizeLoaded.toLocaleString() + " / " + total.toLocaleString();
+		}
+		
+		// プログレスバーを囲っている div 要素全体を削除しておく :
+		document.body.removeChild( div1 );
+		
+		
+		return	buffer;
+	})
+	.then( buffer => WebAssembly.compile(buffer) )
+	.then( module => WebAssembly.instantiate(module, imports) )
+	.then( instance => {
+		g_instance	= instance;
+		g_exports	= instance.exports;
+		g_memory	= g_exports.memory;
+		
+		// g_memory に対応している ArrayBuffer を、JS の HEAP8[] 配列
+		// に投影する :
+		_js_on_grow_memory();
+		
+		var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
+		
+		// alert( "start_from_js() = " + String(ret) );
+	});
+};
