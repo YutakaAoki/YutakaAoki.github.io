@@ -1454,9 +1454,9 @@ window.onload = function() {
 		// なお、Request-Header に Accept-Encoding を指定することも禁止されている。
 		// Accept-Encoding は、"Forbidden Header Name" である。
 		// 注意が必要。
-		const	total	= Number.parseInt(response.headers.get("Content-Length"));
+		var			total	= Number.parseInt(response.headers.get("Content-Length"));
 		
-		console.log( `original total = $(total)` );
+		console.log( `original total = ${total}` );
 		
 		/*
 		for (var key of response.headers.keys()) {
@@ -1488,7 +1488,7 @@ window.onload = function() {
 			if (done) {
 				if ( sizeLoaded != sizeBuf ) {
 					// バッファサイズとロードしたサイズが異なっている場合 :
-					console.log( `At th end of fetch, resize from $(sizeBuf) to $(sizeLoaded)` );
+					console.log( `At th end of fetch, resize from ${sizeBuf} to ${sizeLoaded}` );
 					
 					buffer	= resizeArrBuf(buffer, sizeLoaded, sizeLoaded);
 				}
@@ -1504,7 +1504,7 @@ window.onload = function() {
 			if ( sizeNeedBuf > total ) {
 				// バッファが足りない場合(少し多めに確保しておく) :
 				var			sizeNew		= sizeLoaded + sizeAdd * 3;
-				console.log( `Resize ArrayBuffer from $(sizeBuf) to $(sizeNew)` );
+				console.log( `Resize ArrayBuffer from ${sizeBuf} to ${sizeNew}` );
 				
 				// バッファをサイズ変更しておく :
 				// sizeLoaded = コピーするバイト数、sizeNew = 新しいバッファのバイト数 :
@@ -1518,7 +1518,7 @@ window.onload = function() {
 				// プログレスバーの最大値も修正しておく :
 				prgrs.max	= total;
 				
-				console.log( `new total = $(total)` );
+				console.log( `new total = ${total}` );
 				
 				sizeBuf		= sizeNew;
 			}
