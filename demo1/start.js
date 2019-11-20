@@ -19,18 +19,38 @@
 var import_func_s = {
 
 _jsfunc_MyStdcLib_1 : function ()
-{ 	g_wasm_stdout_buf = "";},
+{
+	g_wasm_stdout_buf = "";},
 
 _jsfunc_MyStdcLib_2 : function ()
-{ 	g_outarea.value += g_wasm_stdout_buf;
+{
+	g_outarea.value += g_wasm_stdout_buf;
 	g_outarea.scrollTop = g_outarea.scrollHeight;
 	g_wasm_stdout_buf = "";},
 
 _jsfunc_MyStdcLib_3 : function ($0)
-{ 	g_wasm_stdout_buf += String.fromCharCode($0);},
+{
+	g_wasm_stdout_buf += String.fromCharCode($0);},
+
+_jsfunc_basic_math_1 : function ($0)
+{
+	var a = $0;
+	return Math.floor( a );},
+
+_jsfunc_basic_math_2 : function ($0)
+{
+	var x = $0;
+	return Math.log10( x );},
+
+_jsfunc_basic_math_3 : function ($0, $1)
+{
+	var x = $0;
+	var y = $1;
+	return Math.pow( x, y );},
 
 _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var idxParent = $1;
 	var x = $2;
 	var y = $3;
@@ -95,12 +115,13 @@ _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 	return 1;},
 
 _jsfunc_Wnd_2 : function ($0, $1)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var sizeFont = $1;
 	var sxFont = sizeFont / 2.0;
 	var ctx = g_ctx_s[idxCanvas];
 	{
-	var font_name = "monospace";
+	var font_name = "MS Gothic";
 	ctx.font = "normal normal " + String(sizeFont) + "px " + font_name;
 	var sxTextX = ctx.measureText("X").width;
 	var ratio = sxTextX / sxFont;
@@ -111,7 +132,8 @@ _jsfunc_Wnd_2 : function ($0, $1)
 	return 1;},
 
 _jsfunc_Wnd_3 : function ($0, $1, $2)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var x = $1;
 	var y = $2;
 	var whole_div = g_whole_div_s[idxCanvas];
@@ -119,7 +141,8 @@ _jsfunc_Wnd_3 : function ($0, $1, $2)
 	whole_div.style.top = String(y) + "px";},
 
 _jsfunc_Wnd_4 : function ($0, $1, $2, $3, $4, $5, $6, $7)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var x = $1;
 	var y = $2;
 	var sx = $3;
@@ -163,20 +186,24 @@ _jsfunc_Wnd_4 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 	}},
 
 _jsfunc_Wnd_5 : function ($0, $1, $2)
-{ 	var whole_div = g_whole_div_s[$0];
+{
+	var whole_div = g_whole_div_s[$0];
 	whole_div.style.left = String($1) + "px";
 	whole_div.style.top = String($2) + "px";},
 
 _jsfunc_Wnd_6 : function ($0)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.save();},
 
 _jsfunc_Wnd_7 : function ($0)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.restore();},
 
 _jsfunc_Wnd_8 : function ($0)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var whole_div = g_whole_div_s[idxCanvas];
 	whole_div.parentNode.removeChild(whole_div);
 	g_whole_div_s[idxCanvas] = 0;
@@ -186,7 +213,8 @@ _jsfunc_Wnd_8 : function ($0)
 	return 1;},
 
 _jsfunc_Wnd_9 : function ($0, $1)
-{ 	var pTimer = $0;
+{
+	var pTimer = $0;
 	var millisec = $1;
 	var js_OnTimer = function() {
 	var rr = g_exports.wa_OnTimer( pTimer );
@@ -194,11 +222,13 @@ _jsfunc_Wnd_9 : function ($0, $1)
 	return setInterval( js_OnTimer, millisec );},
 
 _jsfunc_Wnd_10 : function ($0)
-{ 	var idTimer = $0;
+{
+	var idTimer = $0;
 	clearInterval( idTimer );},
 
 _jsfunc_Wnd_11 : function ($0, $1, $2, $3)
-{ 	var idxCanvas = $0;
+{
+	var idxCanvas = $0;
 	var idxCanvas_wgl = $1;
 	var sx = $2;
 	var sy = $3;
@@ -239,7 +269,8 @@ _jsfunc_Wnd_11 : function ($0, $1, $2, $3)
 	g_ctx_s[idxCanvas_wgl] = ctx_wgl;},
 
 _jsfunc_PrepDC_1 : function ($0, $1, $2, $3, $4)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var org_x = $1;
 	var org_y = $2;
 	var sx = $3;
@@ -251,7 +282,8 @@ _jsfunc_PrepDC_1 : function ($0, $1, $2, $3, $4)
 	ctx.clip();},
 
 _jsfunc_Caret_1 : function ($0, $1, $2, $3, $4, $5, $6)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var xCaret = $1;
 	var yCaret = $2;
 	var sxCaret = $3;
@@ -283,26 +315,33 @@ _jsfunc_Caret_1 : function ($0, $1, $2, $3, $4, $5, $6)
 	);},
 
 _jsfunc_NexFuncs_1 : function ($0)
-{ 	var s = Pointer_stringify($0);
+{
+	var s = Pointer_stringify($0);
 	alert(s);},
 
 _jsfunc_NexFuncs_2 : function ()
-{ 	document.body.style.cursor = "se-resize";},
+{
+	document.body.style.cursor = "se-resize";},
 
 _jsfunc_NexFuncs_3 : function ()
-{ 	document.body.style.cursor = "e-resize";},
+{
+	document.body.style.cursor = "e-resize";},
 
 _jsfunc_NexFuncs_4 : function ()
-{ 	document.body.style.cursor = "s-resize";},
+{
+	document.body.style.cursor = "s-resize";},
 
 _jsfunc_NexFuncs_5 : function ()
-{ 	document.body.style.cursor = "default";},
+{
+	document.body.style.cursor = "default";},
 
 _jsfunc_NexFuncs_6 : function ()
-{ 	g_input_tag.focus();},
+{
+	g_input_tag.focus();},
 
 _jsfunc_DC_1 : function ($0, $1, $2, $3, $4, $5, $6)
-{ 	var str = Pointer_stringify($5);
+{
+	var str = Pointer_stringify($5);
 	var ctx = g_ctx_s[$0];
 	ctx.beginPath();
 	ctx.lineWidth = $6;
@@ -314,13 +353,15 @@ _jsfunc_DC_1 : function ($0, $1, $2, $3, $4, $5, $6)
 	return 0;},
 
 _jsfunc_DC_2 : function ($0, $1, $2, $3, $4, $5)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.fillStyle = Pointer_stringify($5);
 	ctx.fillRect($1, $2, $3, $4);
 	return 0;},
 
 _jsfunc_DC_3 : function ($0, $1, $2, $3)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var str = Pointer_stringify($3);
 	ctx.fillStyle = "#000000";
 	ctx.textBaseline = "top";
@@ -328,7 +369,8 @@ _jsfunc_DC_3 : function ($0, $1, $2, $3)
 	ctx.fillText(str, $1, $2);},
 
 _jsfunc_DC_4 : function ($0, $1, $2, $3)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var str = String.fromCodePoint($3);
 	ctx.fillStyle = "#000000";
 	ctx.textBaseline = "top";
@@ -336,7 +378,8 @@ _jsfunc_DC_4 : function ($0, $1, $2, $3)
 	ctx.fillText(str, $1, $2);},
 
 _jsfunc_DC_5 : function ($0, $1, $2, $3, $4, $5)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var x = $1;
 	var y = $2;
 	var radius = $3;
@@ -348,16 +391,157 @@ _jsfunc_DC_5 : function ($0, $1, $2, $3, $4, $5)
 	ctx.stroke();},
 
 _jsfunc_BaseWnd_1 : function ()
-{ 	if ( document.activeElement != null ) {
+{
+	if ( document.activeElement != null ) {
 	document.activeElement.blur();
 	}},
 
+_jsfunc_TopWnd_1 : function ($0, $1)
+{
+	var ctx = g_ctx_s[$0];
+	var str = Pointer_stringify( $1 );
+	var metrics = ctx.measureText( str );
+	return metrics.width;},
+
+_jsfunc_TopWnd_2 : function ()
+{
+	printf_file_list = function(file_list) {
+	var i;
+	var num = file_list.length;
+	console.log( "num = " + num );
+	for ( i = 0; i < num; i++ ){
+	var file = file_list[i];
+	console.log( "i = " + i );
+	console.log( "name:" + file.name );
+	console.log( "size:" + file.size );
+	console.log( "type:" + file.type );
+	var reader = new FileReader();
+	reader.readAsText( file, 'UTF-8' );
+	reader.onload = function( readerEvent ) {
+	var content = readerEvent.target.result;
+	console.log( content );
+	}
+	}
+	}},
+
+_jsfunc_TopWnd_3 : function ()
+{
+	g_open_dlg_obj = new Object();
+	g_open_dlg_obj.m_file_list = null;
+	g_open_dlg_obj.m_bOk = 0;
+	var whole_div = document.createElement('div');
+	whole_div.style.position = "absolute";
+	whole_div.style.left = "50px";
+	whole_div.style.top = "20px";
+	whole_div.style["background-color"] = "#FF0000";
+	whole_div.style.border = "5px solid #00FF00";
+	whole_div.style.width = "300px";
+	whole_div.style.height = "110px";
+	whole_div.style.zIndex = "10000000";
+	document.body.appendChild( whole_div );
+	g_open_dlg_obj.m_whole_div = whole_div;
+	var title = document.createElement('span');
+	title.innerHTML = "File Open Dialog";
+	title.style.position = "absolute";
+	title.style.border = "2px solid #000000";
+	title.style.color = "#000000";
+	title.style["background-color"] = "#FFFF00";
+	title.style["text-align"] = "center";
+	title.style.left = "0px";
+	title.style.top = "0px";
+	title.style.width = "296px";
+	title.style.height = "25px";
+	whole_div.appendChild( title );
+	g_open_dlg_obj.m_title = title;
+	file_input_tag = document.createElement('input');
+	file_input_tag.type = 'file';
+	file_input_tag.name = 'name';
+	file_input_tag.multiple = 'multiple';
+	file_input_tag.innerHTML = "input element";
+	file_input_tag.style.position = "absolute";
+	file_input_tag.style.border = "2px solid #000000";
+	file_input_tag.style.left = "0px";
+	file_input_tag.style.top = "35px";
+	file_input_tag.style.width = "280px";
+	file_input_tag.style.height = "32px";
+	file_input_tag.style.color = "#000000";
+	file_input_tag.style["background-color"] = "#00FFFF";
+	whole_div.appendChild( file_input_tag );
+	g_open_dlg_obj.m_file_input_tag = file_input_tag;
+	CalcelToOpen = function() {
+	console.log( "CalcelToOpen() „Å´Êù•„Åü." );
+	g_exports.c_OpenDialogCanceled();
+	}
+	var cancel_button = document.createElement('button');
+	cancel_button.innerHTML = "Cancel";
+	cancel_button.style.position = "absolute";
+	cancel_button.style.left = "120px";
+	cancel_button.style.top = "80px";
+	file_input_tag.style.height = "24px";
+	cancel_button.onclick = CalcelToOpen;
+	whole_div.appendChild( cancel_button );
+	g_open_dlg_obj.m_cancel_button = cancel_button;
+	file_input_tag.onclick = function(event) {
+	console.log( "file_input_tag.onclick() is coming. " );
+	}
+	file_input_tag.onblur = function(event) {
+	console.log( "file_input_tag.onblur() is coming. " );
+	}
+	file_input_tag.onfocus = function(event) {
+	console.log( "file_input_tag.onfocus() is coming. " );
+	}
+	document.body.onfocus = function(event) {
+	console.log( "document.body.onfocus() is coming." );
+	}
+	document.body.onblur = function(event) {
+	console.log( "document.body.onblur() is coming." );
+	}
+	file_input_tag.onchange = function(event) {
+	console.log( "file_input_tag.onchange() is coming. " );
+	g_open_dlg_obj.m_bOk = 1;
+	var file_list = event.target.files;
+	g_open_dlg_obj.m_file_list = file_list;
+	g_exports.c_OpenDialogEnd();
+	}
+	file_input_tag.click();},
+
+_jsfunc_TopWnd_4 : function ()
+{
+	var whole_div = g_open_dlg_obj.m_whole_div;
+	document.body.removeChild( whole_div );},
+
+_jsfunc_TopWnd_5 : function ()
+{
+	var file_list = g_open_dlg_obj.m_file_list;
+	console.log( "g_open_dlg_obj.m_bOk = " + g_open_dlg_obj.m_bOk );
+	console.log( "file_list = " + file_list );
+	if ( file_list != null ) {
+	console.log( "begin of filelist(2)" );
+	printf_file_list(file_list);
+	console.log( "end of filelist(2)" );
+	}
+	else {
+	console.log( "file_list == null" );
+	}},
+
+_jsfunc_TopWnd_6 : function ()
+{
+	var atag = document.createElement('a');
+	atag.href = URL.createObjectURL(new Blob(['NWSTK, Hello Blob. Y.A.\n'], {type: 'text/plain'}));
+	atag.download = 'test-blob-NWSTK.txt';
+	atag.style.display = 'none';
+	document.body.appendChild(atag);
+	atag.click();
+	document.body.removeChild(atag);},
+
 _jsfunc_Image_1 : function ($0)
-{ 	var x = $0;
+{
+	var x = $0;
 	return Math.sin( x ) * 10000000.0 ;},
 
 _jsfunc_Image_2 : function ($0, $1)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var szPath = Pointer_stringify($1);
 	var img_pack = {};
 	var img = new Image();
@@ -378,31 +562,36 @@ _jsfunc_Image_2 : function ($0, $1)
 	}},
 
 _jsfunc_Image_3 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.naturalWidth;},
 
 _jsfunc_Image_4 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.naturalHeight;},
 
 _jsfunc_Image_5 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.clientWidth;},
 
 _jsfunc_Image_6 : function ($0)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	return img.clientHeight;},
 
 _jsfunc_Image_7 : function ($0, $1, $2, $3)
-{ 	var idxImg = $0;
+{
+	var idxImg = $0;
 	var img_pack = g_js_img_hash[idxImg];
 	var img = img_pack.m_img;
 	var ctx = g_ctx_s[$1];
@@ -424,23 +613,27 @@ _jsfunc_Image_7 : function ($0, $1, $2, $3)
 	);},
 
 _jsfunc_Image_8 : function ($0, $1, $2)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var org_x = $1;
 	var org_y = $2;
 	ctx.resetTransform();
 	ctx.translate( org_x, org_y );},
 
 _jsfunc_Image_9 : function ($0, $1)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	var rad_x = $1;
 	ctx.rotate( rad_x );},
 
 _jsfunc_Image_10 : function ($0, $1, $2)
-{ 	var ctx = g_ctx_s[$0];
+{
+	var ctx = g_ctx_s[$0];
 	ctx.translate( $1, $2 );},
 
 _jsfunc_NewEntry_1 : function ()
-{ 	g_log_cnt = 0;
+{
+	g_log_cnt = 0;
 	js_MyPrint = function( str ) {
 	console.log( "" + g_log_cnt + " : " + str );
 	g_log_cnt++;
@@ -451,12 +644,14 @@ _jsfunc_NewEntry_1 : function ()
 	return g_bTouchSupported;},
 
 _jsfunc_NewEntry_2 : function ($0, $1, $2)
-{ 	console.log( "start_from_js(), a=" + String($0) );
+{
+	console.log( "start_from_js(), a=" + String($0) );
 	console.log( "start_from_js(), b=" + String($1) );
 	console.log( "start_from_js(), c=" + String($2) );},
 
 _jsfunc_NewEntry_3 : function ()
-{ 	js_genshi_line = function(ctx, x1, y1, x2, y2, strCol, width) {
+{
+	js_genshi_line = function(ctx, x1, y1, x2, y2, strCol, width) {
 	ctx.beginPath();
 	ctx.lineWidth = width;
 	ctx.imageSmoothingEnabled = false;
@@ -552,7 +747,8 @@ _jsfunc_NewEntry_3 : function ()
 	);},
 
 _jsfunc_NewEntry_4 : function ()
-{ 	g_bIME = 0;
+{
+	g_bIME = 0;
 	g_bComposStarted = 0;
 	g_input_tag = null;
 	js_make_input_tag_caret_goto_btm = function() {
@@ -593,11 +789,13 @@ _jsfunc_NewEntry_4 : function ()
 	g_input_tag.focus();},
 
 _jsfunc_NewEntry_5 : function ()
-{ 	g_outarea = document.getElementById( "outarea" );
+{
+	g_outarea = document.getElementById( "outarea" );
 	g_js_img_hash = {};},
 
 _jsfunc_NewEntry_6 : function ()
-{ 	js_MyPrint( "window.devicePixelRatio = " + window.devicePixelRatio );
+{
+	js_MyPrint( "window.devicePixelRatio = " + window.devicePixelRatio );
 	var value;
 	if ( !g_bTouchSupported ) {
 	value = window.devicePixelRatio;
@@ -614,10 +812,12 @@ _jsfunc_NewEntry_6 : function ()
 	js_MyPrint( "g_scaling = " + g_scaling );},
 
 _jsfunc_NewEntry_7 : function ()
-{ 	return g_scaling * 10000.0;},
+{
+	return g_scaling * 10000.0;},
 
 _jsfunc_NewEntry_8 : function ()
-{ 	var canvas = document.createElement("canvas");
+{
+	var canvas = document.createElement("canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.font = "normal normal 32px monospace";
 	var sxTextX = ctx.measureText("X").width;
@@ -625,14 +825,16 @@ _jsfunc_NewEntry_8 : function ()
 	js_MyPrint( "sxTextX / 16.0 = " + (sxTextX / 16.0) );},
 
 _jsfunc_NewEntry_9 : function ()
-{ 	g_canvas_s = new Array(200 );
+{
+	g_canvas_s = new Array(200 );
 	g_whole_div_s = new Array(200 );
 	g_ctx_s = new Array(200 );
 	g_client_div_s = new Array(200 );
 	g_strFont_s = new Array(200 );},
 
 _jsfunc_NewEntry_10 : function ()
-{ 	g_js_bInputInputEvent = 0;
+{
+	g_js_bInputInputEvent = 0;
 	g_input_tag.addEventListener( 'keydown', js_keydown, {passive: false} );
 	g_input_tag.addEventListener( 'keyup', js_keyup, {passive: false} );
 	g_input_tag.addEventListener( 'input', js_input_input );
@@ -868,26 +1070,32 @@ _jsfunc_NewEntry_10 : function ()
 	}},
 
 _jsfunc_NewEntry_11 : function ()
-{ 	count = 0;
+{
+	count = 0;
 	function js_OnMainTimer() {
 	var rr = g_exports.wa_OnMainTimer(1);
 	}
 	setInterval(js_OnMainTimer, 20);},
 
 _jsfunc_NewEntry_12 : function ()
-{ 	g_bComposStarted = 1;},
+{
+	g_bComposStarted = 1;},
 
 _jsfunc_NewEntry_13 : function ()
-{ 	g_bComposStarted = 0;},
+{
+	g_bComposStarted = 0;},
 
 _jsfunc_NewEntry_14 : function ($0)
-{ 	return g_js_ime_unicode_s[$0];},
+{
+	return g_js_ime_unicode_s[$0];},
 
 _jsfunc_NewEntry_15 : function ()
-{ 	js_set_delay_input_tag_caret_goto_btm();},
+{
+	js_set_delay_input_tag_caret_goto_btm();},
 
 _jsfunc_NewEntry_16 : function ($0)
-{ 	g_bIME = $0;
+{
+	g_bIME = $0;
 	if ( g_bIME ) {
 	g_input_tag.style["background-color"] = "#ffffff";
 	g_input_tag.style.left = "220px";
@@ -897,26 +1105,32 @@ _jsfunc_NewEntry_16 : function ($0)
 	}},
 
 _jsfunc_NewEntry_17 : function ($0)
-{ 	var str1 = Pointer_stringify($0);
+{
+	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
 _jsfunc_NewEntry_18 : function ($0)
-{ 	g_outarea.value += String($0);
+{
+	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
 _jsfunc_NewEntry_19 : function ($0)
-{ 	g_outarea.value += String.fromCharCode($0);
+{
+	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
 _jsfunc_NewEntry_20 : function ($0, $1)
-{ 	alert( Pointer_stringify($0) + String($1) );},
+{
+	alert( Pointer_stringify($0) + String($1) );},
 
 _jsfunc_NewEntry_21 : function ()
-{ 	alert( "abort() is called." );},
+{
+	alert( "abort() is called." );},
 
 _jsfunc_NewEntry_22 : function ($0, $1)
-{ 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
+{
+	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
 // this is foot.js from here :
 };
@@ -943,21 +1157,76 @@ function _js_on_grow_memory() {
 	HEAP8	= new Uint8Array(buffer);
 }
 
-function Pointer_stringify( pTop ) {
+
+function GetLengthOfPointerString( pTop ) {
 	var		ptr		= pTop;
-	var		str1	= "";
+	var		len		= 0;
 	for ( ;; ) {
 		var  code = HEAP8[ptr];
 		if ( code == 0 ) {
 			break;
 		}
-		
-		str1	+= String.fromCharCode(code);
+		ptr++;
+		len++;
+	}
+	
+	return	len;
+}
+
+//function Pointer_stringify( pTop ) {
+//	var		ptr		= pTop;
+//	var		str1	= "";
+//	for ( ;; ) {
+//		var  code = HEAP8[ptr];
+//		if ( code == 0 ) {
+//			break;
+//		}
+//		
+//		str1	+= String.fromCharCode(code);
+//		ptr++;
+//	}
+//	
+//	return	str1;
+//}
+
+
+//function Pointer_stringify( pTop ) {
+//	var		len			= GetLengthOfPointerString( pTop );
+//	var		u8array		= new Uint8Array(HEAP8, pTop, len);
+//	
+//	var		decoder		= new TextDecoder("utf-8");
+//	
+//	// utf8 ÇÃBYTE îzóÒÇ©ÇÁ JS ÇÃ utf16 ï∂éöóÒÇçÏÇÈ :
+//	var		decodedText = decoder.decode(u8array);
+//	
+//	return	decodedText;
+//}
+
+
+function Pointer_stringify( pTop ) {
+	var		len			= GetLengthOfPointerString( pTop );
+	var		u8array		= new Uint8Array(len);
+	
+	var		ptr		= pTop;
+	for ( var cnt = 0; cnt < len; cnt++ ) {
+		u8array[cnt]	= HEAP8[ptr];
 		ptr++;
 	}
 	
-	return	str1;
+	var		decoder		= new TextDecoder("utf-8");
+	
+	// utf8 ÇÃBYTE îzóÒÇ©ÇÁ JS ÇÃ utf16 ï∂éöóÒÇçÏÇÈ :
+	var		decodedText = decoder.decode(u8array);
+	
+	return	decodedText;
 }
+
+
+
+
+
+
+
 
 
 
@@ -1051,33 +1320,250 @@ for (var key in import_func_s) {
 // console.log( env );
 
 
-fetch("test.wasm")
-.then( response => response.arrayBuffer() )
-.then( buffer => WebAssembly.compile(buffer) )
-.then( module => WebAssembly.instantiate(module, imports) )
-.then( instance => {
+/*
+	Request Headers
+		Accept-Encoding: identity
+	Ç…ÇµÇΩÇ¢ÅB
+	
+	XMLHttpRequest.setRequestHeader( "xxx", "yyy" );
+*/
+function get_filesize(url, callback) {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.open("HEAD", url, true); // Notice "HEAD" instead of "GET",
+								 //  to get only the header
+	
+	// gzip Ç»Ç«Ç≈à≥èkÇÇπÇ∏Ç…ÅAÇªÇÃÇ‹Ç‹ÇÃÉtÉ@ÉCÉãÇÃÉTÉCÉYÇï‘ÇµÇƒÇ‡ÇÁÇ¢ÇΩÇ¢ :
+	xhr.setRequestHeader( "Accept-Encoding", "identity" );
+	
+	// èÛë‘Ç™ïœâªÇµÇΩéûÇ…åƒÇ—èoÇ≥ÇÍÇÈä÷êîÇìoò^ÇµÇƒÇ®Ç≠ :
+	xhr.onreadystatechange = function() {
+		if (this.readyState == this.DONE) {
+			// ÉRÅ[ÉãÉoÉbÉNä÷êîÇ…ÉoÉCÉgêîÇé¿à¯êîÇ…ÇµÇƒåƒÇ—èoÇ∑ :
+			callback(parseInt(xhr.getResponseHeader("Content-Length")));
+		}
+	};
+	
+	// é¿ç€Ç… XHR Çî≠çsÇ∑ÇÈ :
+	xhr.send();
+}
+
+function ya_aaa(size)
+{
+	console.log( "YA, From HEAD, the size of test.wasm is: "
+				 + size + " bytes." );
+	
+	fetch("test.wasm")
+	.then( response => response.arrayBuffer() )
+	.then( buffer => WebAssembly.compile(buffer) )
+	.then( module => WebAssembly.instantiate(module, imports) )
+	.then( instance => {
+		g_instance	= instance;
+		g_exports	= instance.exports;
+		g_memory	= g_exports.memory;
+		
+		// g_memory Ç…ëŒâûÇµÇƒÇ¢ÇÈ ArrayBuffer ÇÅAJS ÇÃ HEAP8[] îzóÒ
+		// Ç…ìäâeÇ∑ÇÈ :
+		_js_on_grow_memory();
+		
+		var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
+		
+		//alert( "start_from_js() = " + String(ret) );
+	});
+}
+
+/*
+window.onload = function() {
+	get_filesize( "test.wasm", ya_aaa );
+}
+*/
 
 
+/*
+	in:		bufOld		= êÃÇÃ ArrayBuffer
+			sizeCopy	= êÃÇÃÉoÉbÉtÉ@Ç©ÇÁÉRÉsÅ[Ç∑ÇÈÉoÉCÉgêî
+			sizeNew		= êVÇµÇ¢ ArrayBuffer ÇÃÉoÉCÉgêîÅB
+	
+	ÅEsizeNew >= sizeCopy
+	ÅEsizeCopy >= (bufOld ÇÃÉTÉCÉY)
+	
+	ÇÃèåèÇñûÇΩÇ∑Ç‡ÇÃÇ∆Ç∑ÇÈÅBÇΩÇæÇµÅA
+		sizeNew < (bufOld ÇÃÉTÉCÉY)
+	Ç≈Ç†Ç¡ÇƒÇ‡ÇÊÇ¢ÅB
+*/
+function resizeArrBuf(bufOld, sizeCopy, sizeNew) {
+	var		bufNew		= new ArrayBuffer(sizeNew);
+	var		u8arrNew	= new Uint8Array(bufNew);
+	var		u8arrOld	= new Uint8Array(bufOld, 0, sizeCopy);
+	
+	u8arrNew.set(u8arrOld);
+	
+	return	bufNew;
+}
 
-
-
-g_instance	= instance;
-g_exports	= instance.exports;
-g_memory	= g_exports.memory;
-
-
-// g_memory Ç…ëŒâûÇµÇƒÇ¢ÇÈ ArrayBuffer ÇÅAJS ÇÃ HEAP8[] îzóÒ
-// Ç…ìäâeÇ∑ÇÈ :
-_js_on_grow_memory();
-
-
-
-
-var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
-
-	//alert( "start_from_js() = " + String(ret) );
-
-});
-
-
-
+window.onload = function() {
+//	var		outarea		= document.getElementById( "outarea" );
+	
+	var		sx		= 300;
+	var		sy		= 70;
+	var		wx		= window.innerWidth;
+	var		wy		= window.innerHeight;
+	
+//	console.log( "window.parent.screen.height = " + window.parent.screen.height );
+//	console.log( "window.parent.screen.width = " + window.parent.screen.width );
+//	console.log( "window.innerWidth  = " + window.innerWidth );
+//	console.log( "window.innerHeight = " + window.innerHeight );
+	
+	div1 = document.createElement('div');
+	div1.style.border	= "2px solid #00FF00";
+	div1.style.position	= "absolute";
+	div1.style.left		= String((wx - sx) / 2) + "px";
+	div1.style.top		= String((wy - sy) / 2) + "px";
+	div1.style.width	= String(sx) + "px";
+	div1.style.height	= String(sy) + "px";
+	div1.style["background-color"]	= "#FFFFFF";
+	div1.style.zIndex		= "100";		// ílÇ™è¨Ç≥Ç¢ÇŸÇ«å„ÇÎë§(âúÇÃï˚)Ç…Ç†ÇÈÇ±Ç∆Ç…Ç»ÇÈÅB
+	document.body.appendChild( div1 );
+	
+	span1 = document.createElement('span');
+	span1.style.height	= "16px";
+	span1.innerHTML		= "NWSTK: Now loading a wasm module...";
+	div1.appendChild( span1 );
+	
+	prgrs	= document.createElement('progress');
+	prgrs.style.width	= "200px";
+	prgrs.style.height	= "16px";
+	div1.appendChild( prgrs );
+	
+	br1 = document.createElement('br');
+	div1.appendChild( br1 );
+	
+	span2 = document.createElement('span');
+	span2.style.height	= "16px";
+	div1.appendChild( span2 );
+	
+	
+	fetch("test.wasm")
+	.then( async response => {
+		// ëSÉoÉCÉgêî(îÒà≥èkÇÃèÍçáÇ…ÇÃÇ›ê≥ÇµÇ¢íl) :
+		// Apache ÇÃ mod_gzip ÉÇÉWÉÖÅ[ÉãÇ≈ gzip à≥èkÇ≥ÇÍÇƒÇ¢ÇÈèÍçáÅAÇ±ÇÃílÇÕà≥èkå„ÇÃílÇ≈Ç†Ç¡ÇƒÅA
+		// å≥ÇÃ *.wasm ÇÃÉTÉCÉYÇ≈ÇÕÇ»Ç¢ÅBÇ∆Ç±ÇÎÇ™ÅAreader.read() Ç≈ì«Ç›çûÇ‹ÇÍÇÈÉfÅ[É^ÇÕÅA
+		// ìWäJå„ÇÃÉfÅ[É^Ç»ÇÃÇ≈ÅAå≥ÇÃ *.wasm ÇÃÉTÉCÉYÇ…Ç»Ç¡ÇƒÇµÇ‹Ç§ÅB
+		// à≥èkëOÇÃÉfÅ[É^ÇÃÉTÉCÉYÇéÊìæÇ∑ÇÈï˚ñ@ÇÕå©Ç¬Ç©ÇÁÇ»Ç©Ç¡ÇΩÅB
+		// Ç»Ç®ÅARequest-Header Ç… Accept-Encoding ÇéwíËÇ∑ÇÈÇ±Ç∆Ç‡ã÷é~Ç≥ÇÍÇƒÇ¢ÇÈÅB
+		// Accept-Encoding ÇÕÅA"Forbidden Header Name" Ç≈Ç†ÇÈÅB
+		// íçà”Ç™ïKóvÅB
+		var			total	= Number.parseInt(response.headers.get("Content-Length"));
+		
+		console.log( `original total = ${total}` );
+		
+		/*
+		for (var key of response.headers.keys()) {
+			console.log( "response.headers.get(" + key + ")=" +
+						  response.headers.get(key) );
+		}
+		*/
+		
+		var		cnt_enc	= response.headers.get("content-encoding");
+		
+		console.log( "cnt_enc=" + cnt_enc );
+		
+		
+		
+		prgrs.max		= total;
+		prgrs.value		= 0;
+		
+		
+		var		sizeBuf		= total;
+		var		buffer		= new ArrayBuffer(total);
+		var		u8arr		= new Uint8Array(buffer);
+		
+		let		sizeLoaded	= 0;		// éÛêMÇµÇΩÉoÉCÉgêî
+		
+		// è≠ÇµÇ∏Ç¬ì«Ç›çûÇÒÇ≈ ÉvÉçÉOÉåÉXÉoÅ[Ç∆ % ï\é¶Ç≈êiíªèÛãµÇï\é¶Ç∑ÇÈ :
+		const	reader	= response.body.getReader();
+		while ( true ) {
+			const {done, value} = await reader.read();
+			if (done) {
+				if ( sizeLoaded != sizeBuf ) {
+					// ÉoÉbÉtÉ@ÉTÉCÉYÇ∆ÉçÅ[ÉhÇµÇΩÉTÉCÉYÇ™àŸÇ»Ç¡ÇƒÇ¢ÇÈèÍçá :
+					console.log( `At the end of fetch, final sizeLoaded = ${sizeLoaded}, ` );
+					console.log( `  resize from ${sizeBuf} to ${sizeLoaded}` );
+					
+					buffer	= resizeArrBuf(buffer, sizeLoaded, sizeLoaded);
+				}
+				break;
+			}
+			// ì«ÇÒÇæÉfÅ[É^ÇÕÉoÉCÉiÉäÉfÅ[É^ÅiUint8ArrayÅjÇ≈ó^Ç¶ÇÁÇÍÇÈ :
+			
+			// ç°âÒÉçÅ[ÉhÇ≥ÇÍÇΩÉoÉCÉgêîÅiëùï™ílÅj :
+			var		sizeAdd			= value.length;
+			
+			console.log( `sizeAdd = ${sizeAdd}` );
+			
+			// ÉoÉbÉtÉ@Ç…ïKóvÇ»ÉoÉCÉgêî :
+			var		sizeNeedBuf		= sizeLoaded + sizeAdd;
+			if ( sizeNeedBuf > total ) {
+				// ÉoÉbÉtÉ@Ç™ë´ÇËÇ»Ç¢èÍçá(è≠ÇµëΩÇﬂÇ…ämï€ÇµÇƒÇ®Ç≠) :
+				var			sizeNew		= sizeLoaded + sizeAdd * 3;
+				console.log( `Resize ArrayBuffer from ${sizeBuf} to ${sizeNew}` );
+				
+				// ÉoÉbÉtÉ@ÇÉTÉCÉYïœçXÇµÇƒÇ®Ç≠ :
+				// sizeLoaded = ÉRÉsÅ[Ç∑ÇÈÉoÉCÉgêîÅAsizeNew = êVÇµÇ¢ÉoÉbÉtÉ@ÇÃÉoÉCÉgêî :
+				buffer	= resizeArrBuf(buffer, sizeLoaded, sizeNew);
+				
+				// ÉoÉbÉtÉ@ÇÃìäâeÇ‡êVÇµÇ¢ÉoÉbÉtÉ@ÇÃÇ‡ÇÃÇ…èCê≥ÇµÇƒÇ®Ç≠ :
+				u8arr	= new Uint8Array(buffer);
+				
+				// ó\ëzÇ≥ÇÍÇÈç≈ëÂÉoÉCÉgêîÇ‡ìKìxÇ…ëùÇ‚ÇµÇƒÇ®Ç≠ :
+				total		= sizeLoaded + sizeAdd * 2;
+				// ÉvÉçÉOÉåÉXÉoÅ[ÇÃç≈ëÂílÇ‡èCê≥ÇµÇƒÇ®Ç≠ :
+				prgrs.max	= total;
+				
+				console.log( `new total = ${total}` );
+				
+				sizeBuf		= sizeNew;
+			}
+			
+			// value îzóÒÇ u8arr îzóÒÇÃ sizeLoaded ÇÃà íuÇ…ÉRÉsÅ[Ç∑ÇÈ :
+			u8arr.set( value, sizeLoaded );
+			
+			// ì«Ç›çûÇÒÇæÉoÉCÉgêîÇêœéZÇµÇƒÇ®Ç≠ :
+			sizeLoaded		+= sizeAdd;
+			
+			// ÉvÉçÉOÉåÉXÉoÅ[Ç…ílÇê›íËÇµÇƒÇ®Ç≠ :
+			prgrs.value		= sizeLoaded;
+			
+			
+			// 12.3 ÇÃÇÊÇ§Ç…è¨êîì_à»â∫ 1 åÖÇ‹Ç≈ï\é¶Ç∑ÇÈ :
+			var		perc	= ((sizeLoaded * 100.0) / total).toFixed(1);
+			
+	//		console.log( `${perc}% : ${sizeLoaded} / ${total}` );
+	//		console.log( `sizeAdd=${sizeAdd}` );
+	//		console.log( `value=${value}` );
+			
+			span2.innerHTML	= `${perc}% :` + sizeLoaded.toLocaleString() + " / " + total.toLocaleString();
+		}
+		
+		// ÉvÉçÉOÉåÉXÉoÅ[ÇàÕÇ¡ÇƒÇ¢ÇÈ div óvëfëSëÃÇçÌèúÇµÇƒÇ®Ç≠ :
+		document.body.removeChild( div1 );
+		
+		
+		return	buffer;
+	})
+	.then( buffer => WebAssembly.compile(buffer) )
+	.then( module => WebAssembly.instantiate(module, imports) )
+	.then( instance => {
+		g_instance	= instance;
+		g_exports	= instance.exports;
+		g_memory	= g_exports.memory;
+		
+		// g_memory Ç…ëŒâûÇµÇƒÇ¢ÇÈ ArrayBuffer ÇÅAJS ÇÃ HEAP8[] îzóÒ
+		// Ç…ìäâeÇ∑ÇÈ :
+		_js_on_grow_memory();
+		
+		var		ret		= g_exports.start_from_js( 123, 456, 3.14 );
+		
+		// alert( "start_from_js() = " + String(ret) );
+	});
+};
