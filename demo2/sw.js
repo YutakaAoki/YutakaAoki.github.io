@@ -3,13 +3,12 @@ console.log('sw.js is coming.')
 var cacheStorageKey = 'nwstk-pwa-B2'
 
 var cacheList = [
-  './',
-  "./index.html",
+//  './',
+//  "./index.html",
   "./main.css",
   "./icon.png",
   
-//  "./test.wasm",
-  
+  "./test.wasm",
   "./hogo.js",
   "./start.js"
 ]
