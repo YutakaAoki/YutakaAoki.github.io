@@ -1795,7 +1795,7 @@ function resizeArrBuf(bufOld, sizeCopy, sizeNew) {
 }
 
 window.onload = function() {
-	console.log( "window.location.hostname=" + window.location.hostname );
+//	console.log( "window.location.hostname=" + window.location.hostname );
 	
 	
 	
