@@ -1806,6 +1806,10 @@ function resizeArrBuf(bufOld, sizeCopy, sizeNew) {
 }
 
 window.onload = function() {
+//	console.log( "window.location.hostname=" + window.location.hostname );
+	
+	
+	
 //	var		outarea		= document.getElementById( "outarea" );
 	
 	var		sx		= 300;
