@@ -3,9 +3,12 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
+  <title>Demo for NWSTK with NWSC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="icon" href="icon.png" type="image/png" />
   
-  <title>NWSTK with NWSC</title>
   
   <style>
     body {
@@ -46,14 +49,40 @@
   Enable JavaScript, to browse this site.
   </noscript>
   
-  <script type="text/javascript" src="hogo.js"></script>
-  <script type="text/javascript" src="start.js"></script>
-  
-  
 </head>
 
 <body style="height:250%;">
 
+  <div class="main-text">
+    PWA NWSTK
+  </div>
+  <div class="network-message">
+    Network:
+    <span id="network-status" class="">Good</span>
+  </div>
+  <script type="text/javascript">
+    if (navigator.serviceWorker != null) {
+      navigator.serviceWorker.register('sw.js')
+      .then(function(registration) {
+        console.log('Registered events at scope: ', registration.scope);
+      });
+    }
+
+//    fetch('data.json')
+
+    var statusEl = document.querySelector('#network-status')
+    if (!navigator.onLine) {
+      statusEl.classList = ['is-offline']
+      statusEl.innerText = 'Offline'
+    }
+  </script>
+
+  <script type="text/javascript" src="hogo.js"></script>
+  <script type="text/javascript" src="start.js"></script>
+
+  <textarea id="outarea" rows="5"></textarea>
+  
+  
 <!-- NINJA ANALYZE -->
 <script type="text/javascript">
 //<![CDATA[
@@ -68,9 +97,7 @@
 //]]>
 </script>
 <!-- /NINJA ANALYZE -->
-
-
-
-  <textarea id="outarea" rows="5"></textarea>
+  
+  
 </body>
 </html>
