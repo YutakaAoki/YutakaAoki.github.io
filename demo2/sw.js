@@ -7,7 +7,11 @@ var cacheList = [
 //  './',
 //  "./index.html",
   "./main.css",
-//"./icon-72.png",
+  
+  "./icon-72.png",
+  "./icon-192.png",
+  "./icon-256.png",
+  "./icon-512.png",
   
   "./test.wasm",
   "./hogo.js",
