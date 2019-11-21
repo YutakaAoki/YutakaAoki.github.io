@@ -28,15 +28,20 @@ self.addEventListener('install', function(e) {
 })
 
 self.addEventListener('activate', function(e) {
-  console.log('sw, Activate event')
+  console.log('sw, Activate event is coming.')
   e.waitUntil(
     Promise.all(
       caches.keys().then(cacheNames => {
-        return cacheNames.map(name => {
+      	console.log( "swYA, activate(), cacheNames=" + cacheNames );
+      	var		aaa		= cacheNames.map(name => {
+          console.log( "swYA, activate(), name=" + name );
           if (name !== cacheStorageKey) {
             return caches.delete(name)
           }
         })
+      	console.log( "swYA, activate(), aaa=" + aaa );
+        
+        return	aaa;
       })
     ).then(() => {
       console.log('sw, Clients claims.')
