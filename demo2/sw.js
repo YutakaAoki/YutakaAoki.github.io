@@ -15,13 +15,13 @@ var cacheList = [
 ]
 
 self.addEventListener('install', function(e) {
-  console.log('sw, Cache event!')
+  console.log('sw, install event!')
   e.waitUntil(
     caches.open(cacheStorageKey).then(function(cache) {
-      console.log('sw, Adding to Cache:', cacheList)
+      console.log('sw, call cache.addAll(), Adding to Cache:', cacheList)
       return cache.addAll(cacheList)
     }).then(function() {
-      console.log('sw, Skip waiting!')
+      console.log('sw, call self.skipWaiting()')
       return self.skipWaiting()
     })
   )
@@ -53,7 +53,7 @@ self.addEventListener('fetch', function(e) {
         console.log('sw, Using cache for:', e.request.url)
         return response
       }
-      console.log('sw, Fallback to fetch:', e.request.url)
+      console.log('sw, Actually download via fetch:', e.request.url)
       return fetch(e.request.url)
     })
   )
