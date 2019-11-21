@@ -1,7 +1,6 @@
 {
-  "name": "PWA NWSTK demo2, 2019/11/21. 16:11",
+  "name": "PWA NWSTK demo2",
   "short_name": "PWA NWSTK demo2",
-  "description": "desc: NWSTK NWSTK demo2, 2019/11/21. 16:11",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

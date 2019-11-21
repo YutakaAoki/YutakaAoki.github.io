@@ -1571,5 +1571,3 @@ window.onload = function() {
 		// alert( "start_from_js() = " + String(ret) );
 	});
 };
-
-// Ver 1.0.2
