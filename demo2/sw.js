@@ -1,5 +1,6 @@
+// Ver 1.0.0, 2019/11/21, 12:59
 
-console.log('sw.js is coming.')
+console.log('sw.js is coming. Ver 1.0.0, 19/11/21, 12:59')
 var cacheStorageKey = 'nwstk-pwa-B2'
 
 var cacheList = [
