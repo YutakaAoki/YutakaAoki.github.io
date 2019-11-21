@@ -7,7 +7,7 @@ var cacheList = [
 //  './',
 //  "./index.html",
   "./main.css",
-  "./icon.png",
+//"./icon-72.png",
   
   "./test.wasm",
   "./hogo.js",
