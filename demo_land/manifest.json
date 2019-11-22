@@ -3,7 +3,7 @@
   "short_name": "PWA NWSTK demo-land",
   "display": "standalone",
   "start_url": "./",
-  "theme_color": "#313131",
+  "theme_color": "#6699FF",
   "background_color": "#313131",
   "icons": [
     {
