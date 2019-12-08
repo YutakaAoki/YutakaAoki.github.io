@@ -1197,9 +1197,22 @@ _jsfunc_main_7 : function ($0, $1, $2, $3, $4, $5, $6)
 	gl.drawArrays(gl.LINE_LOOP, 0, 32 );
 	gl.disableVertexAttribArray(attLocation);
 	}
+	function DrawCourt() {
+	var mMatrix3 = myMat_identity(g_mat_s[2]);
+	set_attribute( g_my_col_vbo, g_locAttCol, g_numElemPerAttCol,
+	( ( 4 + ( 16 + 2 ) ) + 32 ) * 4 * g_numElemPerAttCol
+	);
+	gl.bindBuffer(gl.ARRAY_BUFFER, g_vboCourt);
+	gl.enableVertexAttribArray(attLocation);
+	gl.vertexAttribPointer(attLocation, 3, gl.FLOAT, false, 0, 0);
+	myMat_multiply(vpMatrix, mMatrix3, mvpMatrix);
+	gl.uniformMatrix4fv(g_uniLocation, false, mvpMatrix);
+	gl.drawArrays(gl.LINE_LOOP, 0, 4 );
+	gl.disableVertexAttribArray(attLocation);
+	}
 	var attLocation = gl.getAttribLocation(prg, 'position');
 	vpMatrix[0 + 0] = 2.0 / 700 ;
-	vpMatrix[4 + 1] = - 2.0 / 490 ;
+	vpMatrix[4 + 1] = - 2.0 / 580 ;
 	vpMatrix[4*3 + 0] = -1.0;
 	vpMatrix[4*3 + 1] = 1.0;
 	myMat_translate( mMatrix1, [xRacket, yRacket, 0], tmpMatrix );
@@ -1230,8 +1243,9 @@ _jsfunc_main_7 : function ($0, $1, $2, $3, $4, $5, $6)
 	gl.drawArrays(gl.TRIANGLE_FAN, 0, ( 16 + 2 ) );
 	gl.disableVertexAttribArray(attLocation);
 	}
-	DrawTouchCircle( 100 , ( 490 - 100 ) );
-	DrawTouchCircle( ( 700 - 100 ) , ( 490 - 100 ) );
+	DrawTouchCircle( 100 , ( 580 - 50 ) );
+	DrawTouchCircle( ( 700 - 100 ) , ( 580 - 50 ) );
+	DrawCourt();
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
 	gl.flush();},
 
@@ -1559,7 +1573,7 @@ _jsfunc_main_12 : function ($0)
 	g_js_color_array = new Float32Array(
 	buffer,
 	color_array_addr,
-	4 * ( 4 + ( 16 + 2 ) + 32 )
+	4 * ( 4 + ( 16 + 2 ) + 32 + ( ( 4 + ( 16 + 2 ) ) + 32 ) )
 	);},
 
 _jsfunc_main_13 : function ($0)
@@ -1580,6 +1594,12 @@ _jsfunc_main_13 : function ($0)
 	-50 , 10 , 0.0,
 	50 , -10 , 0.0,
 	-50 , -10 , 0.0
+	];
+	var court_points = [
+	0 , 0 , 0,
+	0 , ( 490 - 1 ) , 0,
+	( 700 - 1 ) , ( 490 - 1 ) , 0,
+	( 700 - 1 ) , 0 , 0
 	];
 	var ball_points = new Array( ( 16 + 2 ) * 3 );
 	ball_points[0] = 0;
@@ -1612,7 +1632,8 @@ _jsfunc_main_13 : function ($0)
 	}
 	g_vboRacket = create_vbo(racket_points);
 	g_vboBall = create_vbo(ball_points);
-	g_vboTouchCircle = create_vbo(touch_circle_points);},
+	g_vboTouchCircle = create_vbo(touch_circle_points);
+	g_vboCourt = create_vbo(court_points);},
 
 _jsfunc_main_14 : function ()
 {
