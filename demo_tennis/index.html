@@ -64,7 +64,12 @@
     if (navigator.serviceWorker != null) {
       navigator.serviceWorker.register('sw.js')
       .then(function(registration) {
-        console.log('Registered events at scope: ', registration.scope);
+        // registration worked
+        console.log('from main, sw, Registration of ServiceWorker was succeeded.');
+        console.log('from main, sw, Registered events at scope: ', registration.scope);
+        
+        console.log('from main, sw, force to registration.update()');
+        registration.update();
       });
     }
 
@@ -99,7 +104,7 @@ if ( window.location.hostname == "yutakaaoki.github.io" ) {
 	  ins.parentNode.insertBefore(sc, ins);
 	})(document);
 }
-else {
+else if ( window.location.hostname == "nowsmartsoft.atwebpages.com" ) {
 	// in the case of "https://nowsmartsoft.atwebpages.com" :
 	(function(d) {
 	  var sc=d.createElement("script"),

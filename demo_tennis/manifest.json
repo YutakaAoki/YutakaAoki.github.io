@@ -1,6 +1,6 @@
 {
-  "name": "PWA NWSTK demo-Mountain",
-  "short_name": "PWA NWSTK demo-Mountain",
+  "name": "PWA NWSTK demo-tennis",
+  "short_name": "PWA NWSTK demo-tennis",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

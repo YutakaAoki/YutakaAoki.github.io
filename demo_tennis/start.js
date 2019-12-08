@@ -337,7 +337,22 @@ _jsfunc_NexFuncs_5 : function ()
 
 _jsfunc_NexFuncs_6 : function ()
 {
+	document.onkeydown = null;
+	document.onkeyup = null;
 	g_input_tag.focus();},
+
+_jsfunc_NexFuncs_7 : function ()
+{
+	document.onkeydown = js_keydown_whole;
+	document.onkeyup = js_keyup_whole;},
+
+_jsfunc_NexFuncs_8 : function ()
+{
+	return window.innerWidth;},
+
+_jsfunc_NexFuncs_9 : function ()
+{
+	return window.innerHeight;},
 
 _jsfunc_DC_1 : function ($0, $1, $2, $3, $4, $5, $6)
 {
@@ -359,11 +374,11 @@ _jsfunc_DC_2 : function ($0, $1, $2, $3, $4, $5)
 	ctx.fillRect($1, $2, $3, $4);
 	return 0;},
 
-_jsfunc_DC_3 : function ($0, $1, $2, $3)
+_jsfunc_DC_3 : function ($0, $1, $2, $3, $4)
 {
 	var ctx = g_ctx_s[$0];
 	var str = Pointer_stringify($3);
-	ctx.fillStyle = "#000000";
+	ctx.fillStyle = Pointer_stringify($4);
 	ctx.textBaseline = "top";
 	ctx.font = g_strFont_s[$0];
 	ctx.fillText(str, $1, $2);},
@@ -795,27 +810,9 @@ _jsfunc_NewEntry_5 : function ()
 
 _jsfunc_NewEntry_6 : function ()
 {
-	js_MyPrint( "window.devicePixelRatio = " + window.devicePixelRatio );
-	var value;
-	if ( !g_bTouchSupported ) {
-	value = window.devicePixelRatio;
-	}
-	else {
-	value = window.devicePixelRatio;
-	}
-	var body1 = document.body;
-	var style1 = body1.style;
-	var factor1 = 1.0 / value;
-	style1.transform = 'scale(' + String(factor1) + ')';
-	style1["transform-origin"] = "top left";
-	g_scaling = value;
-	js_MyPrint( "g_scaling = " + g_scaling );},
+	g_scaling = 1.0;},
 
 _jsfunc_NewEntry_7 : function ()
-{
-	return g_scaling * 10000.0;},
-
-_jsfunc_NewEntry_8 : function ()
 {
 	var canvas = document.createElement("canvas");
 	var ctx = canvas.getContext("2d");
@@ -824,7 +821,7 @@ _jsfunc_NewEntry_8 : function ()
 	js_MyPrint( "font_check, width of font 'X' = " + sxTextX );
 	js_MyPrint( "sxTextX / 16.0 = " + (sxTextX / 16.0) );},
 
-_jsfunc_NewEntry_9 : function ()
+_jsfunc_NewEntry_8 : function ()
 {
 	g_canvas_s = new Array(200 );
 	g_whole_div_s = new Array(200 );
@@ -832,7 +829,7 @@ _jsfunc_NewEntry_9 : function ()
 	g_client_div_s = new Array(200 );
 	g_strFont_s = new Array(200 );},
 
-_jsfunc_NewEntry_10 : function ()
+_jsfunc_NewEntry_9 : function ()
 {
 	g_js_bInputInputEvent = 0;
 	g_input_tag.addEventListener( 'keydown', js_keydown, {passive: false} );
@@ -928,7 +925,6 @@ _jsfunc_NewEntry_10 : function ()
 	g_js_ime_unicode_s.push( unicode );
 	}
 	}
-	console.log( g_js_ime_unicode_s );
 	var len = g_js_ime_unicode_s.length;
 	g_js_ime_unicode_s.push(0);
 	g_exports.c_composition_end_core( len );
@@ -972,6 +968,14 @@ _jsfunc_NewEntry_10 : function ()
 	g_js_bInputInputEvent = 0;
 	var rr = g_exports.c_keyup( key );
 	}
+	js_keydown_whole = function(e) {
+	var key = e.keyCode;
+	var rr = g_exports.c_keydown( key );
+	};
+	js_keyup_whole = function(e) {
+	var key = e.keyCode;
+	var rr = g_exports.c_keyup_whole( key );
+	};
 	function js_mousedown(e) {
 	var bProcessed = g_exports.c_mousedown(
 	e.clientX * g_scaling,
@@ -1069,7 +1073,7 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	}},
 
-_jsfunc_NewEntry_11 : function ()
+_jsfunc_NewEntry_10 : function ()
 {
 	count = 0;
 	function js_OnMainTimer() {
@@ -1077,23 +1081,23 @@ _jsfunc_NewEntry_11 : function ()
 	}
 	setInterval(js_OnMainTimer, 20);},
 
-_jsfunc_NewEntry_12 : function ()
+_jsfunc_NewEntry_11 : function ()
 {
 	g_bComposStarted = 1;},
 
-_jsfunc_NewEntry_13 : function ()
+_jsfunc_NewEntry_12 : function ()
 {
 	g_bComposStarted = 0;},
 
-_jsfunc_NewEntry_14 : function ($0)
+_jsfunc_NewEntry_13 : function ($0)
 {
 	return g_js_ime_unicode_s[$0];},
 
-_jsfunc_NewEntry_15 : function ()
+_jsfunc_NewEntry_14 : function ()
 {
 	js_set_delay_input_tag_caret_goto_btm();},
 
-_jsfunc_NewEntry_16 : function ($0)
+_jsfunc_NewEntry_15 : function ($0)
 {
 	g_bIME = $0;
 	if ( g_bIME ) {
@@ -1104,87 +1108,356 @@ _jsfunc_NewEntry_16 : function ($0)
 	g_input_tag.style.left = "-10000px";
 	}},
 
-_jsfunc_NewEntry_17 : function ($0)
+_jsfunc_NewEntry_16 : function ($0)
 {
 	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_18 : function ($0)
+_jsfunc_NewEntry_17 : function ($0)
 {
 	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_19 : function ($0)
+_jsfunc_NewEntry_18 : function ($0)
 {
 	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_20 : function ($0, $1)
+_jsfunc_NewEntry_19 : function ($0, $1)
 {
 	alert( Pointer_stringify($0) + String($1) );},
 
-_jsfunc_NewEntry_21 : function ()
+_jsfunc_NewEntry_20 : function ()
 {
 	alert( "abort() is called." );},
 
-_jsfunc_NewEntry_22 : function ($0, $1)
+_jsfunc_NewEntry_21 : function ($0, $1)
 {
 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
-_jsfunc_main_1 : function ($0)
+_jsfunc_main_1 : function ()
+{
+	gjs_audio_so.play();},
+
+_jsfunc_main_2 : function ()
+{
+	gjs_audio_mi.play();},
+
+_jsfunc_main_3 : function ()
+{
+	gjs_audio_mi.play();},
+
+_jsfunc_main_4 : function ()
+{
+	gjs_audio_mi.play();},
+
+_jsfunc_main_5 : function ()
+{
+	gjs_audio_do.play();},
+
+_jsfunc_main_6 : function ($0)
 {
 	var idxCanvas_wgl = $0;
 	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	var prg = g_prg;
 	gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-	gl.clearColor(0.0, 0.0, 0.0, 0.0);
+	gl.clearColor(0.0, 0.0, 0.0, 1.0);
 	gl.clearDepth(1.0);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);},
 
-_jsfunc_main_2 : function ($0)
+_jsfunc_main_7 : function ($0, $1, $2, $3, $4, $5, $6)
 {
 	var idxCanvas_wgl = $0;
+	var sxClient = $1;
+	var syClient = $2;
+	var xRacket = $3;
+	var yRacket = $4;
+	var xBall = $5;
+	var yBall = $6;
 	var gl = g_ctx_s[idxCanvas_wgl];
 	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	var mMatrix = myMat_identity(g_mat_s[0]);
-	var vMatrix = myMat_identity(g_mat_s[1]);
-	var pMatrix = myMat_identity(g_mat_s[2]);
-	var tmpMatrix = myMat_identity(g_mat_s[3]);
-	var mvpMatrix = myMat_identity(g_mat_s[4]);
-	myMat_lookAt([0.0, 0.0, 3.0], [0, 0, 0], [0, 1, 0], vMatrix);
-	myMat_perspective(40, canvas_wgl.width / canvas_wgl.height, 0.01, 1000, pMatrix);
-	myMat_multiply(pMatrix, vMatrix, tmpMatrix);
-	myMat_multiply(tmpMatrix, mMatrix, mvpMatrix);
-	gl.uniformMatrix4fv(g_uniLocation, false, mvpMatrix);},
-
-_jsfunc_main_3 : function ($0)
-{
-	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	gl.bindBuffer(gl.ARRAY_BUFFER, g_my_pos_vbo);
-	gl.bufferSubData(gl.ARRAY_BUFFER, 0, g_js_mesh3D);
-	gl.bindBuffer(gl.ARRAY_BUFFER, g_my_col_vbo);
-	gl.bufferSubData(gl.ARRAY_BUFFER, 0, g_js_color_array);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, g_my_ibo);
-	gl.bufferSubData(gl.ELEMENT_ARRAY_BUFFER, 0, g_js_wgl_index_s);},
-
-_jsfunc_main_4 : function ($0, $1)
-{
-	var idxCanvas_wgl = $0;
-	var num_indices = $1;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	gl.drawElements(gl.LINES, num_indices, gl.UNSIGNED_SHORT, 0);},
-
-_jsfunc_main_5 : function ($0)
-{
-	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
+	var prg = g_prg;
+	var mMatrix1 = myMat_identity(g_mat_s[0]);
+	var mMatrix2 = myMat_identity(g_mat_s[1]);
+	var tmpMatrix = myMat_identity(g_mat_s[10]);
+	var vpMatrix = myMat_identity(g_mat_s[13]);
+	var mvpMatrix = myMat_identity(g_mat_s[14]);
+	function DrawTouchCircle(x1, y1) {
+	var mMatrix3 = myMat_identity(g_mat_s[2]);
+	myMat_translate( mMatrix3, [x1, y1, 0], tmpMatrix );
+	myMat_copyMatrix( mMatrix3, tmpMatrix );
+	set_attribute( g_my_col_vbo, g_locAttCol, g_numElemPerAttCol,
+	( 4 + ( 16 + 2 ) ) * 4 * g_numElemPerAttCol
+	);
+	gl.bindBuffer(gl.ARRAY_BUFFER, g_vboTouchCircle);
+	gl.enableVertexAttribArray(attLocation);
+	gl.vertexAttribPointer(attLocation, 3, gl.FLOAT, false, 0, 0);
+	myMat_multiply(vpMatrix, mMatrix3, mvpMatrix);
+	gl.uniformMatrix4fv(g_uniLocation, false, mvpMatrix);
+	gl.drawArrays(gl.LINE_LOOP, 0, 32 );
+	gl.disableVertexAttribArray(attLocation);
+	}
+	var attLocation = gl.getAttribLocation(prg, 'position');
+	vpMatrix[0 + 0] = 2.0 / 700 ;
+	vpMatrix[4 + 1] = - 2.0 / 490 ;
+	vpMatrix[4*3 + 0] = -1.0;
+	vpMatrix[4*3 + 1] = 1.0;
+	myMat_translate( mMatrix1, [xRacket, yRacket, 0], tmpMatrix );
+	myMat_copyMatrix( mMatrix1, tmpMatrix );
+	myMat_translate( mMatrix2, [xBall, yBall, 0], tmpMatrix );
+	myMat_copyMatrix( mMatrix2, tmpMatrix );
+	{
+	set_attribute( g_my_col_vbo, g_locAttCol, g_numElemPerAttCol,
+	0 * 4 * g_numElemPerAttCol
+	);
+	gl.bindBuffer(gl.ARRAY_BUFFER, g_vboRacket);
+	gl.enableVertexAttribArray(attLocation);
+	gl.vertexAttribPointer(attLocation, 3, gl.FLOAT, false, 0, 0);
+	myMat_multiply(vpMatrix, mMatrix1, mvpMatrix);
+	gl.uniformMatrix4fv(g_uniLocation, false, mvpMatrix);
+	gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4 );
+	gl.disableVertexAttribArray(attLocation);
+	}
+	{
+	set_attribute( g_my_col_vbo, g_locAttCol, g_numElemPerAttCol,
+	4 * 4 * g_numElemPerAttCol
+	);
+	gl.bindBuffer(gl.ARRAY_BUFFER, g_vboBall);
+	gl.enableVertexAttribArray(attLocation);
+	gl.vertexAttribPointer(attLocation, 3, gl.FLOAT, false, 0, 0);
+	myMat_multiply(vpMatrix, mMatrix2, mvpMatrix);
+	gl.uniformMatrix4fv(g_uniLocation, false, mvpMatrix);
+	gl.drawArrays(gl.TRIANGLE_FAN, 0, ( 16 + 2 ) );
+	gl.disableVertexAttribArray(attLocation);
+	}
+	DrawTouchCircle( 50 , 420 );
+	DrawTouchCircle( ( 700 - 50 ) , 420 );
+	gl.bindBuffer(gl.ARRAY_BUFFER, null);
 	gl.flush();},
 
-_jsfunc_main_6 : function ($0)
+_jsfunc_main_8 : function ()
+{
+	myMat_create = function(){
+	return new Float32Array(16);
+	};
+	myMat_identity = function(dst){
+	dst[0] = 1; dst[1] = 0; dst[2] = 0; dst[3] = 0;
+	dst[4] = 0; dst[5] = 1; dst[6] = 0; dst[7] = 0;
+	dst[8] = 0; dst[9] = 0; dst[10] = 1; dst[11] = 0;
+	dst[12] = 0; dst[13] = 0; dst[14] = 0; dst[15] = 1;
+	return dst;
+	};
+	myMat_copyMatrix = function(dst, src){
+	for ( i = 0; i < 16; i++ ) {
+	dst[i] = src[i];
+	}
+	};
+	myMat_multiply = function(mat1, mat2, dst){
+	var a = mat1[0], b = mat1[1], c = mat1[2], d = mat1[3],
+	e = mat1[4], f = mat1[5], g = mat1[6], h = mat1[7],
+	i = mat1[8], j = mat1[9], k = mat1[10], l = mat1[11],
+	m = mat1[12], n = mat1[13], o = mat1[14], p = mat1[15],
+	A = mat2[0], B = mat2[1], C = mat2[2], D = mat2[3],
+	E = mat2[4], F = mat2[5], G = mat2[6], H = mat2[7],
+	I = mat2[8], J = mat2[9], K = mat2[10], L = mat2[11],
+	M = mat2[12], N = mat2[13], O = mat2[14], P = mat2[15];
+	dst[0] = A * a + B * e + C * i + D * m;
+	dst[1] = A * b + B * f + C * j + D * n;
+	dst[2] = A * c + B * g + C * k + D * o;
+	dst[3] = A * d + B * h + C * l + D * p;
+	dst[4] = E * a + F * e + G * i + H * m;
+	dst[5] = E * b + F * f + G * j + H * n;
+	dst[6] = E * c + F * g + G * k + H * o;
+	dst[7] = E * d + F * h + G * l + H * p;
+	dst[8] = I * a + J * e + K * i + L * m;
+	dst[9] = I * b + J * f + K * j + L * n;
+	dst[10] = I * c + J * g + K * k + L * o;
+	dst[11] = I * d + J * h + K * l + L * p;
+	dst[12] = M * a + N * e + O * i + P * m;
+	dst[13] = M * b + N * f + O * j + P * n;
+	dst[14] = M * c + N * g + O * k + P * o;
+	dst[15] = M * d + N * h + O * l + P * p;
+	return dst;
+	};
+	myMat_scale = function(mat, vec, dst){
+	dst[0] = mat[0] * vec[0];
+	dst[1] = mat[1] * vec[0];
+	dst[2] = mat[2] * vec[0];
+	dst[3] = mat[3] * vec[0];
+	dst[4] = mat[4] * vec[1];
+	dst[5] = mat[5] * vec[1];
+	dst[6] = mat[6] * vec[1];
+	dst[7] = mat[7] * vec[1];
+	dst[8] = mat[8] * vec[2];
+	dst[9] = mat[9] * vec[2];
+	dst[10] = mat[10] * vec[2];
+	dst[11] = mat[11] * vec[2];
+	dst[12] = mat[12];
+	dst[13] = mat[13];
+	dst[14] = mat[14];
+	dst[15] = mat[15];
+	return dst;
+	};
+	myMat_translate = function(mat, vec, dst){
+	dst[0] = mat[0]; dst[1] = mat[1]; dst[2] = mat[2]; dst[3] = mat[3];
+	dst[4] = mat[4]; dst[5] = mat[5]; dst[6] = mat[6]; dst[7] = mat[7];
+	dst[8] = mat[8]; dst[9] = mat[9]; dst[10] = mat[10]; dst[11] = mat[11];
+	dst[12] = mat[0] * vec[0] + mat[4] * vec[1] + mat[8] * vec[2] + mat[12];
+	dst[13] = mat[1] * vec[0] + mat[5] * vec[1] + mat[9] * vec[2] + mat[13];
+	dst[14] = mat[2] * vec[0] + mat[6] * vec[1] + mat[10] * vec[2] + mat[14];
+	dst[15] = mat[3] * vec[0] + mat[7] * vec[1] + mat[11] * vec[2] + mat[15];
+	return dst;
+	};
+	myMat_rotate = function(mat, angle, axis, dst){
+	var sq = Math.sqrt(axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]);
+	if(!sq){return null;}
+	var a = axis[0], b = axis[1], c = axis[2];
+	if(sq != 1){sq = 1 / sq; a *= sq; b *= sq; c *= sq;}
+	var d = Math.sin(angle), e = Math.cos(angle), f = 1 - e,
+	g = mat[0], h = mat[1], i = mat[2], j = mat[3],
+	k = mat[4], l = mat[5], m = mat[6], n = mat[7],
+	o = mat[8], p = mat[9], q = mat[10], r = mat[11],
+	s = a * a * f + e,
+	t = b * a * f + c * d,
+	u = c * a * f - b * d,
+	v = a * b * f - c * d,
+	w = b * b * f + e,
+	x = c * b * f + a * d,
+	y = a * c * f + b * d,
+	z = b * c * f - a * d,
+	A = c * c * f + e;
+	if(angle){
+	if(mat != dst){
+	dst[12] = mat[12]; dst[13] = mat[13];
+	dst[14] = mat[14]; dst[15] = mat[15];
+	}
+	} else {
+	dst = mat;
+	}
+	dst[0] = g * s + k * t + o * u;
+	dst[1] = h * s + l * t + p * u;
+	dst[2] = i * s + m * t + q * u;
+	dst[3] = j * s + n * t + r * u;
+	dst[4] = g * v + k * w + o * x;
+	dst[5] = h * v + l * w + p * x;
+	dst[6] = i * v + m * w + q * x;
+	dst[7] = j * v + n * w + r * x;
+	dst[8] = g * y + k * z + o * A;
+	dst[9] = h * y + l * z + p * A;
+	dst[10] = i * y + m * z + q * A;
+	dst[11] = j * y + n * z + r * A;
+	return dst;
+	};
+	myMat_lookAt = function(eye, center, up, dst){
+	var eyeX = eye[0], eyeY = eye[1], eyeZ = eye[2],
+	upX = up[0], upY = up[1], upZ = up[2],
+	centerX = center[0], centerY = center[1], centerZ = center[2];
+	if ( eyeX == centerX && eyeY == centerY && eyeZ == centerZ ) {
+	return myMat_identity(dst);
+	}
+	var x0, x1, x2, y0, y1, y2, z0, z1, z2, l;
+	z0 = eyeX - center[0]; z1 = eyeY - center[1]; z2 = eyeZ - center[2];
+	l = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
+	z0 *= l; z1 *= l; z2 *= l;
+	x0 = upY * z2 - upZ * z1;
+	x1 = upZ * z0 - upX * z2;
+	x2 = upX * z1 - upY * z0;
+	l = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
+	if(!l){
+	x0 = 0; x1 = 0; x2 = 0;
+	} else {
+	l = 1 / l;
+	x0 *= l; x1 *= l; x2 *= l;
+	}
+	y0 = z1 * x2 - z2 * x1; y1 = z2 * x0 - z0 * x2; y2 = z0 * x1 - z1 * x0;
+	l = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
+	if(!l){
+	y0 = 0; y1 = 0; y2 = 0;
+	} else {
+	l = 1 / l;
+	y0 *= l; y1 *= l; y2 *= l;
+	}
+	dst[0] = x0; dst[1] = y0; dst[2] = z0; dst[3] = 0;
+	dst[4] = x1; dst[5] = y1; dst[6] = z1; dst[7] = 0;
+	dst[8] = x2; dst[9] = y2; dst[10] = z2; dst[11] = 0;
+	dst[12] = -(x0 * eyeX + x1 * eyeY + x2 * eyeZ);
+	dst[13] = -(y0 * eyeX + y1 * eyeY + y2 * eyeZ);
+	dst[14] = -(z0 * eyeX + z1 * eyeY + z2 * eyeZ);
+	dst[15] = 1;
+	return dst;
+	};
+	myMat_perspective = function(fovy, aspect, near, far, dst){
+	var t = near * Math.tan(fovy * Math.PI / 360);
+	var r = t * aspect;
+	var a = r * 2, b = t * 2, c = far - near;
+	dst[0] = near * 2 / a;
+	dst[1] = 0;
+	dst[2] = 0;
+	dst[3] = 0;
+	dst[4] = 0;
+	dst[5] = near * 2 / b;
+	dst[6] = 0;
+	dst[7] = 0;
+	dst[8] = 0;
+	dst[9] = 0;
+	dst[10] = -(far + near) / c;
+	dst[11] = -1;
+	dst[12] = 0;
+	dst[13] = 0;
+	dst[14] = -(far * near * 2) / c;
+	dst[15] = 0;
+	return dst;
+	};
+	myMat_transpose = function(mat, dst){
+	dst[0] = mat[0]; dst[1] = mat[4];
+	dst[2] = mat[8]; dst[3] = mat[12];
+	dst[4] = mat[1]; dst[5] = mat[5];
+	dst[6] = mat[9]; dst[7] = mat[13];
+	dst[8] = mat[2]; dst[9] = mat[6];
+	dst[10] = mat[10]; dst[11] = mat[14];
+	dst[12] = mat[3]; dst[13] = mat[7];
+	dst[14] = mat[11]; dst[15] = mat[15];
+	return dst;
+	};
+	myMat_inverse = function(mat, dst){
+	var a = mat[0], b = mat[1], c = mat[2], d = mat[3],
+	e = mat[4], f = mat[5], g = mat[6], h = mat[7],
+	i = mat[8], j = mat[9], k = mat[10], l = mat[11],
+	m = mat[12], n = mat[13], o = mat[14], p = mat[15],
+	q = a * f - b * e, r = a * g - c * e,
+	s = a * h - d * e, t = b * g - c * f,
+	u = b * h - d * f, v = c * h - d * g,
+	w = i * n - j * m, x = i * o - k * m,
+	y = i * p - l * m, z = j * o - k * n,
+	A = j * p - l * n, B = k * p - l * o,
+	ivd = 1 / (q * B - r * A + s * z + t * y - u * x + v * w);
+	dst[0] = ( f * B - g * A + h * z) * ivd;
+	dst[1] = (-b * B + c * A - d * z) * ivd;
+	dst[2] = ( n * v - o * u + p * t) * ivd;
+	dst[3] = (-j * v + k * u - l * t) * ivd;
+	dst[4] = (-e * B + g * y - h * x) * ivd;
+	dst[5] = ( a * B - c * y + d * x) * ivd;
+	dst[6] = (-m * v + o * s - p * r) * ivd;
+	dst[7] = ( i * v - k * s + l * r) * ivd;
+	dst[8] = ( e * A - f * y + h * w) * ivd;
+	dst[9] = (-a * A + b * y - d * w) * ivd;
+	dst[10] = ( m * u - n * s + p * q) * ivd;
+	dst[11] = (-i * u + j * s - l * q) * ivd;
+	dst[12] = (-e * z + f * x - g * w) * ivd;
+	dst[13] = ( a * z - b * x + c * w) * ivd;
+	dst[14] = (-m * t + n * r - o * q) * ivd;
+	dst[15] = ( i * t - j * r + k * q) * ivd;
+	return dst;
+	};},
+
+_jsfunc_main_9 : function ()
+{
+	g_mat_s = new Array(20 );
+	for ( i = 0; i < 20 ; i++ ) {
+	g_mat_s[i] = myMat_create();
+	}},
+
+_jsfunc_main_10 : function ($0)
 {
 	g_prg = null;
 	var idxCanvas_wgl = $0;
@@ -1235,7 +1508,7 @@ _jsfunc_main_6 : function ($0)
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 	return ibo;
 	};
-	create_vbo2_staic = function(f32array) {
+	create_vbo2_static = function(f32array) {
 	return create_vbo2_core( f32array, gl.STATIC_DRAW );
 	};
 	create_vbo2_dynamic = function(f32array) {
@@ -1247,283 +1520,159 @@ _jsfunc_main_6 : function ($0)
 	create_ibo2_dynamic = function(i16array) {
 	return create_ibo2_core( i16array, gl.DYNAMIC_DRAW );
 	};
-	set_attribute = function(vbo, attL, attS) {
-	for (var i in vbo){
-	gl.bindBuffer(gl.ARRAY_BUFFER, vbo[i]);
-	gl.enableVertexAttribArray(attL[i]);
-	gl.vertexAttribPointer(attL[i], attS[i], gl.FLOAT, false, 0, 0);
+	set_attribute = function(vbo, locAtt, numElemPerVertex, ofs) {
+	gl.bindBuffer(
+	gl.ARRAY_BUFFER,
+	vbo
+	);
+	gl.enableVertexAttribArray(locAtt);
+	gl.vertexAttribPointer(
+	locAtt,
+	numElemPerVertex,
+	gl.FLOAT,
+	false,
+	0,
+	ofs
+	);
+	};
+	set_multiple_attribute_s = function(vbo_s, locAtt_s, attS_s) {
+	for (var i in vbo_s){
+	set_attribute( vbo_s[i], locAtt_s[i], attS_s[i], 0);
 	}
 	};
 	initShaders();},
 
-_jsfunc_main_7 : function ($0)
+_jsfunc_main_11 : function ($0)
 {
 	var idxCanvas_wgl = $0;
 	var gl = g_ctx_s[idxCanvas_wgl];
 	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
 	var prg = g_prg;
-	g_attLocation = new Array(2);
-	g_attLocation[0] = gl.getAttribLocation(prg, "position");
-	g_attLocation[1] = gl.getAttribLocation(prg, "color");
+	g_locAttCol = gl.getAttribLocation(prg, "color");
 	g_uniLocation = gl.getUniformLocation(prg, "mvpMatrix");
-	g_attStride = new Array(2);
-	g_attStride[0] = 3;
-	g_attStride[1] = 4;},
+	g_numElemPerAttCol = 4;},
 
-_jsfunc_main_8 : function ($0, $1)
+_jsfunc_main_12 : function ($0)
 {
-	var mesh3d_addr = $0;
-	var color_array_addr = $1;
+	var color_array_addr = $0;
 	var buffer = g_memory.buffer;
-	g_js_mesh3D = new Float32Array(
-	buffer,
-	mesh3d_addr,
-	3 * 50 * 300
-	);
 	g_js_color_array = new Float32Array(
 	buffer,
 	color_array_addr,
-	4 * 50 * 300
+	4 * ( 4 + ( 16 + 2 ) + 32 )
 	);},
 
-_jsfunc_main_9 : function ($0, $1)
-{
-	var index_addr = $0;
-	var num_indices = $1;
-	var buffer = g_memory.buffer;
-	g_js_wgl_index_s = new Int16Array(
-	buffer,
-	index_addr,
-	num_indices
-	);},
-
-_jsfunc_main_10 : function ($0)
+_jsfunc_main_13 : function ($0)
 {
 	var idxCanvas_wgl = $0;
 	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	g_my_pos_vbo = create_vbo2_dynamic(g_js_mesh3D);
-	g_my_col_vbo = create_vbo2_dynamic(g_js_color_array);
-	set_attribute( [g_my_pos_vbo, g_my_col_vbo], g_attLocation, g_attStride );
-	g_my_ibo = create_ibo2_dynamic(g_js_wgl_index_s);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, g_my_ibo);},
+	g_my_col_vbo = create_vbo2_static(g_js_color_array);
+	set_attribute( g_my_col_vbo, g_locAttCol, g_numElemPerAttCol, 0);
+	function create_vbo(data){
+	var vbo = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW);
+	gl.bindBuffer(gl.ARRAY_BUFFER, null);
+	return vbo;
+	}
+	var racket_points = [
+	50 , 10 , 0.0,
+	-50 , 10 , 0.0,
+	50 , -10 , 0.0,
+	-50 , -10 , 0.0
+	];
+	var ball_points = new Array( ( 16 + 2 ) * 3 );
+	ball_points[0] = 0;
+	ball_points[1] = 0;
+	ball_points[2] = 0;
+	{
+	var rad_step = 2 * Math.PI / 16 ;
+	var rad = 0;
+	var idx = 3;
+	for ( var i = 0; i < 16 + 1; i++ ) {
+	ball_points[idx + 0] = 15 * Math.cos(rad);
+	ball_points[idx + 1] = - 15 * Math.sin(rad);
+	ball_points[idx + 2] = 0;
+	rad += rad_step;
+	idx += 3;
+	}
+	}
+	var touch_circle_points = new Array( 32 * 3 );
+	{
+	var rad_step = 2 * Math.PI / 32 ;
+	var rad = 0;
+	var idx = 0;
+	for ( var i = 0; i < 32 ; i++ ) {
+	touch_circle_points[idx + 0] = 30 * Math.cos(rad);
+	touch_circle_points[idx + 1] = - 30 * Math.sin(rad);
+	touch_circle_points[idx + 2] = 0;
+	rad += rad_step;
+	idx += 3;
+	}
+	}
+	g_vboRacket = create_vbo(racket_points);
+	g_vboBall = create_vbo(ball_points);
+	g_vboTouchCircle = create_vbo(touch_circle_points);},
 
-_jsfunc_main_11 : function ()
+_jsfunc_main_14 : function ()
 {
-	myMat_create = function(){
-	return new Float32Array(16);
-	};
-	myMat_identity = function(dest){
-	dest[0] = 1; dest[1] = 0; dest[2] = 0; dest[3] = 0;
-	dest[4] = 0; dest[5] = 1; dest[6] = 0; dest[7] = 0;
-	dest[8] = 0; dest[9] = 0; dest[10] = 1; dest[11] = 0;
-	dest[12] = 0; dest[13] = 0; dest[14] = 0; dest[15] = 1;
-	return dest;
-	};
-	myMat_multiply = function(mat1, mat2, dest){
-	var a = mat1[0], b = mat1[1], c = mat1[2], d = mat1[3],
-	e = mat1[4], f = mat1[5], g = mat1[6], h = mat1[7],
-	i = mat1[8], j = mat1[9], k = mat1[10], l = mat1[11],
-	m = mat1[12], n = mat1[13], o = mat1[14], p = mat1[15],
-	A = mat2[0], B = mat2[1], C = mat2[2], D = mat2[3],
-	E = mat2[4], F = mat2[5], G = mat2[6], H = mat2[7],
-	I = mat2[8], J = mat2[9], K = mat2[10], L = mat2[11],
-	M = mat2[12], N = mat2[13], O = mat2[14], P = mat2[15];
-	dest[0] = A * a + B * e + C * i + D * m;
-	dest[1] = A * b + B * f + C * j + D * n;
-	dest[2] = A * c + B * g + C * k + D * o;
-	dest[3] = A * d + B * h + C * l + D * p;
-	dest[4] = E * a + F * e + G * i + H * m;
-	dest[5] = E * b + F * f + G * j + H * n;
-	dest[6] = E * c + F * g + G * k + H * o;
-	dest[7] = E * d + F * h + G * l + H * p;
-	dest[8] = I * a + J * e + K * i + L * m;
-	dest[9] = I * b + J * f + K * j + L * n;
-	dest[10] = I * c + J * g + K * k + L * o;
-	dest[11] = I * d + J * h + K * l + L * p;
-	dest[12] = M * a + N * e + O * i + P * m;
-	dest[13] = M * b + N * f + O * j + P * n;
-	dest[14] = M * c + N * g + O * k + P * o;
-	dest[15] = M * d + N * h + O * l + P * p;
-	return dest;
-	};
-	myMat_scale = function(mat, vec, dest){
-	dest[0] = mat[0] * vec[0];
-	dest[1] = mat[1] * vec[0];
-	dest[2] = mat[2] * vec[0];
-	dest[3] = mat[3] * vec[0];
-	dest[4] = mat[4] * vec[1];
-	dest[5] = mat[5] * vec[1];
-	dest[6] = mat[6] * vec[1];
-	dest[7] = mat[7] * vec[1];
-	dest[8] = mat[8] * vec[2];
-	dest[9] = mat[9] * vec[2];
-	dest[10] = mat[10] * vec[2];
-	dest[11] = mat[11] * vec[2];
-	dest[12] = mat[12];
-	dest[13] = mat[13];
-	dest[14] = mat[14];
-	dest[15] = mat[15];
-	return dest;
-	};
-	myMat_translate = function(mat, vec, dest){
-	dest[0] = mat[0]; dest[1] = mat[1]; dest[2] = mat[2]; dest[3] = mat[3];
-	dest[4] = mat[4]; dest[5] = mat[5]; dest[6] = mat[6]; dest[7] = mat[7];
-	dest[8] = mat[8]; dest[9] = mat[9]; dest[10] = mat[10]; dest[11] = mat[11];
-	dest[12] = mat[0] * vec[0] + mat[4] * vec[1] + mat[8] * vec[2] + mat[12];
-	dest[13] = mat[1] * vec[0] + mat[5] * vec[1] + mat[9] * vec[2] + mat[13];
-	dest[14] = mat[2] * vec[0] + mat[6] * vec[1] + mat[10] * vec[2] + mat[14];
-	dest[15] = mat[3] * vec[0] + mat[7] * vec[1] + mat[11] * vec[2] + mat[15];
-	return dest;
-	};
-	myMat_rotate = function(mat, angle, axis, dest){
-	var sq = Math.sqrt(axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]);
-	if(!sq){return null;}
-	var a = axis[0], b = axis[1], c = axis[2];
-	if(sq != 1){sq = 1 / sq; a *= sq; b *= sq; c *= sq;}
-	var d = Math.sin(angle), e = Math.cos(angle), f = 1 - e,
-	g = mat[0], h = mat[1], i = mat[2], j = mat[3],
-	k = mat[4], l = mat[5], m = mat[6], n = mat[7],
-	o = mat[8], p = mat[9], q = mat[10], r = mat[11],
-	s = a * a * f + e,
-	t = b * a * f + c * d,
-	u = c * a * f - b * d,
-	v = a * b * f - c * d,
-	w = b * b * f + e,
-	x = c * b * f + a * d,
-	y = a * c * f + b * d,
-	z = b * c * f - a * d,
-	A = c * c * f + e;
-	if(angle){
-	if(mat != dest){
-	dest[12] = mat[12]; dest[13] = mat[13];
-	dest[14] = mat[14]; dest[15] = mat[15];
+	function make_node_wav(node, sec)
+	{
+	if ( node >= 96 ) {
+	return;
 	}
-	} else {
-	dest = mat;
+	var Hz = 11025;
+	var wav_data = new Uint8Array( Math.floor(Hz * sec) + 100 );
+	var header = "524946460000000057415645666D74201000000001000100112B0000112B0000010008006461746100000000";
+	var half_len = header.length / 2;
+	for ( fp = 0; fp < half_len; fp++ ) {
+	wav_data[fp] = parseInt( header.substr( fp * 2, 2 ), 16 );
 	}
-	dest[0] = g * s + k * t + o * u;
-	dest[1] = h * s + l * t + p * u;
-	dest[2] = i * s + m * t + q * u;
-	dest[3] = j * s + n * t + r * u;
-	dest[4] = g * v + k * w + o * x;
-	dest[5] = h * v + l * w + p * x;
-	dest[6] = i * v + m * w + q * x;
-	dest[7] = j * v + n * w + r * x;
-	dest[8] = g * y + k * z + o * A;
-	dest[9] = h * y + l * z + p * A;
-	dest[10] = i * y + m * z + q * A;
-	dest[11] = j * y + n * z + r * A;
-	return dest;
-	};
-	myMat_lookAt = function(eye, center, up, dest){
-	var eyeX = eye[0], eyeY = eye[1], eyeZ = eye[2],
-	upX = up[0], upY = up[1], upZ = up[2],
-	centerX = center[0], centerY = center[1], centerZ = center[2];
-	if ( eyeX == centerX && eyeY == centerY && eyeZ == centerZ ) {
-	return myMat_identity(dest);
+	var freq_s = [4180, 4428, 4708, 4968, 5264, 5592, 5884, 6300, 6676, 6988, 7476, 7848];
+	var octave = Math.floor( node / 12 );
+	var freq = freq_s[node % 12] / (1<<(7-octave));
+	var phase = Math.PI * 2.0 * (freq / Hz);
+	var max_idx = Math.floor( Hz * sec );
+	for ( t = 0; t < max_idx; t++ ){
+	wav_data[fp++] = Math.floor( Math.sin( phase * t ) * 127 ) + 128;
 	}
-	var x0, x1, x2, y0, y1, y2, z0, z1, z2, l;
-	z0 = eyeX - center[0]; z1 = eyeY - center[1]; z2 = eyeZ - center[2];
-	l = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
-	z0 *= l; z1 *= l; z2 *= l;
-	x0 = upY * z2 - upZ * z1;
-	x1 = upZ * z0 - upX * z2;
-	x2 = upX * z1 - upY * z0;
-	l = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
-	if(!l){
-	x0 = 0; x1 = 0; x2 = 0;
-	} else {
-	l = 1 / l;
-	x0 *= l; x1 *= l; x2 *= l;
+	setLittleEndian( wav_data, 4, fp - 8 );
+	setLittleEndian( wav_data, 24, Hz );
+	setLittleEndian( wav_data, 40, fp - 44);
+	var str = "";
+	for ( i = 0; i < fp; i++ ) {
+	str += String.fromCharCode( wav_data[i] );
 	}
-	y0 = z1 * x2 - z2 * x1; y1 = z2 * x0 - z0 * x2; y2 = z0 * x1 - z1 * x0;
-	l = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
-	if(!l){
-	y0 = 0; y1 = 0; y2 = 0;
-	} else {
-	l = 1 / l;
-	y0 *= l; y1 *= l; y2 *= l;
+	var audio = new Audio( "data:audio/wav;base64," + btoa(str) );
+	audio.volume = 0.2;
+	return audio;
 	}
-	dest[0] = x0; dest[1] = y0; dest[2] = z0; dest[3] = 0;
-	dest[4] = x1; dest[5] = y1; dest[6] = z1; dest[7] = 0;
-	dest[8] = x2; dest[9] = y2; dest[10] = z2; dest[11] = 0;
-	dest[12] = -(x0 * eyeX + x1 * eyeY + x2 * eyeZ);
-	dest[13] = -(y0 * eyeX + y1 * eyeY + y2 * eyeZ);
-	dest[14] = -(z0 * eyeX + z1 * eyeY + z2 * eyeZ);
-	dest[15] = 1;
-	return dest;
-	};
-	myMat_perspective = function(fovy, aspect, near, far, dest){
-	var t = near * Math.tan(fovy * Math.PI / 360);
-	var r = t * aspect;
-	var a = r * 2, b = t * 2, c = far - near;
-	dest[0] = near * 2 / a;
-	dest[1] = 0;
-	dest[2] = 0;
-	dest[3] = 0;
-	dest[4] = 0;
-	dest[5] = near * 2 / b;
-	dest[6] = 0;
-	dest[7] = 0;
-	dest[8] = 0;
-	dest[9] = 0;
-	dest[10] = -(far + near) / c;
-	dest[11] = -1;
-	dest[12] = 0;
-	dest[13] = 0;
-	dest[14] = -(far * near * 2) / c;
-	dest[15] = 0;
-	return dest;
-	};
-	myMat_transpose = function(mat, dest){
-	dest[0] = mat[0]; dest[1] = mat[4];
-	dest[2] = mat[8]; dest[3] = mat[12];
-	dest[4] = mat[1]; dest[5] = mat[5];
-	dest[6] = mat[9]; dest[7] = mat[13];
-	dest[8] = mat[2]; dest[9] = mat[6];
-	dest[10] = mat[10]; dest[11] = mat[14];
-	dest[12] = mat[3]; dest[13] = mat[7];
-	dest[14] = mat[11]; dest[15] = mat[15];
-	return dest;
-	};
-	myMat_inverse = function(mat, dest){
-	var a = mat[0], b = mat[1], c = mat[2], d = mat[3],
-	e = mat[4], f = mat[5], g = mat[6], h = mat[7],
-	i = mat[8], j = mat[9], k = mat[10], l = mat[11],
-	m = mat[12], n = mat[13], o = mat[14], p = mat[15],
-	q = a * f - b * e, r = a * g - c * e,
-	s = a * h - d * e, t = b * g - c * f,
-	u = b * h - d * f, v = c * h - d * g,
-	w = i * n - j * m, x = i * o - k * m,
-	y = i * p - l * m, z = j * o - k * n,
-	A = j * p - l * n, B = k * p - l * o,
-	ivd = 1 / (q * B - r * A + s * z + t * y - u * x + v * w);
-	dest[0] = ( f * B - g * A + h * z) * ivd;
-	dest[1] = (-b * B + c * A - d * z) * ivd;
-	dest[2] = ( n * v - o * u + p * t) * ivd;
-	dest[3] = (-j * v + k * u - l * t) * ivd;
-	dest[4] = (-e * B + g * y - h * x) * ivd;
-	dest[5] = ( a * B - c * y + d * x) * ivd;
-	dest[6] = (-m * v + o * s - p * r) * ivd;
-	dest[7] = ( i * v - k * s + l * r) * ivd;
-	dest[8] = ( e * A - f * y + h * w) * ivd;
-	dest[9] = (-a * A + b * y - d * w) * ivd;
-	dest[10] = ( m * u - n * s + p * q) * ivd;
-	dest[11] = (-i * u + j * s - l * q) * ivd;
-	dest[12] = (-e * z + f * x - g * w) * ivd;
-	dest[13] = ( a * z - b * x + c * w) * ivd;
-	dest[14] = (-m * t + n * r - o * q) * ivd;
-	dest[15] = ( i * t - j * r + k * q) * ivd;
-	return dest;
-	};},
+	function stop()
+	{
+	}
+	function setLittleEndian(bytes, p, data)
+	{
+	bytes[p] = (data & 0xFF);
+	bytes[p+1] = ((data >> 8) & 0xFF);
+	bytes[p+2] = ((data >> 16) & 0xFF);
+	bytes[p+3] = ((data >> 24) & 0xFF);
+	}
+	gjs_audio_do = make_node_wav(48, 0.3);
+	gjs_audio_re = make_node_wav(50, 0.3);
+	gjs_audio_mi = make_node_wav(52, 0.3);
+	gjs_audio_fa = make_node_wav(53, 0.3);
+	gjs_audio_so = make_node_wav(55, 0.3);
+	gjs_audio_ra = make_node_wav(57, 0.3);
+	gjs_audio_shi = make_node_wav(59, 0.3);
+	gjs_audio_do2 = make_node_wav(60, 0.3);},
 
-_jsfunc_main_12 : function ()
+_jsfunc_main_15 : function ()
 {
-	g_mat_s = new Array(5 );
-	for ( i = 0; i < 5 ; i++ ) {
-	g_mat_s[i] = myMat_create();
-	}},
+	function js_OnUpdate( timestamp ) {
+	g_exports.c_OnUpdate();
+	window.requestAnimationFrame( js_OnUpdate );
+	}
+	window.requestAnimationFrame( js_OnUpdate );},
 
 // this is foot.js from here :
 };
