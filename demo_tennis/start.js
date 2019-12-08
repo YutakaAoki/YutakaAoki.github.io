@@ -1230,8 +1230,8 @@ _jsfunc_main_7 : function ($0, $1, $2, $3, $4, $5, $6)
 	gl.drawArrays(gl.TRIANGLE_FAN, 0, ( 16 + 2 ) );
 	gl.disableVertexAttribArray(attLocation);
 	}
-	DrawTouchCircle( 50 , 420 );
-	DrawTouchCircle( ( 700 - 50 ) , 420 );
+	DrawTouchCircle( 100 , ( 490 - 100 ) );
+	DrawTouchCircle( ( 700 - 100 ) , ( 490 - 100 ) );
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
 	gl.flush();},
 
@@ -1603,8 +1603,8 @@ _jsfunc_main_13 : function ($0)
 	var rad = 0;
 	var idx = 0;
 	for ( var i = 0; i < 32 ; i++ ) {
-	touch_circle_points[idx + 0] = 30 * Math.cos(rad);
-	touch_circle_points[idx + 1] = - 30 * Math.sin(rad);
+	touch_circle_points[idx + 0] = 100 * Math.cos(rad);
+	touch_circle_points[idx + 1] = - 100 * Math.sin(rad);
 	touch_circle_points[idx + 2] = 0;
 	rad += rad_step;
 	idx += 3;
