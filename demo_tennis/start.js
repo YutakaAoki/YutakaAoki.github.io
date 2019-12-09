@@ -1212,13 +1212,14 @@ _jsfunc_main_7 : function ($0, $1, $2, $3, $4, $5, $6)
 	}
 	var attLocation = gl.getAttribLocation(prg, 'position');
 	vpMatrix[0 + 0] = 2.0 / 700 ;
-	vpMatrix[4 + 1] = - 2.0 / 580 ;
+	vpMatrix[4 + 1] = - 2.0 / 620 ;
 	vpMatrix[4*3 + 0] = -1.0;
 	vpMatrix[4*3 + 1] = 1.0;
 	myMat_translate( mMatrix1, [xRacket, yRacket, 0], tmpMatrix );
 	myMat_copyMatrix( mMatrix1, tmpMatrix );
 	myMat_translate( mMatrix2, [xBall, yBall, 0], tmpMatrix );
 	myMat_copyMatrix( mMatrix2, tmpMatrix );
+	DrawCourt();
 	{
 	set_attribute( g_my_col_vbo, g_locAttCol, g_numElemPerAttCol,
 	0 * 4 * g_numElemPerAttCol
@@ -1243,9 +1244,8 @@ _jsfunc_main_7 : function ($0, $1, $2, $3, $4, $5, $6)
 	gl.drawArrays(gl.TRIANGLE_FAN, 0, ( 16 + 2 ) );
 	gl.disableVertexAttribArray(attLocation);
 	}
-	DrawTouchCircle( 100 , ( 580 - 50 ) );
-	DrawTouchCircle( ( 700 - 100 ) , ( 580 - 50 ) );
-	DrawCourt();
+	DrawTouchCircle( 100 , ( 620 - 50 ) );
+	DrawTouchCircle( ( 700 - 100 ) , ( 620 - 50 ) );
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
 	gl.flush();},
 
