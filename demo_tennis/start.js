@@ -191,17 +191,21 @@ _jsfunc_Wnd_5 : function ($0, $1, $2)
 	whole_div.style.left = String($1) + "px";
 	whole_div.style.top = String($2) + "px";},
 
-_jsfunc_Wnd_6 : function ($0)
+_jsfunc_Wnd_6 : function ()
 {
-	var ctx = g_ctx_s[$0];
-	ctx.save();},
+	console.log( "CWnd::OnLButtonDown(), call wasm_UnfocusHiddenInputTag()" );},
 
 _jsfunc_Wnd_7 : function ($0)
 {
 	var ctx = g_ctx_s[$0];
-	ctx.restore();},
+	ctx.save();},
 
 _jsfunc_Wnd_8 : function ($0)
+{
+	var ctx = g_ctx_s[$0];
+	ctx.restore();},
+
+_jsfunc_Wnd_9 : function ($0)
 {
 	var idxCanvas = $0;
 	var whole_div = g_whole_div_s[idxCanvas];
@@ -212,7 +216,7 @@ _jsfunc_Wnd_8 : function ($0)
 	g_ctx_s[idxCanvas] = 0;
 	return 1;},
 
-_jsfunc_Wnd_9 : function ($0, $1)
+_jsfunc_Wnd_10 : function ($0, $1)
 {
 	var pTimer = $0;
 	var millisec = $1;
@@ -221,12 +225,12 @@ _jsfunc_Wnd_9 : function ($0, $1)
 	};
 	return setInterval( js_OnTimer, millisec );},
 
-_jsfunc_Wnd_10 : function ($0)
+_jsfunc_Wnd_11 : function ($0)
 {
 	var idTimer = $0;
 	clearInterval( idTimer );},
 
-_jsfunc_Wnd_11 : function ($0, $1, $2, $3)
+_jsfunc_Wnd_12 : function ($0, $1, $2, $3)
 {
 	var idxCanvas = $0;
 	var idxCanvas_wgl = $1;
@@ -348,9 +352,14 @@ _jsfunc_NexFuncs_7 : function ()
 
 _jsfunc_NexFuncs_8 : function ()
 {
-	return window.innerWidth;},
+	document.onkeydown = null;
+	document.onkeyup = null;},
 
 _jsfunc_NexFuncs_9 : function ()
+{
+	return window.innerWidth;},
+
+_jsfunc_NexFuncs_10 : function ()
 {
 	return window.innerHeight;},
 
@@ -654,7 +663,7 @@ _jsfunc_NewEntry_1 : function ()
 	g_log_cnt++;
 	};
 	g_bTouchSupported = 0;
-	eval( "if ( window.ontouchstart === null ) { g_bTouchSupported\x09= 1; }" );
+	eval( "if ( window.ontouchstart === null ) { g_bTouchSupported = 1; }" );
 	js_MyPrint( "g_bTouchSupported=" + g_bTouchSupported );
 	return g_bTouchSupported;},
 
@@ -708,6 +717,8 @@ _jsfunc_NewEntry_3 : function ()
 	g_touch_mark_canvas.style["background-color"] = "#00000000";
 	g_touch_mark_canvas.style.zIndex = "10000000";
 	g_touch_mark_canvas.style.visibility = "hidden";
+	gjs_touch_mark_visiblity = 0;
+	gjs_bTouchMarkEnable = 1;
 	document.body.appendChild(g_touch_mark_canvas);
 	var ctx = g_touch_mark_canvas.getContext("2d");
 	var cx = 200 / 2;
@@ -971,10 +982,14 @@ _jsfunc_NewEntry_9 : function ()
 	js_keydown_whole = function(e) {
 	var key = e.keyCode;
 	var rr = g_exports.c_keydown( key );
+	e.preventDefault();
+	e.stopPropagation();
 	};
 	js_keyup_whole = function(e) {
 	var key = e.keyCode;
 	var rr = g_exports.c_keyup_whole( key );
+	e.preventDefault();
+	e.stopPropagation();
 	};
 	function js_mousedown(e) {
 	var bProcessed = g_exports.c_mousedown(
@@ -1012,25 +1027,33 @@ _jsfunc_NewEntry_9 : function ()
 	}
 	}
 	function js_move_touch_mark(mx, my) {
+	if ( g_bTouchSupported ) {
 	var tx = mx - 200 / 2;
 	var ty = my - 200 / 2;
 	g_touch_mark_canvas.style.left = String(tx) + "px";
 	g_touch_mark_canvas.style.top = String(ty) + "px";
 	}
-	function js_enable_touch_mark(bEnable) {
-	if ( bEnable ) {
+	}
+	js_set_raw_touch_mark_visibility = function( bVisible ) {
+	if ( g_bTouchSupported ) {
+	if ( bVisible ) {
 	g_touch_mark_canvas.style.visibility = "visible";
+	gjs_touch_mark_visiblity = 1;
 	}
 	else {
 	g_touch_mark_canvas.style.visibility = "hidden";
+	gjs_touch_mark_visiblity = 0;
+	}
 	}
 	}
 	function js_touchstart(e) {
 	var touch = e.touches[0];
 	var mx = touch.clientX * g_scaling;
 	var my = touch.clientY * g_scaling;
+	if ( gjs_bTouchMarkEnable ) {
 	js_move_touch_mark(mx, my);
-	js_enable_touch_mark( 1 );
+	js_set_raw_touch_mark_visibility( 1 );
+	}
 	var bProcessed = g_exports.c_mousedown(
 	mx,
 	my,
@@ -1042,8 +1065,9 @@ _jsfunc_NewEntry_9 : function ()
 	}
 	}
 	function js_touchend(e) {
-	js_MyPrint( "js_touchend is coming" );
-	js_enable_touch_mark( 0 );
+	if ( gjs_bTouchMarkEnable ) {
+	js_set_raw_touch_mark_visibility( 0 );
+	}
 	var bProcessed = g_exports.c_mouseup(
 	0,
 	0,
@@ -1058,8 +1082,10 @@ _jsfunc_NewEntry_9 : function ()
 	var touch = e.touches[0];
 	var mx = touch.clientX * g_scaling;
 	var my = touch.clientY * g_scaling;
+	if ( gjs_bTouchMarkEnable ) {
 	js_move_touch_mark(mx, my);
-	js_enable_touch_mark( 1 );
+	js_set_raw_touch_mark_visibility( 1 );
+	}
 	var bProcessed = g_exports.c_mousemove(
 	mx,
 	my,
@@ -1081,23 +1107,33 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	setInterval(js_OnMainTimer, 20);},
 
-_jsfunc_NewEntry_11 : function ()
+_jsfunc_NewEntry_11 : function ($0)
 {
-	g_bComposStarted = 1;},
+	var bEnable = $0;
+	if ( gjs_bTouchMarkEnable ) {
+	js_set_raw_touch_mark_visibility( 0 );
+	}
+	else {
+	}
+	gjs_bTouchMarkEnable = bEnable;},
 
 _jsfunc_NewEntry_12 : function ()
 {
+	g_bComposStarted = 1;},
+
+_jsfunc_NewEntry_13 : function ()
+{
 	g_bComposStarted = 0;},
 
-_jsfunc_NewEntry_13 : function ($0)
+_jsfunc_NewEntry_14 : function ($0)
 {
 	return g_js_ime_unicode_s[$0];},
 
-_jsfunc_NewEntry_14 : function ()
+_jsfunc_NewEntry_15 : function ()
 {
 	js_set_delay_input_tag_caret_goto_btm();},
 
-_jsfunc_NewEntry_15 : function ($0)
+_jsfunc_NewEntry_16 : function ($0)
 {
 	g_bIME = $0;
 	if ( g_bIME ) {
@@ -1108,31 +1144,31 @@ _jsfunc_NewEntry_15 : function ($0)
 	g_input_tag.style.left = "-10000px";
 	}},
 
-_jsfunc_NewEntry_16 : function ($0)
+_jsfunc_NewEntry_17 : function ($0)
 {
 	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_17 : function ($0)
+_jsfunc_NewEntry_18 : function ($0)
 {
 	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_18 : function ($0)
+_jsfunc_NewEntry_19 : function ($0)
 {
 	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_19 : function ($0, $1)
+_jsfunc_NewEntry_20 : function ($0, $1)
 {
 	alert( Pointer_stringify($0) + String($1) );},
 
-_jsfunc_NewEntry_20 : function ()
+_jsfunc_NewEntry_21 : function ()
 {
 	alert( "abort() is called." );},
 
-_jsfunc_NewEntry_21 : function ($0, $1)
+_jsfunc_NewEntry_22 : function ($0, $1)
 {
 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
