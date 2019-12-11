@@ -703,73 +703,99 @@ _jsfunc_NewEntry_3 : function ()
 	ctx.arc(x1, y1, r, 0, Math.PI*2, true);
 	ctx.stroke();
 	}
-	g_touch_mark_canvas = document.createElement("canvas");
-	var sx = 200 ;
-	var sy = 200 ;
-	g_touch_mark_canvas.width = String(sx);
-	g_touch_mark_canvas.height = String(sy);
-	g_touch_mark_canvas.style.border = "0px solid #FFFFFF";
-	g_touch_mark_canvas.style.position = "absolute";
-	g_touch_mark_canvas.style.left = "0px";
-	g_touch_mark_canvas.style.top = "30px";
-	g_touch_mark_canvas.style.width = String(sx) + "px";
-	g_touch_mark_canvas.style.height = String(sy) + "px";
-	g_touch_mark_canvas.style["background-color"] = "#00000000";
-	g_touch_mark_canvas.style.zIndex = "10000000";
-	g_touch_mark_canvas.style.visibility = "hidden";
+	function make_one_touch_mark(dx, dy, sx, sy) {
+	canvas = document.createElement("canvas");
+	canvas.width = String(sx);
+	canvas.height = String(sy);
+	canvas.style.border = "0px solid #FFFFFF";
+	canvas.style.position = "absolute";
+	canvas.style.left = "0px";
+	canvas.style.top = "30px";
+	canvas.style.width = String(sx) + "px";
+	canvas.style.height = String(sy) + "px";
+	canvas.style["background-color"] = "#00000000";
+	canvas.style.zIndex = "10000000";
+	canvas.style.visibility = "hidden";
 	gjs_touch_mark_visiblity = 0;
 	gjs_bTouchMarkEnable = 1;
-	document.body.appendChild(g_touch_mark_canvas);
-	var ctx = g_touch_mark_canvas.getContext("2d");
+	document.body.appendChild(canvas);
+	var ctx = canvas.getContext("2d");
 	var cx = 200 / 2;
 	var cy = 200 / 2;
 	js_genshi_line( ctx,
-	cx,
-	0,
-	cx,
-	200 ,
+	dx + cx,
+	dy,
+	dx + cx,
+	dy + 200 ,
 	"#00FFFF",
 	7
 	);
 	js_genshi_line( ctx,
-	cx,
-	0,
-	cx,
-	200 ,
-	"#0000FF",
-	3
-	);
-	js_genshi_line( ctx,
-	0,
-	cy,
-	200 ,
-	cy,
-	"#00FFFF",
-	7
-	);
-	js_genshi_line( ctx,
-	0,
-	cy,
-	200 ,
-	cy,
-	"#0000FF",
-	3
-	);
-	js_genshi_circle(
-	ctx,
-	cx,
-	cy,
-	60 ,
+	dx,
+	dy + cy,
+	dx + 200 ,
+	dy + cy,
 	"#00FFFF",
 	7
 	);
 	js_genshi_circle(
 	ctx,
-	cx,
-	cy,
+	dx + cx,
+	dy + cy,
+	60 ,
+	"#00FFFF",
+	7
+	);
+	js_genshi_line( ctx,
+	dx + cx,
+	dy,
+	dx + cx,
+	dy + 200 ,
+	"#0000FF",
+	3
+	);
+	js_genshi_line( ctx,
+	dx,
+	dy + cy,
+	dx + 200 ,
+	dy + cy,
+	"#0000FF",
+	3
+	);
+	js_genshi_circle(
+	ctx,
+	dx + cx,
+	dy + cy,
 	60 ,
 	"#0000FF",
 	3
+	);
+	return canvas;
+	}
+	g_touch_mark_canvas_s = new Array( 4 );
+	g_touch_mark_canvas_s[0] = make_one_touch_mark(
+	- 0 ,
+	- 0 ,
+	200 ,
+	( 200 / 2 - 4 )
+	);
+	g_touch_mark_canvas_s[1] = make_one_touch_mark(
+	- 0 ,
+	- ( 200 / 2 + 4 ) ,
+	200 ,
+	( 200 / 2 - 4 )
+	);
+	g_touch_mark_canvas_s[2] = make_one_touch_mark(
+	- 0 ,
+	- ( 200 / 2 - 4 ) ,
+	( 200 / 2 - 4 ) ,
+	8
+	);
+	g_touch_mark_canvas_s[3] = make_one_touch_mark(
+	- ( 200 / 2 + 4 ) ,
+	- ( 200 / 2 - 4 ) ,
+	( 200 / 2 - 4 ) ,
+	8
 	);},
 
 _jsfunc_NewEntry_4 : function ()
@@ -1030,18 +1056,28 @@ _jsfunc_NewEntry_9 : function ()
 	if ( g_bTouchSupported ) {
 	var tx = mx - 200 / 2;
 	var ty = my - 200 / 2;
-	g_touch_mark_canvas.style.left = String(tx) + "px";
-	g_touch_mark_canvas.style.top = String(ty) + "px";
+	g_touch_mark_canvas_s[0].style.left = String(tx) + "px";
+	g_touch_mark_canvas_s[0].style.top = String(ty) + "px";
+	g_touch_mark_canvas_s[1].style.left = String(tx) + "px";
+	g_touch_mark_canvas_s[1].style.top = String(ty + ( 200 / 2 + 4 ) ) + "px";
+	g_touch_mark_canvas_s[2].style.left = String(tx) + "px";
+	g_touch_mark_canvas_s[2].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
+	g_touch_mark_canvas_s[3].style.left = String(tx + ( 200 / 2 + 4 ) ) + "px";
+	g_touch_mark_canvas_s[3].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
 	}
 	}
 	js_set_raw_touch_mark_visibility = function( bVisible ) {
 	if ( g_bTouchSupported ) {
 	if ( bVisible ) {
-	g_touch_mark_canvas.style.visibility = "visible";
+	for ( var i = 0; i < 4 ; i++ ) {
+	g_touch_mark_canvas_s[i].style.visibility = "visible";
+	}
 	gjs_touch_mark_visiblity = 1;
 	}
 	else {
-	g_touch_mark_canvas.style.visibility = "hidden";
+	for ( var i = 0; i < 4 ; i++ ) {
+	g_touch_mark_canvas_s[i].style.visibility = "hidden";
+	}
 	gjs_touch_mark_visiblity = 0;
 	}
 	}
