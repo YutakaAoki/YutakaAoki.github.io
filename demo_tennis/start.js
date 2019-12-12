@@ -663,7 +663,9 @@ _jsfunc_NewEntry_1 : function ()
 	g_log_cnt++;
 	};
 	g_bTouchSupported = 0;
-	eval( "if ( window.ontouchstart === null ) { g_bTouchSupported = 1; }" );
+	if ( window.ontouchstart === null ) {
+	g_bTouchSupported = 1;
+	}
 	js_MyPrint( "g_bTouchSupported=" + g_bTouchSupported );
 	return g_bTouchSupported;},
 
@@ -1171,40 +1173,42 @@ _jsfunc_NewEntry_15 : function ()
 
 _jsfunc_NewEntry_16 : function ($0)
 {
-	g_bIME = $0;
-	if ( g_bIME ) {
-	g_input_tag.style["background-color"] = "#ffffff";
-	g_input_tag.style.left = "220px";
-	}
-	else {
-	g_input_tag.style.left = "-10000px";
-	}},
+	g_bIME = $0;},
 
-_jsfunc_NewEntry_17 : function ($0)
+_jsfunc_NewEntry_17 : function ()
+{
+	g_input_tag.style["background-color"] = "#ffffff";
+	g_input_tag.style.left = "220px";},
+
+_jsfunc_NewEntry_18 : function ()
+{
+	g_input_tag.style.left = "-10000px";},
+
+_jsfunc_NewEntry_19 : function ($0)
 {
 	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_18 : function ($0)
+_jsfunc_NewEntry_20 : function ($0)
 {
 	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_19 : function ($0)
+_jsfunc_NewEntry_21 : function ($0)
 {
 	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_20 : function ($0, $1)
+_jsfunc_NewEntry_22 : function ($0, $1)
 {
 	alert( Pointer_stringify($0) + String($1) );},
 
-_jsfunc_NewEntry_21 : function ()
+_jsfunc_NewEntry_23 : function ()
 {
 	alert( "abort() is called." );},
 
-_jsfunc_NewEntry_22 : function ($0, $1)
+_jsfunc_NewEntry_24 : function ($0, $1)
 {
 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
