@@ -9,78 +9,43 @@
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="icon" href="icon-256.png" type="image/png" />
   
-  
-  <style>
-    body {
-      font-family: arial;
-      margin: 0px;
-      padding: 0px;
-      
-      position: fixed;
-      top:  0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
-    }
-    
-    #outarea {
-      width: 95%;
-      height: 160px;
-      margin: 0 auto;
-      margin-top: 0px;
-      border-left: 0px;
-      border-right: 0px;
-      padding-left: 0px;
-      padding-right: 0px;
-      display: block;
-      background-color: black;
-      color: white;
-      font-family: 'Lucida Console', Monaco, monospace;
-      outline: none;
-      
-      position: absolute;
-      top : 0px;
-      left : 0px;
-    }
-  </style>
-  
   <noscript>
   JavaScript is not enabled.<br>
   Enable JavaScript, to browse this site.
   </noscript>
-  
 </head>
 
-<body style="height:250%;">
 
-  <div class="main-text">
-    PWA NWSTK
-  </div>
-  <div class="network-message">
-    Network:
-    <span id="network-status" class="">Good</span>
-  </div>
+
+<body style="height:250%;">
+  <h3>NWSTK Multiplatform Toolkit(Beta), C++ nex, Wasm, WebGL, PWA</h3>
+  <a href="https://yutakaaoki.github.io/">NWSTK HomePage1(github)</a><br>
+  <a href="http://nowsmartsoft.atwebpages.com/">NWSTK HomePage2(atwebpages, ZettaHost)</a><br><br>
+  <textarea id="outarea" rows="5"></textarea>
+  <br>
+  <div>Network: <span id="network-status" class="">Good</span></div>
   <script type="text/javascript">
-    if (navigator.serviceWorker != null) {
-      navigator.serviceWorker.register('sw.js')
+    if ( navigator.serviceWorker != null ) {
+      navigator.serviceWorker.register( 'sw.js' )
       .then(function(registration) {
-        console.log('Registered events at scope: ', registration.scope);
+        // registration worked
+        console.log('from main, sw, Registration of ServiceWorker has succeeded.');
+        console.log('from main, sw, Registered events at scope: ',
+        			registration.scope);
+        console.log('from main, sw, force to registration.update()');
+        registration.update();
       });
     }
-
-//    fetch('data.json')
-
-    var statusEl = document.querySelector('#network-status')
-    if (!navigator.onLine) {
-      statusEl.classList = ['is-offline']
-      statusEl.innerText = 'Offline'
+	// fetch('data.json')
+    var statusEl = document.querySelector('#network-status');
+    if ( !navigator.onLine ) {
+      statusEl.classList = ['is-offline'];
+      statusEl.innerText = 'Offline';
     }
   </script>
 
   <script type="text/javascript" src="hogo.js"></script>
   <script type="text/javascript" src="start.js"></script>
-
-  <textarea id="outarea" rows="5"></textarea>
 
 
 <!-- NINJA ANALYZE -->
@@ -99,7 +64,7 @@ if ( window.location.hostname == "yutakaaoki.github.io" ) {
 	  ins.parentNode.insertBefore(sc, ins);
 	})(document);
 }
-else {
+else if ( window.location.hostname == "nowsmartsoft.atwebpages.com" ) {
 	// in the case of "https://nowsmartsoft.atwebpages.com" :
 	(function(d) {
 	  var sc=d.createElement("script"),

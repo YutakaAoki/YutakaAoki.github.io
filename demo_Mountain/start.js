@@ -191,17 +191,21 @@ _jsfunc_Wnd_5 : function ($0, $1, $2)
 	whole_div.style.left = String($1) + "px";
 	whole_div.style.top = String($2) + "px";},
 
-_jsfunc_Wnd_6 : function ($0)
+_jsfunc_Wnd_6 : function ()
 {
-	var ctx = g_ctx_s[$0];
-	ctx.save();},
+	console.log( "CWnd::OnLButtonDown(), call wasm_UnfocusHiddenInputTag()" );},
 
 _jsfunc_Wnd_7 : function ($0)
 {
 	var ctx = g_ctx_s[$0];
-	ctx.restore();},
+	ctx.save();},
 
 _jsfunc_Wnd_8 : function ($0)
+{
+	var ctx = g_ctx_s[$0];
+	ctx.restore();},
+
+_jsfunc_Wnd_9 : function ($0)
 {
 	var idxCanvas = $0;
 	var whole_div = g_whole_div_s[idxCanvas];
@@ -212,7 +216,7 @@ _jsfunc_Wnd_8 : function ($0)
 	g_ctx_s[idxCanvas] = 0;
 	return 1;},
 
-_jsfunc_Wnd_9 : function ($0, $1)
+_jsfunc_Wnd_10 : function ($0, $1)
 {
 	var pTimer = $0;
 	var millisec = $1;
@@ -221,12 +225,12 @@ _jsfunc_Wnd_9 : function ($0, $1)
 	};
 	return setInterval( js_OnTimer, millisec );},
 
-_jsfunc_Wnd_10 : function ($0)
+_jsfunc_Wnd_11 : function ($0)
 {
 	var idTimer = $0;
 	clearInterval( idTimer );},
 
-_jsfunc_Wnd_11 : function ($0, $1, $2, $3)
+_jsfunc_Wnd_12 : function ($0, $1, $2, $3)
 {
 	var idxCanvas = $0;
 	var idxCanvas_wgl = $1;
@@ -337,7 +341,27 @@ _jsfunc_NexFuncs_5 : function ()
 
 _jsfunc_NexFuncs_6 : function ()
 {
+	document.onkeydown = null;
+	document.onkeyup = null;
 	g_input_tag.focus();},
+
+_jsfunc_NexFuncs_7 : function ()
+{
+	document.onkeydown = js_keydown_whole;
+	document.onkeyup = js_keyup_whole;},
+
+_jsfunc_NexFuncs_8 : function ()
+{
+	document.onkeydown = null;
+	document.onkeyup = null;},
+
+_jsfunc_NexFuncs_9 : function ()
+{
+	return window.innerWidth;},
+
+_jsfunc_NexFuncs_10 : function ()
+{
+	return window.innerHeight;},
 
 _jsfunc_DC_1 : function ($0, $1, $2, $3, $4, $5, $6)
 {
@@ -359,11 +383,11 @@ _jsfunc_DC_2 : function ($0, $1, $2, $3, $4, $5)
 	ctx.fillRect($1, $2, $3, $4);
 	return 0;},
 
-_jsfunc_DC_3 : function ($0, $1, $2, $3)
+_jsfunc_DC_3 : function ($0, $1, $2, $3, $4)
 {
 	var ctx = g_ctx_s[$0];
 	var str = Pointer_stringify($3);
-	ctx.fillStyle = "#000000";
+	ctx.fillStyle = Pointer_stringify($4);
 	ctx.textBaseline = "top";
 	ctx.font = g_strFont_s[$0];
 	ctx.fillText(str, $1, $2);},
@@ -639,7 +663,9 @@ _jsfunc_NewEntry_1 : function ()
 	g_log_cnt++;
 	};
 	g_bTouchSupported = 0;
-	eval( "if ( window.ontouchstart === null ) { g_bTouchSupported\x09= 1; }" );
+	if ( window.ontouchstart === null ) {
+	g_bTouchSupported = 1;
+	}
 	js_MyPrint( "g_bTouchSupported=" + g_bTouchSupported );
 	return g_bTouchSupported;},
 
@@ -679,71 +705,99 @@ _jsfunc_NewEntry_3 : function ()
 	ctx.arc(x1, y1, r, 0, Math.PI*2, true);
 	ctx.stroke();
 	}
-	g_touch_mark_canvas = document.createElement("canvas");
-	var sx = 200 ;
-	var sy = 200 ;
-	g_touch_mark_canvas.width = String(sx);
-	g_touch_mark_canvas.height = String(sy);
-	g_touch_mark_canvas.style.border = "0px solid #FFFFFF";
-	g_touch_mark_canvas.style.position = "absolute";
-	g_touch_mark_canvas.style.left = "0px";
-	g_touch_mark_canvas.style.top = "30px";
-	g_touch_mark_canvas.style.width = String(sx) + "px";
-	g_touch_mark_canvas.style.height = String(sy) + "px";
-	g_touch_mark_canvas.style["background-color"] = "#00000000";
-	g_touch_mark_canvas.style.zIndex = "10000000";
-	g_touch_mark_canvas.style.visibility = "hidden";
-	document.body.appendChild(g_touch_mark_canvas);
-	var ctx = g_touch_mark_canvas.getContext("2d");
+	function make_one_touch_mark(dx, dy, sx, sy) {
+	canvas = document.createElement("canvas");
+	canvas.width = String(sx);
+	canvas.height = String(sy);
+	canvas.style.border = "0px solid #FFFFFF";
+	canvas.style.position = "absolute";
+	canvas.style.left = "0px";
+	canvas.style.top = "30px";
+	canvas.style.width = String(sx) + "px";
+	canvas.style.height = String(sy) + "px";
+	canvas.style["background-color"] = "#00000000";
+	canvas.style.zIndex = "10000000";
+	canvas.style.visibility = "hidden";
+	gjs_touch_mark_visiblity = 0;
+	gjs_bTouchMarkEnable = 1;
+	document.body.appendChild(canvas);
+	var ctx = canvas.getContext("2d");
 	var cx = 200 / 2;
 	var cy = 200 / 2;
 	js_genshi_line( ctx,
-	cx,
-	0,
-	cx,
-	200 ,
+	dx + cx,
+	dy,
+	dx + cx,
+	dy + 200 ,
 	"#00FFFF",
 	7
 	);
 	js_genshi_line( ctx,
-	cx,
-	0,
-	cx,
-	200 ,
-	"#0000FF",
-	3
-	);
-	js_genshi_line( ctx,
-	0,
-	cy,
-	200 ,
-	cy,
-	"#00FFFF",
-	7
-	);
-	js_genshi_line( ctx,
-	0,
-	cy,
-	200 ,
-	cy,
-	"#0000FF",
-	3
-	);
-	js_genshi_circle(
-	ctx,
-	cx,
-	cy,
-	60 ,
+	dx,
+	dy + cy,
+	dx + 200 ,
+	dy + cy,
 	"#00FFFF",
 	7
 	);
 	js_genshi_circle(
 	ctx,
-	cx,
-	cy,
+	dx + cx,
+	dy + cy,
+	60 ,
+	"#00FFFF",
+	7
+	);
+	js_genshi_line( ctx,
+	dx + cx,
+	dy,
+	dx + cx,
+	dy + 200 ,
+	"#0000FF",
+	3
+	);
+	js_genshi_line( ctx,
+	dx,
+	dy + cy,
+	dx + 200 ,
+	dy + cy,
+	"#0000FF",
+	3
+	);
+	js_genshi_circle(
+	ctx,
+	dx + cx,
+	dy + cy,
 	60 ,
 	"#0000FF",
 	3
+	);
+	return canvas;
+	}
+	g_touch_mark_canvas_s = new Array( 4 );
+	g_touch_mark_canvas_s[0] = make_one_touch_mark(
+	- 0 ,
+	- 0 ,
+	200 ,
+	( 200 / 2 - 4 )
+	);
+	g_touch_mark_canvas_s[1] = make_one_touch_mark(
+	- 0 ,
+	- ( 200 / 2 + 4 ) ,
+	200 ,
+	( 200 / 2 - 4 )
+	);
+	g_touch_mark_canvas_s[2] = make_one_touch_mark(
+	- 0 ,
+	- ( 200 / 2 - 4 ) ,
+	( 200 / 2 - 4 ) ,
+	8
+	);
+	g_touch_mark_canvas_s[3] = make_one_touch_mark(
+	- ( 200 / 2 + 4 ) ,
+	- ( 200 / 2 - 4 ) ,
+	( 200 / 2 - 4 ) ,
+	8
 	);},
 
 _jsfunc_NewEntry_4 : function ()
@@ -795,27 +849,9 @@ _jsfunc_NewEntry_5 : function ()
 
 _jsfunc_NewEntry_6 : function ()
 {
-	js_MyPrint( "window.devicePixelRatio = " + window.devicePixelRatio );
-	var value;
-	if ( !g_bTouchSupported ) {
-	value = window.devicePixelRatio;
-	}
-	else {
-	value = window.devicePixelRatio;
-	}
-	var body1 = document.body;
-	var style1 = body1.style;
-	var factor1 = 1.0 / value;
-	style1.transform = 'scale(' + String(factor1) + ')';
-	style1["transform-origin"] = "top left";
-	g_scaling = value;
-	js_MyPrint( "g_scaling = " + g_scaling );},
+	g_scaling = 1.0;},
 
 _jsfunc_NewEntry_7 : function ()
-{
-	return g_scaling * 10000.0;},
-
-_jsfunc_NewEntry_8 : function ()
 {
 	var canvas = document.createElement("canvas");
 	var ctx = canvas.getContext("2d");
@@ -824,7 +860,7 @@ _jsfunc_NewEntry_8 : function ()
 	js_MyPrint( "font_check, width of font 'X' = " + sxTextX );
 	js_MyPrint( "sxTextX / 16.0 = " + (sxTextX / 16.0) );},
 
-_jsfunc_NewEntry_9 : function ()
+_jsfunc_NewEntry_8 : function ()
 {
 	g_canvas_s = new Array(200 );
 	g_whole_div_s = new Array(200 );
@@ -832,7 +868,7 @@ _jsfunc_NewEntry_9 : function ()
 	g_client_div_s = new Array(200 );
 	g_strFont_s = new Array(200 );},
 
-_jsfunc_NewEntry_10 : function ()
+_jsfunc_NewEntry_9 : function ()
 {
 	g_js_bInputInputEvent = 0;
 	g_input_tag.addEventListener( 'keydown', js_keydown, {passive: false} );
@@ -928,7 +964,6 @@ _jsfunc_NewEntry_10 : function ()
 	g_js_ime_unicode_s.push( unicode );
 	}
 	}
-	console.log( g_js_ime_unicode_s );
 	var len = g_js_ime_unicode_s.length;
 	g_js_ime_unicode_s.push(0);
 	g_exports.c_composition_end_core( len );
@@ -972,6 +1007,18 @@ _jsfunc_NewEntry_10 : function ()
 	g_js_bInputInputEvent = 0;
 	var rr = g_exports.c_keyup( key );
 	}
+	js_keydown_whole = function(e) {
+	var key = e.keyCode;
+	var rr = g_exports.c_keydown( key );
+	e.preventDefault();
+	e.stopPropagation();
+	};
+	js_keyup_whole = function(e) {
+	var key = e.keyCode;
+	var rr = g_exports.c_keyup_whole( key );
+	e.preventDefault();
+	e.stopPropagation();
+	};
 	function js_mousedown(e) {
 	var bProcessed = g_exports.c_mousedown(
 	e.clientX * g_scaling,
@@ -1008,25 +1055,43 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	}
 	function js_move_touch_mark(mx, my) {
+	if ( g_bTouchSupported ) {
 	var tx = mx - 200 / 2;
 	var ty = my - 200 / 2;
-	g_touch_mark_canvas.style.left = String(tx) + "px";
-	g_touch_mark_canvas.style.top = String(ty) + "px";
+	g_touch_mark_canvas_s[0].style.left = String(tx) + "px";
+	g_touch_mark_canvas_s[0].style.top = String(ty) + "px";
+	g_touch_mark_canvas_s[1].style.left = String(tx) + "px";
+	g_touch_mark_canvas_s[1].style.top = String(ty + ( 200 / 2 + 4 ) ) + "px";
+	g_touch_mark_canvas_s[2].style.left = String(tx) + "px";
+	g_touch_mark_canvas_s[2].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
+	g_touch_mark_canvas_s[3].style.left = String(tx + ( 200 / 2 + 4 ) ) + "px";
+	g_touch_mark_canvas_s[3].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
 	}
-	function js_enable_touch_mark(bEnable) {
-	if ( bEnable ) {
-	g_touch_mark_canvas.style.visibility = "visible";
+	}
+	js_set_raw_touch_mark_visibility = function( bVisible ) {
+	if ( g_bTouchSupported ) {
+	if ( bVisible ) {
+	for ( var i = 0; i < 4 ; i++ ) {
+	g_touch_mark_canvas_s[i].style.visibility = "visible";
+	}
+	gjs_touch_mark_visiblity = 1;
 	}
 	else {
-	g_touch_mark_canvas.style.visibility = "hidden";
+	for ( var i = 0; i < 4 ; i++ ) {
+	g_touch_mark_canvas_s[i].style.visibility = "hidden";
+	}
+	gjs_touch_mark_visiblity = 0;
+	}
 	}
 	}
 	function js_touchstart(e) {
 	var touch = e.touches[0];
 	var mx = touch.clientX * g_scaling;
 	var my = touch.clientY * g_scaling;
+	if ( gjs_bTouchMarkEnable ) {
 	js_move_touch_mark(mx, my);
-	js_enable_touch_mark( 1 );
+	js_set_raw_touch_mark_visibility( 1 );
+	}
 	var bProcessed = g_exports.c_mousedown(
 	mx,
 	my,
@@ -1038,8 +1103,9 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	}
 	function js_touchend(e) {
-	js_MyPrint( "js_touchend is coming" );
-	js_enable_touch_mark( 0 );
+	if ( gjs_bTouchMarkEnable ) {
+	js_set_raw_touch_mark_visibility( 0 );
+	}
 	var bProcessed = g_exports.c_mouseup(
 	0,
 	0,
@@ -1054,8 +1120,10 @@ _jsfunc_NewEntry_10 : function ()
 	var touch = e.touches[0];
 	var mx = touch.clientX * g_scaling;
 	var my = touch.clientY * g_scaling;
+	if ( gjs_bTouchMarkEnable ) {
 	js_move_touch_mark(mx, my);
-	js_enable_touch_mark( 1 );
+	js_set_raw_touch_mark_visibility( 1 );
+	}
 	var bProcessed = g_exports.c_mousemove(
 	mx,
 	my,
@@ -1069,13 +1137,23 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	}},
 
-_jsfunc_NewEntry_11 : function ()
+_jsfunc_NewEntry_10 : function ()
 {
 	count = 0;
 	function js_OnMainTimer() {
 	var rr = g_exports.wa_OnMainTimer(1);
 	}
 	setInterval(js_OnMainTimer, 20);},
+
+_jsfunc_NewEntry_11 : function ($0)
+{
+	var bEnable = $0;
+	if ( gjs_bTouchMarkEnable ) {
+	js_set_raw_touch_mark_visibility( 0 );
+	}
+	else {
+	}
+	gjs_bTouchMarkEnable = bEnable;},
 
 _jsfunc_NewEntry_12 : function ()
 {
@@ -1095,40 +1173,42 @@ _jsfunc_NewEntry_15 : function ()
 
 _jsfunc_NewEntry_16 : function ($0)
 {
-	g_bIME = $0;
-	if ( g_bIME ) {
-	g_input_tag.style["background-color"] = "#ffffff";
-	g_input_tag.style.left = "220px";
-	}
-	else {
-	g_input_tag.style.left = "-10000px";
-	}},
+	g_bIME = $0;},
 
-_jsfunc_NewEntry_17 : function ($0)
+_jsfunc_NewEntry_17 : function ()
+{
+	g_input_tag.style["background-color"] = "#ffffff";
+	g_input_tag.style.left = "220px";},
+
+_jsfunc_NewEntry_18 : function ()
+{
+	g_input_tag.style.left = "-10000px";},
+
+_jsfunc_NewEntry_19 : function ($0)
 {
 	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_18 : function ($0)
+_jsfunc_NewEntry_20 : function ($0)
 {
 	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_19 : function ($0)
+_jsfunc_NewEntry_21 : function ($0)
 {
 	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_20 : function ($0, $1)
+_jsfunc_NewEntry_22 : function ($0, $1)
 {
 	alert( Pointer_stringify($0) + String($1) );},
 
-_jsfunc_NewEntry_21 : function ()
+_jsfunc_NewEntry_23 : function ()
 {
 	alert( "abort() is called." );},
 
-_jsfunc_NewEntry_22 : function ($0, $1)
+_jsfunc_NewEntry_24 : function ($0, $1)
 {
 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
@@ -1139,7 +1219,7 @@ _jsfunc_main_1 : function ($0)
 	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
 	var prg = g_prg;
 	gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-	gl.clearColor(0.0, 0.0, 0.0, 0.0);
+	gl.clearColor(0x00/256, 0x99/256, 0xff/256, 1.0);
 	gl.clearDepth(1.0);
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);},
 
