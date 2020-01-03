@@ -1,20 +1,3 @@
-/*
-	This program has been built with NWSC "C++ Nex" Compiler and clang toolset,
-	and is running under wasm (WebAssembly), and is using NWSTK which is
-	a multiplatform toolkit for wasm and windows. NWSTK represents
-	NOWSMART ToolKit.
-	
-	But, neither Emscripten compiler emcc nor its library was used to build
-	this program.
-	
-	
-	NWSC represents NOWSMART C++ Nex Compiler (for LLVM, wasm, IA32, AMD64).
-	NWSA represents NOWSMART Assembler (for IA32 and AMD64(64BIT REX prefix),
-	SSE, SSE2, 3DNow!)
-	
-	
-	Produced by NOWSMARTSOFT, LightCone.
-*/
 
 var import_func_s = {
 
@@ -227,8 +210,7 @@ _jsfunc_Wnd_10 : function ($0, $1)
 
 _jsfunc_Wnd_11 : function ($0)
 {
-	var idTimer = $0;
-	clearInterval( idTimer );},
+	var idTimer = $0;},
 
 _jsfunc_Wnd_12 : function ($0, $1, $2, $3)
 {
@@ -1343,30 +1325,30 @@ _jsfunc_main_8 : function ()
 	}
 	};
 	myMat_multiply = function(mat1, mat2, dst){
-	var a = mat1[0], b = mat1[1], c = mat1[2], d = mat1[3],
-	e = mat1[4], f = mat1[5], g = mat1[6], h = mat1[7],
-	i = mat1[8], j = mat1[9], k = mat1[10], l = mat1[11],
-	m = mat1[12], n = mat1[13], o = mat1[14], p = mat1[15],
-	A = mat2[0], B = mat2[1], C = mat2[2], D = mat2[3],
-	E = mat2[4], F = mat2[5], G = mat2[6], H = mat2[7],
-	I = mat2[8], J = mat2[9], K = mat2[10], L = mat2[11],
-	M = mat2[12], N = mat2[13], O = mat2[14], P = mat2[15];
-	dst[0] = A * a + B * e + C * i + D * m;
-	dst[1] = A * b + B * f + C * j + D * n;
-	dst[2] = A * c + B * g + C * k + D * o;
-	dst[3] = A * d + B * h + C * l + D * p;
-	dst[4] = E * a + F * e + G * i + H * m;
-	dst[5] = E * b + F * f + G * j + H * n;
-	dst[6] = E * c + F * g + G * k + H * o;
-	dst[7] = E * d + F * h + G * l + H * p;
-	dst[8] = I * a + J * e + K * i + L * m;
-	dst[9] = I * b + J * f + K * j + L * n;
-	dst[10] = I * c + J * g + K * k + L * o;
-	dst[11] = I * d + J * h + K * l + L * p;
-	dst[12] = M * a + N * e + O * i + P * m;
-	dst[13] = M * b + N * f + O * j + P * n;
-	dst[14] = M * c + N * g + O * k + P * o;
-	dst[15] = M * d + N * h + O * l + P * p;
+	var A00 = mat1[0], A01 = mat1[1], A02 = mat1[2], A03 = mat1[3],
+	A10 = mat1[4], A11 = mat1[5], A12 = mat1[6], A13 = mat1[7],
+	A20 = mat1[8], A21 = mat1[9], A22 = mat1[10], A23 = mat1[11],
+	A30 = mat1[12], A31 = mat1[13], A32 = mat1[14], A33 = mat1[15];
+	var B00 = mat2[0], B01 = mat2[1], B02 = mat2[2], B03 = mat2[3],
+	B10 = mat2[4], B11 = mat2[5], B12 = mat2[6], B13 = mat2[7],
+	B20 = mat2[8], B21 = mat2[9], B22 = mat2[10], B23 = mat2[11],
+	B30 = mat2[12], B31 = mat2[13], B32 = mat2[14], B33 = mat2[15];
+	dst[0] = B00 * A00 + B01 * A10 + B02 * A20 + B03 * A30;
+	dst[1] = B00 * A01 + B01 * A11 + B02 * A21 + B03 * A31;
+	dst[2] = B00 * A02 + B01 * A12 + B02 * A22 + B03 * A32;
+	dst[3] = B00 * A03 + B01 * A13 + B02 * A23 + B03 * A33;
+	dst[4] = B10 * A00 + B11 * A10 + B12 * A20 + B13 * A30;
+	dst[5] = B10 * A01 + B11 * A11 + B12 * A21 + B13 * A31;
+	dst[6] = B10 * A02 + B11 * A12 + B12 * A22 + B13 * A32;
+	dst[7] = B10 * A03 + B11 * A13 + B12 * A23 + B13 * A33;
+	dst[8] = B20 * A00 + B21 * A10 + B22 * A20 + B23 * A30;
+	dst[9] = B20 * A01 + B21 * A11 + B22 * A21 + B23 * A31;
+	dst[10] = B20 * A02 + B21 * A12 + B22 * A22 + B23 * A32;
+	dst[11] = B20 * A03 + B21 * A13 + B22 * A23 + B23 * A33;
+	dst[12] = B30 * A00 + B31 * A10 + B32 * A20 + B33 * A30;
+	dst[13] = B30 * A01 + B31 * A11 + B32 * A21 + B33 * A31;
+	dst[14] = B30 * A02 + B31 * A12 + B32 * A22 + B33 * A32;
+	dst[15] = B30 * A03 + B31 * A13 + B32 * A23 + B33 * A33;
 	return dst;
 	};
 	myMat_scale = function(mat, vec, dst){
