@@ -821,7 +821,7 @@ _jsfunc_NewEntry_3 : function ()
 	"#0000FF",
 	3
 	);
-	let len = cx * 0.7;
+	let len = cx * 0.94;
 	if ( typeTouchMarkGraph == 3 ) {
 	drawArrow(dx + cx,
 	dy + cy,
