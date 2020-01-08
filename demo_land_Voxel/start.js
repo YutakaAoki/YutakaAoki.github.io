@@ -307,41 +307,60 @@ _jsfunc_NexFuncs_1 : function ($0)
 
 _jsfunc_NexFuncs_2 : function ()
 {
-	document.body.style.cursor = "se-resize";},
+	if ( gjs_touch_mark_visiblity ) {
+	js_set_raw_touch_mark_visibility( 0 );
+	return 1;
+	}
+	else {
+	return 0;
+	}},
 
-_jsfunc_NexFuncs_3 : function ()
+_jsfunc_NexFuncs_3 : function ($0)
 {
-	document.body.style.cursor = "e-resize";},
+	gjs_typeCursor = $0;},
 
 _jsfunc_NexFuncs_4 : function ()
 {
-	document.body.style.cursor = "s-resize";},
+	document.body.style.cursor = "se-resize";},
 
 _jsfunc_NexFuncs_5 : function ()
 {
-	document.body.style.cursor = "default";},
+	document.body.style.cursor = "e-resize";},
 
 _jsfunc_NexFuncs_6 : function ()
+{
+	document.body.style.cursor = "s-resize";},
+
+_jsfunc_NexFuncs_7 : function ()
+{
+	document.body.style.cursor = "default";},
+
+_jsfunc_NexFuncs_8 : function ()
+{
+	js_move_touch_mark(gjs_touch_mark_x, gjs_touch_mark_y);
+	js_set_raw_touch_mark_visibility( 1 );},
+
+_jsfunc_NexFuncs_9 : function ()
 {
 	document.onkeydown = null;
 	document.onkeyup = null;
 	g_input_tag.focus();},
 
-_jsfunc_NexFuncs_7 : function ()
+_jsfunc_NexFuncs_10 : function ()
 {
 	document.onkeydown = js_keydown_whole;
 	document.onkeyup = js_keyup_whole;},
 
-_jsfunc_NexFuncs_8 : function ()
+_jsfunc_NexFuncs_11 : function ()
 {
 	document.onkeydown = null;
 	document.onkeyup = null;},
 
-_jsfunc_NexFuncs_9 : function ()
+_jsfunc_NexFuncs_12 : function ()
 {
 	return window.innerWidth;},
 
-_jsfunc_NexFuncs_10 : function ()
+_jsfunc_NexFuncs_13 : function ()
 {
 	return window.innerHeight;},
 
@@ -648,6 +667,7 @@ _jsfunc_NewEntry_1 : function ()
 	if ( window.ontouchstart === null ) {
 	g_bTouchSupported = 1;
 	}
+	gjs_typeCursor = 0 ;
 	js_MyPrint( "g_bTouchSupported=" + g_bTouchSupported );
 	return g_bTouchSupported;},
 
@@ -687,7 +707,54 @@ _jsfunc_NewEntry_3 : function ()
 	ctx.arc(x1, y1, r, 0, Math.PI*2, true);
 	ctx.stroke();
 	}
-	function make_one_touch_mark(dx, dy, sx, sy) {
+	function touch_mark_ctor(typeCursor)
+	{
+	if ( typeCursor == 9 ) {
+	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[1 ];
+	}
+	else if ( typeCursor == 10 ) {
+	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[2 ];
+	}
+	else if ( typeCursor == 7 ) {
+	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[3 ];
+	}
+	else {
+	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[0 ];
+	}
+	}
+	function initial_draw_touch_mark_canva_s(canva_s, typeTouchMarkGraph)
+	{
+	canva_s[0] = make_one_touch_mark(
+	typeTouchMarkGraph,
+	- 0 ,
+	- 0 ,
+	200 ,
+	( 200 / 2 - 4 )
+	);
+	canva_s[1] = make_one_touch_mark(
+	typeTouchMarkGraph,
+	- 0 ,
+	- ( 200 / 2 + 4 ) ,
+	200 ,
+	( 200 / 2 - 4 )
+	);
+	canva_s[2] = make_one_touch_mark(
+	typeTouchMarkGraph,
+	- 0 ,
+	- ( 200 / 2 - 4 ) ,
+	( 200 / 2 - 4 ) ,
+	8
+	);
+	canva_s[3] = make_one_touch_mark(
+	typeTouchMarkGraph,
+	- ( 200 / 2 + 4 ) ,
+	- ( 200 / 2 - 4 ) ,
+	( 200 / 2 - 4 ) ,
+	8
+	);
+	}
+	function make_one_touch_mark(typeTouchMarkGraph, dx, dy, sx, sy)
+	{
 	canvas = document.createElement("canvas");
 	canvas.width = String(sx);
 	canvas.height = String(sy);
@@ -754,33 +821,87 @@ _jsfunc_NewEntry_3 : function ()
 	"#0000FF",
 	3
 	);
-	return canvas;
+	let len = cx * 0.7;
+	if ( typeTouchMarkGraph == 3 ) {
+	drawArrow(dx + cx,
+	dy + cy,
+	len,
+	-Math.PI / 4
+	);
+	drawArrow(dx + cx,
+	dy + cy,
+	len,
+	Math.PI / 4 * 3
+	);
 	}
-	g_touch_mark_canvas_s = new Array( 4 );
-	g_touch_mark_canvas_s[0] = make_one_touch_mark(
-	- 0 ,
-	- 0 ,
-	200 ,
-	( 200 / 2 - 4 )
+	else if ( typeTouchMarkGraph == 1 ) {
+	drawArrow(dx + cx,
+	dy + cy,
+	len,
+	0
 	);
-	g_touch_mark_canvas_s[1] = make_one_touch_mark(
-	- 0 ,
-	- ( 200 / 2 + 4 ) ,
-	200 ,
-	( 200 / 2 - 4 )
+	drawArrow(dx + cx,
+	dy + cy,
+	len,
+	- Math.PI
 	);
-	g_touch_mark_canvas_s[2] = make_one_touch_mark(
-	- 0 ,
-	- ( 200 / 2 - 4 ) ,
-	( 200 / 2 - 4 ) ,
-	8
+	}
+	else if ( typeTouchMarkGraph == 2 ) {
+	drawArrow(dx + cx,
+	dy + cy,
+	len,
+	Math.PI / 2
 	);
-	g_touch_mark_canvas_s[3] = make_one_touch_mark(
-	- ( 200 / 2 + 4 ) ,
-	- ( 200 / 2 - 4 ) ,
-	( 200 / 2 - 4 ) ,
-	8
-	);},
+	drawArrow(dx + cx,
+	dy + cy,
+	len,
+	- Math.PI / 2
+	);
+	}
+	return canvas;
+	function drawArrow(x1, y1, len, radAngle) {
+	let c = Math.cos(radAngle);
+	let s = Math.sin(radAngle);
+	let x2 = x1 + len * c;
+	let y2 = y1 - len * s;
+	let x3 = x1 + len * c * 0.8;
+	let y3 = y1 - len * s * 0.8;
+	let col = "#00FF00";
+	js_genshi_line( ctx,
+	x1,
+	y1,
+	x2,
+	y2,
+	col,
+	7
+	);
+	js_genshi_line( ctx,
+	x2,
+	y2,
+	x3 - len * s * 0.08,
+	y3 - len * c * 0.08,
+	col,
+	7
+	);
+	js_genshi_line( ctx,
+	x2,
+	y2,
+	x3 + len * s * 0.08,
+	y3 + len * c * 0.08,
+	col,
+	7
+	);
+	}
+	}
+	gjs_touch_mark_graph_canvas_s = new Array( 4 );
+	for ( let i = 0; i < 4 ; i++ ) {
+	gjs_touch_mark_graph_canvas_s[i] = new Array( 4 );
+	initial_draw_touch_mark_canva_s( gjs_touch_mark_graph_canvas_s[i], i );
+	}
+	gjs_touch_mark_s = new Array(14 );
+	for ( let i = 0; i < 14 ; i++ ) {
+	gjs_touch_mark_s[i] = new touch_mark_ctor( i );
+	}},
 
 _jsfunc_NewEntry_4 : function ()
 {
@@ -1036,31 +1157,39 @@ _jsfunc_NewEntry_9 : function ()
 	e.stopPropagation();
 	}
 	}
-	function js_move_touch_mark(mx, my) {
+	js_move_touch_mark = function(mx, my) {
+	gjs_touch_mark_x = mx;
+	gjs_touch_mark_y = my;
 	if ( g_bTouchSupported ) {
+	console.log( "js_move_touch_mark(), gjs_typeCursor=" + gjs_typeCursor );
 	var tx = mx - 200 / 2;
 	var ty = my - 200 / 2;
-	g_touch_mark_canvas_s[0].style.left = String(tx) + "px";
-	g_touch_mark_canvas_s[0].style.top = String(ty) + "px";
-	g_touch_mark_canvas_s[1].style.left = String(tx) + "px";
-	g_touch_mark_canvas_s[1].style.top = String(ty + ( 200 / 2 + 4 ) ) + "px";
-	g_touch_mark_canvas_s[2].style.left = String(tx) + "px";
-	g_touch_mark_canvas_s[2].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
-	g_touch_mark_canvas_s[3].style.left = String(tx + ( 200 / 2 + 4 ) ) + "px";
-	g_touch_mark_canvas_s[3].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
+	let touch_mark = gjs_touch_mark_s[gjs_typeCursor];
+	canvas_s = touch_mark.mjs_touch_mark_canvas_s;
+	canvas_s[0].style.left = String(tx) + "px";
+	canvas_s[0].style.top = String(ty) + "px";
+	canvas_s[1].style.left = String(tx) + "px";
+	canvas_s[1].style.top = String(ty + ( 200 / 2 + 4 ) ) + "px";
+	canvas_s[2].style.left = String(tx) + "px";
+	canvas_s[2].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
+	canvas_s[3].style.left = String(tx + ( 200 / 2 + 4 ) ) + "px";
+	canvas_s[3].style.top = String(ty + ( 200 / 2 - 4 ) ) + "px";
 	}
 	}
 	js_set_raw_touch_mark_visibility = function( bVisible ) {
 	if ( g_bTouchSupported ) {
+	console.log( "js_set_raw_touch_mark_visibility(), gjs_typeCursor=" + gjs_typeCursor );
+	let touch_mark = gjs_touch_mark_s[gjs_typeCursor];
+	canvas_s = touch_mark.mjs_touch_mark_canvas_s;
 	if ( bVisible ) {
 	for ( var i = 0; i < 4 ; i++ ) {
-	g_touch_mark_canvas_s[i].style.visibility = "visible";
+	canvas_s[i].style.visibility = "visible";
 	}
 	gjs_touch_mark_visiblity = 1;
 	}
 	else {
 	for ( var i = 0; i < 4 ; i++ ) {
-	g_touch_mark_canvas_s[i].style.visibility = "hidden";
+	canvas_s[i].style.visibility = "hidden";
 	}
 	gjs_touch_mark_visiblity = 0;
 	}
