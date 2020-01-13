@@ -99,325 +99,292 @@ Chrome, try such as the following keys:</p>
   <li>Ctrl + Shift + I or F12 : Enter developer's mode.</li>       
 </ul>       
 <p>       
-NWSTK = NOWSMARTSOFT TOOLKIT.<br>                                           
-Wasm&nbsp;&nbsp; = WebAssembly.<br>                                           
-<br>                                             
-Programmed by NOWSMARTSOFT, LightCone, Yutaka Aoki.</p>                                               
-<h2>Compatibility</h2>             
-<table border="1" height="7">                  
-  <tr>                  
-    <th bgcolor="#C0C0C0" width="120" height="40"> Browser</th>                   
-    <th bgcolor="#C0C0C0" width="220" height="40"> OS</th>                   
-    <th bgcolor="#C0C0C0" width="200" height="40" align="center">Status</th>                  
-    <th bgcolor="#C0C0C0" width="200" height="40" align="center">Speed</th>                  
-    <th bgcolor="#C0C0C0" width="300" height="40">Description</th>                 
-  </tr>                 
-  <tr>   
-    <td width="120" height="4">Chrome 79</td>               
-    <td width="220" height="4">Win7, Pro, 64BIT</td>               
-    <td width="200" height="4" align="center">good</td>               
-    <td width="200" height="4" align="center">very slow for WebGL in Intel HD   
-      Graphics.</td>               
-    <td width="300" height="4">With Intel HD Graphics, Chrome cannot use   
-      Hardware Accelerator for WebGL.</td>               
-  </tr>  
-  <tr>  
-    <td width="120" height="4">Chrome 78</td>               
-    <td width="220" height="4">Win7, Pro, 64BIT</td>               
-    <td width="200" height="4" align="center">good</td>               
-    <td width="200" height="4" align="center">fast</td>               
-    <td width="300" height="4"></td>               
-  </tr>  
-  <tr>           
-    <td width="120" height="4">Chrome 73</td>               
-    <td width="220" height="4">Win7, Pro, 64BIT</td>               
-    <td width="200" height="4" align="center">good</td>               
-    <td width="200" height="4" align="center">fast</td>               
-    <td width="300" height="4"></td>               
-  </tr>           
-  <tr>  
-    <td width="120" height="1">FireFox 71.0</td>               
-    <td width="220" height="1">Win7, Pro, 64BIT</td>               
-    <td width="200" height="1" align="center">good</td>               
-    <td width="200" height="1" align="center">faster</td>               
-    <td width="300" height="1"></td>               
-  </tr>  
-  <tr>            
-    <td width="120" height="1">FireFox 67</td>               
-    <td width="220" height="1">Win7, Pro, 64BIT</td>               
-    <td width="200" height="1" align="center">good</td>               
-    <td width="200" height="1" align="center">faster</td>               
-    <td width="300" height="1"></td>               
-  </tr>           
-  <tr>  
-    <td width="120" height="1">Chrome 79</td>               
-    <td width="220" height="1">Fire HD 10 Tablet (9th, 2019)<br>           
-      FireOS (based Android 9.0)</td>               
-    <td width="200" height="1" align="center">Ok</td>                
-    <td width="200" height="1" align="center">fast</td>                
-    <td width="300" height="1"></td>                
-  </tr>  
-  <tr>               
-    <td width="120" height="1">Chrome 73</td>               
-    <td width="220" height="1">Fire 7 Tablet (7th, 2017)<br>           
-      FireOS (based Android 5.0)</td>               
-    <td width="200" height="1" align="center">Ok</td>                
-    <td width="200" height="1" align="center">enough fast<br>           
-      except demo_Mountain</td>                
-    <td width="300" height="1"></td>                
-  </tr>                
-  <tr>           
-    <td width="120" height="4">FireFox 66.0.2</td>               
-    <td width="220" height="4">Fire 7 Tablet (7th, 2017)<br>           
-      FireOS (based Android 5.0)</td>               
-    <td width="200" height="4" align="center">WebGL fails.<br>            
-      But demo1 and demo2 are Ok.</td>               
-    <td width="200" height="4" align="center">fast</td>               
-    <td width="300" height="4">Probably, this tablet GPU chip is not supported            
-      by this version's FireFox mobile.</td>               
-  </tr>           
-  <tr>  
-    <td width="120" height="1">Silk Browser</td>               
-    <td width="220" height="1">Fire HD 10 Tablet (9th, 2019)<br>           
-      FireOS (based Android 9.0)</td>               
-    <td width="200" height="1" align="center">Ok</td>                
-    <td width="200" height="1" align="center">fast at running but slow at   
-      loading</td>                
-    <td width="300" height="1">Loading Page is very slow.<br>  
-      Parsing JavaScript is so slow ??</td>                
-  </tr>  
-  <tr>           
-    <td width="120" height="1">FireFox</td>               
-    <td width="220" height="1">Ubuntu Linux, 32BIT</td>               
-    <td width="200" height="1" align="center">Ok</td>               
-    <td width="200" height="1" align="center">fast</td>               
-    <td width="300" height="1"></td>               
-  </tr>           
-</table>                 
-<h2>                   
-Link</h2>                                          
-<p>                  
-<a href="https://yutakaaoki.github.io/">NWSTK HomePage1(fast, PWA, github)</a><br>   
-<a href="http://nowsmartsoft.atwebpages.com/">NWSTK HomePage2(slow, not PWA, atwebpages, ZettaHost)</a>   
-</p>                                          
-<h2>                  
-Program</h2>                                         
-<p>This program has been built with NWSC &quot;C++ Nex&quot; Compiler and clang 
-toolset, and is running under wasm (WebAssembly), and is using NWSTK which is a 
-multiplatform toolkit for wasm and windows. NWSTK represents NOWSMART ToolKit.<br>
-But, neither Emscripten compiler emcc nor its library was used to build this 
-program.</p>
-<ul>
-  <li>NWSC represents NOWSMART C++ Nex Compiler (for LLVM, wasm, IA32, AMD64).<br>
-  </li>
-  <li>NWSA represents NOWSMART Assembler (for IA32 and AMD64(64BIT REX prefix),<br>
-    SSE, SSE2, 3DNow!)</li>
-</ul>
-<p>Produced by NOWSMARTSOFT, LightCone.</p>
-<h2>                 
-History</h2>                                         
-<table border="1" height="1">              
+NWSTK = NOWSMARTSOFT TOOLKIT.<br>                                             
+Wasm&nbsp;&nbsp; = WebAssembly.<br>                                             
+<br>                                               
+Programmed by NOWSMARTSOFT, LightCone, Yutaka Aoki.</p>                                                 
+<h2>Compatibility</h2>               
+<table border="1" height="7">                    
+  <tr>                    
+    <th bgcolor="#C0C0C0" width="120" height="40"> Browser</th>                     
+    <th bgcolor="#C0C0C0" width="220" height="40"> OS</th>                     
+    <th bgcolor="#C0C0C0" width="200" height="40" align="center">Status</th>                    
+    <th bgcolor="#C0C0C0" width="200" height="40" align="center">Speed</th>                    
+    <th bgcolor="#C0C0C0" width="300" height="40">Description</th>                   
+  </tr>                   
+  <tr>     
+    <td width="120" height="4">Chrome 79</td>                 
+    <td width="220" height="4">Win7, Pro, 64BIT</td>                 
+    <td width="200" height="4" align="center">good</td>                 
+    <td width="200" height="4" align="center">very slow for WebGL in Intel HD     
+      Graphics.</td>                 
+    <td width="300" height="4">With Intel HD Graphics, Chrome cannot use     
+      Hardware Accelerator for WebGL.</td>                 
+  </tr>    
+  <tr>    
+    <td width="120" height="4">Chrome 78</td>                 
+    <td width="220" height="4">Win7, Pro, 64BIT</td>                 
+    <td width="200" height="4" align="center">good</td>                 
+    <td width="200" height="4" align="center">fast</td>                 
+    <td width="300" height="4"></td>                 
+  </tr>    
+  <tr>             
+    <td width="120" height="4">Chrome 73</td>                 
+    <td width="220" height="4">Win7, Pro, 64BIT</td>                 
+    <td width="200" height="4" align="center">good</td>                 
+    <td width="200" height="4" align="center">fast</td>                 
+    <td width="300" height="4"></td>                 
+  </tr>             
+  <tr>    
+    <td width="120" height="1">FireFox 71.0</td>                 
+    <td width="220" height="1">Win7, Pro, 64BIT</td>                 
+    <td width="200" height="1" align="center">good</td>                 
+    <td width="200" height="1" align="center">faster</td>                 
+    <td width="300" height="1"></td>                 
+  </tr>    
   <tr>              
-    <th bgcolor="#C0C0C0" width="200" height="40"> Modified Date<br>              
-      Japan Standard Time</th>               
-    <th bgcolor="#C0C0C0" width="450" height="40">Description</th>              
-  </tr>              
-  <tr> 
-    <td width="200" height="1">2020/01/08</td>         
-    <td width="450" height="1">  
-      Touch Mark has been able to be changed in the device with touch panel for  
-      representing the state of the operation.  
-    </td>          
-  </tr> 
-  <tr> 
-    <td width="200" height="1">2020/01/03</td>         
-    <td width="450" height="1">  
-      Menu Operation for the device with touch panel has been improved.&nbsp;   
-    </td>           
-  </tr>  
+    <td width="120" height="1">FireFox 67</td>                 
+    <td width="220" height="1">Win7, Pro, 64BIT</td>                 
+    <td width="200" height="1" align="center">good</td>                 
+    <td width="200" height="1" align="center">faster</td>                 
+    <td width="300" height="1"></td>                 
+  </tr>             
   <tr>    
-    <td width="200" height="1">2019/12/13, 11:10</td>          
-    <td width="450" height="1">   
-      <ol>   
-        <li>demo_tennis has been added.<br>   
-          <br>   
-        </li>   
-        <li>HTML5 DOM elements which is not drawn by NWSTK has started to be    
-          able to be clicked or dragged.<br>   
-          <br>   
-        </li>   
-        <li>The menu item which does not have an event handler has started to be    
-          drawn with grayed color for specifying as a disabled item.<br>   
-          <br>   
-        </li>   
-        <li>index.html and corresponded CSS file has been arranged for the clean    
-          source.<br>   
-          <br>   
-        </li>   
-        <li>ServiceWorker has been modified.<br>   
-          <br>   
-        </li>   
-        <li>Various bug fix.</li>   
-      </ol>   
-    </td>           
-  </tr>   
+    <td width="120" height="1">Chrome 79</td>                 
+    <td width="220" height="1">Fire HD 10 Tablet (9th, 2019)<br>             
+      FireOS (based Android 9.0)</td>                 
+    <td width="200" height="1" align="center">Ok</td>                  
+    <td width="200" height="1" align="center">fast</td>                  
+    <td width="300" height="1"></td>                  
+  </tr>    
+  <tr>                 
+    <td width="120" height="1">Chrome 73</td>                 
+    <td width="220" height="1">Fire 7 Tablet (7th, 2017)<br>             
+      FireOS (based Android 5.0)</td>                 
+    <td width="200" height="1" align="center">Ok</td>                  
+    <td width="200" height="1" align="center">enough fast<br>             
+      except demo_Mountain</td>                  
+    <td width="300" height="1"></td>                  
+  </tr>                  
+  <tr>             
+    <td width="120" height="4">FireFox 66.0.2</td>                 
+    <td width="220" height="4">Fire 7 Tablet (7th, 2017)<br>             
+      FireOS (based Android 5.0)</td>                 
+    <td width="200" height="4" align="center">WebGL fails.<br>              
+      But demo1 and demo2 are Ok.</td>                 
+    <td width="200" height="4" align="center">fast</td>                 
+    <td width="300" height="4">Probably, this tablet GPU chip is not supported              
+      by this version's FireFox mobile.</td>                 
+  </tr>             
   <tr>    
-    <td width="200" height="1">2019/11/20</td>          
-    <td width="450" height="1">   
-      <ol>   
-        <li>It has started to support PWA -- Progressive Web Application.<br>   
-          <br>   
-          But it need to be placed in the https server.<br>   
-          <br>   
-          So it can be tested only at the site <a href="https://yutakaaoki.github.io/">https://yutakaaoki.github.io/</a>    
-          at present.<br>   
-          <br>   
-        </li>   
-        <li>It has supported gziped test.wasm which is automatically compressed    
-          via Apache mod_gzip module for Progress Bar at the begin of starting    
-          up test.wasm. It is acctually demonstrated in the github homepage at    
-          the linked site above.</li>   
-      </ol>   
-    </td>           
+    <td width="120" height="1">Silk Browser</td>                 
+    <td width="220" height="1">Fire HD 10 Tablet (9th, 2019)<br>             
+      FireOS (based Android 9.0)</td>                 
+    <td width="200" height="1" align="center">Ok</td>                  
+    <td width="200" height="1" align="center">fast at running but slow at     
+      loading</td>                  
+    <td width="300" height="1">Loading Page is very slow.<br>    
+      Parsing JavaScript is so slow ??</td>                  
+  </tr>    
+  <tr>             
+    <td width="120" height="1">FireFox</td>                 
+    <td width="220" height="1">Ubuntu Linux, 32BIT</td>                 
+    <td width="200" height="1" align="center">Ok</td>                 
+    <td width="200" height="1" align="center">fast</td>                 
+    <td width="300" height="1"></td>                 
+  </tr>             
+</table>                   
+<h2>                     
+Link</h2>                                            
+<p>                    
+<a href="https://yutakaaoki.github.io/">NWSTK HomePage1(fast, PWA, github)</a><br>     
+<a href="http://nowsmartsoft.atwebpages.com/">NWSTK HomePage2(slow, not PWA, atwebpages, ZettaHost)</a>     
+</p>                                            
+<h2>                    
+Program</h2>                                           
+<p>This program has been built with NWSC &quot;C++ Nex&quot; Compiler and clang   
+toolset, and is running under wasm (WebAssembly), and is using NWSTK which is a   
+multiplatform toolkit for wasm and windows. NWSTK represents NOWSMART ToolKit.<br>  
+But, neither Emscripten compiler emcc nor its library was used to build this   
+program.</p>  
+<ul>  
+  <li>NWSC represents NOWSMART C++ Nex Compiler (for LLVM, wasm, IA32, AMD64).<br>  
+  </li>  
+  <li>NWSA represents NOWSMART Assembler (for IA32 and AMD64(64BIT REX prefix),<br>  
+    SSE, SSE2, 3DNow!)</li>  
+</ul>  
+<p>Produced by NOWSMARTSOFT, LightCone.</p>  
+<h2>                   
+History</h2>                                           
+<table border="1" height="1">                
+  <tr>                
+    <th bgcolor="#C0C0C0" width="200" height="40"> Modified Date<br>                
+      Japan Standard Time</th>                 
+    <th bgcolor="#C0C0C0" width="450" height="40">Description</th>                
+  </tr>                
+  <tr>   
+    <td width="200" height="1">2020/01/08</td>           
+    <td width="450" height="1">    
+      Touch Mark has been able to be changed in the device with touch panel for    
+      representing the state of the operation.    
+    </td>            
   </tr>   
-  <tr>    
-    <td width="200" height="1">2019/11/17, 17:45</td>          
-    <td width="450" height="1">   
-      <ol>   
-        <li>Progress Bar with percent number during     
-      initial loading wasm module was implemented.<br>    
-          <br>    
-        </li>    
-        <li>File Open Dialog(&quot;Open&quot; Menu) and File Save Dialog     
-      (&quot;New&quot; Menu) from main menu were implemeted experimentally.</li>   
-      </ol>   
-    </td>           
-  </tr>   
-  <tr>       
-    <td width="200" height="1">2019/05/01, 21:43</td>          
-    <td width="450" height="1">Especially in a slow mobile device/phone/tablet, an      
-      emission of a pulldown menu has become faster than the previous.</td>           
-  </tr>      
-  <tr>      
-    <td width="200" height="1">2019/05/01, 08:36</td>          
-    <td width="450" height="1">If it is failed to get WebGL context for canvas,       
-      the toolkit will pop up an error dialog that alerts that.<br>      
-      This feature is for a FireFox 66.0 in the Amazon 7th generation Fire7       
-      Tablet.</td>           
-  </tr>      
-  <tr>       
-    <td width="200" height="1">2019/04/30</td>          
-    <td width="450" height="1">In the environment where touch panel is used        
-      such as Mobile -- Android, a touch mark like a missile target mark has been        
-      started drawing at the touched point.</td>           
-  </tr>       
-  <tr>           
-    <td width="200" height="145">2019/04/21</td>           
-    <td width="450" height="145">   
-      <ol>   
-        <li>EditWidget has started supporting key inputs from the            
-      <i> on-screen             
-      keyboard</i> for Mobile Device(Touch Panel).<br>            
-      Among them, tested specially for USA English and Japanese on-screen            
-      Keybords in the intel HAXM Andoid Emulator.<br>    
-          <br>    
-        </li>    
-        <li>IME --<i> Input Method Editor </i>-- for both PC and Mobile has been            
-      started supporting. Testing was done especially for Japanese IME.<br>   
-          <br>   
-        </li>   
-        <li>In mobile devices, the width of sensitive borders or resizing gripper to            
-      resize the demension of windows have been wider than the previous.<br>    
-          <br>    
-        </li>    
-        <li>The dimension and position of windows in demo1 has been adjusted in            
-      mobile devices.</li>    
-      </ol>    
+  <tr>   
+    <td width="200" height="1">2020/01/03</td>           
+    <td width="450" height="1">    
+      Menu Operation for the device with touch panel has been improved.&nbsp;     
     </td>             
   </tr>    
-</table> 
- 
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<p> 
-　 
-</p> 
-  
-  
-<!-- NINJA ANALYZE -->  
-<script type="text/javascript">  
-//<![CDATA[  
-// Here is for Access Analyzer :  
-console.log( "1, window.location.hostname=" + window.location.hostname );  
-if ( window.location.hostname == "yutakaaoki.github.io" ) {  
-	// in the case of "http://yutakaaoki.github.io" :  
-	(function(d) {  
-	  var sc=d.createElement("script"),  
-	      ins=d.getElementsByTagName("script")[0];  
-	  sc.type="text/javascript";  
-	  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00438754&hash=959bce02&zone=36";  
-	  sc.async=true;  
-	  ins.parentNode.insertBefore(sc, ins);  
-	})(document);  
-}  
-else if ( window.location.hostname == "nowsmartsoft.atwebpages.com" ) {  
-	// in the case of "https://nowsmartsoft.atwebpages.com" :  
-	(function(d) {  
-	  var sc=d.createElement("script"),  
-	      ins=d.getElementsByTagName("script")[0];  
-	  sc.type="text/javascript";  
-	  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00432744&hash=92aec9f0&zone=36";  
-	  sc.async=true;  
-	  ins.parentNode.insertBefore(sc, ins);  
-	})(document);  
-}  
-//]]>  
-</script>  
-<!-- /NINJA ANALYZE -->  
-  
-  
-</body>  
-</html>  
+  <tr>      
+    <td width="200" height="1">2019/12/13, 11:10</td>            
+    <td width="450" height="1">     
+      <ol>     
+        <li>demo_tennis has been added.<br>     
+          <br>     
+        </li>     
+        <li>HTML5 DOM elements which is not drawn by NWSTK has started to be      
+          able to be clicked or dragged.<br>     
+          <br>     
+        </li>     
+        <li>The menu item which does not have an event handler has started to be      
+          drawn with grayed color for specifying as a disabled item.<br>     
+          <br>     
+        </li>     
+        <li>index.html and corresponded CSS file has been arranged for the clean      
+          source.<br>     
+          <br>     
+        </li>     
+        <li>ServiceWorker has been modified.<br>     
+          <br>     
+        </li>     
+        <li>Various bug fix.</li>     
+      </ol>     
+    </td>             
+  </tr>     
+  <tr>      
+    <td width="200" height="1">2019/11/20</td>            
+    <td width="450" height="1">     
+      <ol>     
+        <li>It has started to support PWA -- Progressive Web Application.<br>     
+          <br>     
+          But it need to be placed in the https server.<br>     
+          <br>     
+          So it can be tested only at the site <a href="https://yutakaaoki.github.io/">https://yutakaaoki.github.io/</a>      
+          at present.<br>     
+          <br>     
+        </li>     
+        <li>It has supported gziped test.wasm which is automatically compressed      
+          via Apache mod_gzip module for Progress Bar at the begin of starting      
+          up test.wasm. It is acctually demonstrated in the github homepage at      
+          the linked site above.</li>     
+      </ol>     
+    </td>             
+  </tr>     
+  <tr>      
+    <td width="200" height="1">2019/11/17, 17:45</td>            
+    <td width="450" height="1">     
+      <ol>     
+        <li>Progress Bar with percent number during       
+      initial loading wasm module was implemented.<br>      
+          <br>      
+        </li>      
+        <li>File Open Dialog(&quot;Open&quot; Menu) and File Save Dialog       
+      (&quot;New&quot; Menu) from main menu were implemeted experimentally.</li>     
+      </ol>     
+    </td>             
+  </tr>     
+  <tr>         
+    <td width="200" height="1">2019/05/01, 21:43</td>            
+    <td width="450" height="1">Especially in a slow mobile device/phone/tablet, an        
+      emission of a pulldown menu has become faster than the previous.</td>             
+  </tr>        
+  <tr>        
+    <td width="200" height="1">2019/05/01, 08:36</td>            
+    <td width="450" height="1">If it is failed to get WebGL context for canvas,         
+      the toolkit will pop up an error dialog that alerts that.<br>        
+      This feature is for a FireFox 66.0 in the Amazon 7th generation Fire7         
+      Tablet.</td>             
+  </tr>        
+  <tr>         
+    <td width="200" height="1">2019/04/30</td>            
+    <td width="450" height="1">In the environment where touch panel is used          
+      such as Mobile -- Android, a touch mark like a missile target mark has been          
+      started drawing at the touched point.</td>             
+  </tr>         
+  <tr>             
+    <td width="200" height="145">2019/04/21</td>             
+    <td width="450" height="145">     
+      <ol>     
+        <li>EditWidget has started supporting key inputs from the              
+      <i> on-screen               
+      keyboard</i> for Mobile Device(Touch Panel).<br>              
+      Among them, tested specially for USA English and Japanese on-screen              
+      Keybords in the intel HAXM Andoid Emulator.<br>      
+          <br>      
+        </li>      
+        <li>IME --<i> Input Method Editor </i>-- for both PC and Mobile has been              
+      started supporting. Testing was done especially for Japanese IME.<br>     
+          <br>     
+        </li>     
+        <li>In mobile devices, the width of sensitive borders or resizing gripper to              
+      resize the demension of windows have been wider than the previous.<br>      
+          <br>      
+        </li>      
+        <li>The dimension and position of windows in demo1 has been adjusted in              
+      mobile devices.</li>      
+      </ol>      
+    </td>               
+  </tr>      
+</table>   
+   
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+<p></p> 
+    
+    
+<!-- NINJA ANALYZE -->    
+<script type="text/javascript">    
+//<![CDATA[    
+// Here is for Access Analyzer :    
+console.log( "1, window.location.hostname=" + window.location.hostname );    
+if ( window.location.hostname == "yutakaaoki.github.io" ) {    
+	// in the case of "http://yutakaaoki.github.io" :    
+	(function(d) {    
+	  var sc=d.createElement("script"),    
+	      ins=d.getElementsByTagName("script")[0];    
+	  sc.type="text/javascript";    
+	  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00438754&hash=959bce02&zone=36";    
+	  sc.async=true;    
+	  ins.parentNode.insertBefore(sc, ins);    
+	})(document);    
+}    
+else if ( window.location.hostname == "nowsmartsoft.atwebpages.com" ) {    
+	// in the case of "https://nowsmartsoft.atwebpages.com" :    
+	(function(d) {    
+	  var sc=d.createElement("script"),    
+	      ins=d.getElementsByTagName("script")[0];    
+	  sc.type="text/javascript";    
+	  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00432744&hash=92aec9f0&zone=36";    
+	  sc.async=true;    
+	  ins.parentNode.insertBefore(sc, ins);    
+	})(document);    
+}    
+//]]>    
+</script>    
+<!-- /NINJA ANALYZE -->    
+    
+    
+</body>    
+</html>    
