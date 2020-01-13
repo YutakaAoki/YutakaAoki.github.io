@@ -206,8 +206,11 @@ Program</h2>
 toolset, and is running under Wasm (WebAssembly), and is using NWSTK which is a   
 multiplatform toolkit for Wasm and Windows. NWSTK represents NOWSMART ToolKit.<br>  
 But, neither Emscripten compiler emcc nor its library was used to build this   
-program.</p>  
-<ul>  
+program.<br> 
+Clang toolset is used as a LLVM BackEnd but it is NOT used as a C/C++ compiler.<br>
+<br>
+</p> 
+<ul> 
   <li>NWSC represents NOWSMART C++ Nex Compiler (for LLVM, Wasm, IA32, AMD64).<br>  
   </li>  
   <li>NWSA represents NOWSMART Assembler (for IA32 and AMD64(64BIT REX prefix), SSE, SSE2, 3DNow!)</li>  
