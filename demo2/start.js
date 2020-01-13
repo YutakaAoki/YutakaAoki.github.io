@@ -1,3 +1,20 @@
+/*
+	This program has been built with NWSC "C++ Nex" Compiler and clang toolset,
+	and is running under wasm (WebAssembly), and is using NWSTK which is
+	a multiplatform toolkit for wasm and windows. NWSTK represents
+	NOWSMART ToolKit.
+	
+	But, neither Emscripten compiler emcc nor its library was used to build
+	this program.
+	
+	
+	NWSC represents NOWSMART C++ Nex Compiler (for LLVM, wasm, IA32, AMD64).
+	NWSA represents NOWSMART Assembler (for IA32 and AMD64(64BIT REX prefix),
+	SSE, SSE2, 3DNow!)
+	
+	
+	Produced by NOWSMARTSOFT, LightCone.
+*/
 
 var import_func_s = {
 
