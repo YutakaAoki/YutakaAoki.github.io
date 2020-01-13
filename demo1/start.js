@@ -718,6 +718,9 @@ _jsfunc_NewEntry_3 : function ()
 	else if ( typeCursor == 7 ) {
 	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[3 ];
 	}
+	else if ( typeCursor == 8 ) {
+	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[4 ];
+	}
 	else {
 	this.mjs_touch_mark_canvas_s = gjs_touch_mark_graph_canvas_s[0 ];
 	}
@@ -821,41 +824,28 @@ _jsfunc_NewEntry_3 : function ()
 	"#0000FF",
 	3
 	);
-	let len = cx * 0.94;
 	if ( typeTouchMarkGraph == 3 ) {
-	drawArrow(dx + cx,
+	drawMoveMark( dx + cx,
 	dy + cy,
-	len,
-	-Math.PI / 4
+	Math.PI * 3 / 4
 	);
-	drawArrow(dx + cx,
+	}
+	else if ( typeTouchMarkGraph == 4 ) {
+	drawMoveMark( dx + cx,
 	dy + cy,
-	len,
-	Math.PI / 4 * 3
+	Math.PI / 4
 	);
 	}
 	else if ( typeTouchMarkGraph == 1 ) {
-	drawArrow(dx + cx,
+	drawMoveMark( dx + cx,
 	dy + cy,
-	len,
 	0
-	);
-	drawArrow(dx + cx,
-	dy + cy,
-	len,
-	- Math.PI
 	);
 	}
 	else if ( typeTouchMarkGraph == 2 ) {
-	drawArrow(dx + cx,
+	drawMoveMark( dx + cx,
 	dy + cy,
-	len,
 	Math.PI / 2
-	);
-	drawArrow(dx + cx,
-	dy + cy,
-	len,
-	- Math.PI / 2
 	);
 	}
 	return canvas;
@@ -892,9 +882,31 @@ _jsfunc_NewEntry_3 : function ()
 	7
 	);
 	}
+	function drawMoveMark(x1, y1, radAngle) {
+	let len = 200 / 2;
+	let col = "#00FF00";
+	drawArrow( x1,
+	y1,
+	len,
+	radAngle
+	);
+	drawArrow( x1,
+	y1,
+	len,
+	radAngle + Math.PI
+	);
+	js_genshi_circle(
+	ctx,
+	x1,
+	y1,
+	60 ,
+	col,
+	7
+	);
 	}
-	gjs_touch_mark_graph_canvas_s = new Array( 4 );
-	for ( let i = 0; i < 4 ; i++ ) {
+	}
+	gjs_touch_mark_graph_canvas_s = new Array( 5 );
+	for ( let i = 0; i < 5 ; i++ ) {
 	gjs_touch_mark_graph_canvas_s[i] = new Array( 4 );
 	initial_draw_touch_mark_canva_s( gjs_touch_mark_graph_canvas_s[i], i );
 	}
