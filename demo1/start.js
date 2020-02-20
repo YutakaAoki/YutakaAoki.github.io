@@ -227,7 +227,8 @@ _jsfunc_Wnd_10 : function ($0, $1)
 
 _jsfunc_Wnd_11 : function ($0)
 {
-	var idTimer = $0;},
+	var idTimer = $0;
+	clearInterval( idTimer );},
 
 _jsfunc_Wnd_12 : function ($0, $1, $2, $3)
 {
@@ -419,7 +420,27 @@ _jsfunc_DC_4 : function ($0, $1, $2, $3)
 	ctx.font = g_strFont_s[$0];
 	ctx.fillText(str, $1, $2);},
 
-_jsfunc_DC_5 : function ($0, $1, $2, $3, $4, $5)
+_jsfunc_DC_5 : function ($0, $1, $2)
+{
+	let ctx = g_ctx_s[$0];
+	let str = Pointer_stringify_with_len($1, $2);
+	console.log( "nwsGetTextExtent(), str = " + str );
+	let elm = document.createElement("div");
+	elm.style.font = ctx.font;
+	elm.style.display = "inline-block";
+	elm.style.border = "0px solid #000000";
+	elm.textContent = str;
+	document.body.appendChild(elm);
+	let sx = elm.clientWidth;
+	_gjs_nwsGetTextExtent_sy = elm.clientHeight;
+	document.body.removeChild(elm);
+	return sx;},
+
+_jsfunc_DC_6 : function ()
+{
+	return _gjs_nwsGetTextExtent_sy;},
+
+_jsfunc_DC_7 : function ($0, $1, $2, $3, $4, $5)
 {
 	var ctx = g_ctx_s[$0];
 	var x = $1;
@@ -1378,6 +1399,10 @@ function _js_on_grow_memory() {
 }
 
 
+/*
+	pTop からの 0 終端文字列の長さをバイト単位で数える。
+	返される長さとしては 0 終端文字列は含まない。
+*/
 function GetLengthOfPointerString( pTop ) {
 	var		ptr		= pTop;
 	var		len		= 0;
@@ -1423,6 +1448,9 @@ function GetLengthOfPointerString( pTop ) {
 //}
 
 
+/*
+	pTop からを UTF8 の 0 終端文字列とみなして JS の文字列に直す。
+*/
 function Pointer_stringify( pTop ) {
 	var		len			= GetLengthOfPointerString( pTop );
 	var		u8array		= new Uint8Array(len);
@@ -1441,14 +1469,25 @@ function Pointer_stringify( pTop ) {
 	return	decodedText;
 }
 
-
-
-
-
-
-
-
-
+/*
+	pTop から、len バイトの部分を UTF8 の文字列とみなして JS の文字列に直す。
+*/
+function Pointer_stringify_with_len( pTop, len ) {
+	var		u8array		= new Uint8Array(len);
+	
+	var		ptr		= pTop;
+	for ( var cnt = 0; cnt < len; cnt++ ) {
+		u8array[cnt]	= HEAP8[ptr];
+		ptr++;
+	}
+	
+	var		decoder		= new TextDecoder("utf-8");
+	
+	// utf8 のBYTE 配列から JS の utf16 文字列を作る :
+	var		decodedText = decoder.decode(u8array);
+	
+	return	decodedText;
+}
 
 var		imports = {};
 
