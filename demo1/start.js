@@ -424,7 +424,6 @@ _jsfunc_DC_5 : function ($0, $1, $2)
 {
 	let ctx = g_ctx_s[$0];
 	let str = Pointer_stringify_with_len($1, $2);
-	console.log( "nwsGetTextExtent(), str = " + str );
 	let elm = document.createElement("div");
 	elm.style.font = ctx.font;
 	elm.style.display = "inline-block";
