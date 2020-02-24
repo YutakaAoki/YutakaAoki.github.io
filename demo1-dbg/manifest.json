@@ -1,0 +1,31 @@
+{
+  "name": "PWA NWSTK demo1",
+  "short_name": "PWA NWSTK demo1",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "theme_color": "#6699FF",
+  "background_color": "#313131",
+  "icons": [
+    {
+      "src": "./icon-72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "./icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./icon-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "./icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

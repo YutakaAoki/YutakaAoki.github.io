@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  <title>Demo for NWSTK with NWSC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="icon" href="icon-256.png" type="image/png" />
+  
+  <noscript>
+  JavaScript is not enabled.<br>
+  Enable JavaScript, to browse this site.
+  </noscript>
+</head>
+
+
+
+<body style="height:250%;">
+  <h3>NWSTK Multiplatform Toolkit(Beta), C++ nex, Wasm, WebGL, PWA</h3>
+  <a href="https://yutakaaoki.github.io/">NWSTK HomePage1(fast, PWA, github)</a><br>
+  <a href="http://nowsmartsoft.atwebpages.com/">NWSTK HomePage2(slow, not PWA, atwebpages, ZettaHost)</a><br><br>
+  <textarea id="outarea" rows="5"></textarea>
+  <br>
+  <div>Network: <span id="network-status" class="">Good</span></div>
+  <script type="text/javascript">
+    if ( navigator.serviceWorker != null ) {
+      navigator.serviceWorker.register( 'sw.js' )
+      .then(function(registration) {
+        // registration worked
+        console.log('from main, sw, Registration of ServiceWorker has succeeded.');
+        console.log('from main, sw, Registered events at scope: ',
+        			registration.scope);
+        console.log('from main, sw, force to registration.update()');
+        registration.update();
+      });
+    }
+	// fetch('data.json')
+    var statusEl = document.querySelector('#network-status');
+    if ( !navigator.onLine ) {
+      statusEl.classList = ['is-offline'];
+      statusEl.innerText = 'Offline';
+    }
+  </script>
+
+  <script type="text/javascript" src="hogo.js"></script>
+  <script type="text/javascript" src="start.js"></script>
+
+
+<!-- NINJA ANALYZE -->
+<script type="text/javascript">
+//<![CDATA[
+// Here is for Access Analyzer :
+console.log( "1, window.location.hostname=" + window.location.hostname );
+if ( window.location.hostname == "yutakaaoki.github.io" ) {
+	// in the case of "http://yutakaaoki.github.io" :
+	(function(d) {
+	  var sc=d.createElement("script"),
+	      ins=d.getElementsByTagName("script")[0];
+	  sc.type="text/javascript";
+	  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00438754&hash=959bce02&zone=36";
+	  sc.async=true;
+	  ins.parentNode.insertBefore(sc, ins);
+	})(document);
+}
+else if ( window.location.hostname == "nowsmartsoft.atwebpages.com" ) {
+	// in the case of "https://nowsmartsoft.atwebpages.com" :
+	(function(d) {
+	  var sc=d.createElement("script"),
+	      ins=d.getElementsByTagName("script")[0];
+	  sc.type="text/javascript";
+	  sc.src=("https:"==d.location.protocol?"https://":"http://") + "code.analysis.shinobi.jp" + "/ninja_ar/NewScript?id=00432744&hash=92aec9f0&zone=36";
+	  sc.async=true;
+	  ins.parentNode.insertBefore(sc, ins);
+	})(document);
+}
+//]]>
+</script>
+<!-- /NINJA ANALYZE -->
+
+
+</body>
+</html>
