@@ -1820,6 +1820,11 @@ window.onload = function() {
 		g_exports	= instance.exports;
 		g_memory	= g_exports.memory;
 		
+		
+		// 2020/02/25, for debug :
+		console.log( g_exports );
+		
+		
 		// g_memory ‚É‘Î‰‚µ‚Ä‚¢‚é ArrayBuffer ‚ğAJS ‚Ì HEAP8[] ”z—ñ
 		// ‚É“Š‰e‚·‚é :
 		_js_on_grow_memory();
