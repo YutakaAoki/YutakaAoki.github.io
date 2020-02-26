@@ -114,24 +114,7 @@ _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 	g_ctx_s[idxCanvas] = ctx;
 	return 1;},
 
-_jsfunc_Wnd_2 : function ($0, $1)
-{
-	var idxCanvas = $0;
-	var sizeFont = $1;
-	var sxFont = sizeFont / 2.0;
-	var ctx = g_ctx_s[idxCanvas];
-	{
-	var font_name = "MS Gothic";
-	ctx.font = "normal normal " + String(sizeFont) + "px " + font_name;
-	var sxTextX = ctx.measureText("X").width;
-	var ratio = sxTextX / sxFont;
-	var strFont = "normal normal " + String( sizeFont / ratio ) + "px " + font_name;
-	g_strFont_s[idxCanvas] = strFont;
-	ctx.font = strFont;
-	}
-	return 1;},
-
-_jsfunc_Wnd_3 : function ($0, $1, $2)
+_jsfunc_Wnd_2 : function ($0, $1, $2)
 {
 	var idxCanvas = $0;
 	var x = $1;
@@ -140,7 +123,7 @@ _jsfunc_Wnd_3 : function ($0, $1, $2)
 	whole_div.style.left = String(x) + "px";
 	whole_div.style.top = String(y) + "px";},
 
-_jsfunc_Wnd_4 : function ($0, $1, $2, $3, $4, $5, $6, $7)
+_jsfunc_Wnd_3 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 {
 	var idxCanvas = $0;
 	var x = $1;
@@ -185,27 +168,27 @@ _jsfunc_Wnd_4 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 	canvas_wgl.style.height = String(client_sy) + "px";
 	}},
 
-_jsfunc_Wnd_5 : function ($0, $1, $2)
+_jsfunc_Wnd_4 : function ($0, $1, $2)
 {
 	var whole_div = g_whole_div_s[$0];
 	whole_div.style.left = String($1) + "px";
 	whole_div.style.top = String($2) + "px";},
 
-_jsfunc_Wnd_6 : function ()
+_jsfunc_Wnd_5 : function ()
 {
 	console.log( "CWnd::OnLButtonDown(), call wasm_UnfocusHiddenInputTag()" );},
 
-_jsfunc_Wnd_7 : function ($0)
+_jsfunc_Wnd_6 : function ($0)
 {
 	var ctx = g_ctx_s[$0];
 	ctx.save();},
 
-_jsfunc_Wnd_8 : function ($0)
+_jsfunc_Wnd_7 : function ($0)
 {
 	var ctx = g_ctx_s[$0];
 	ctx.restore();},
 
-_jsfunc_Wnd_9 : function ($0)
+_jsfunc_Wnd_8 : function ($0)
 {
 	var idxCanvas = $0;
 	var whole_div = g_whole_div_s[idxCanvas];
@@ -216,7 +199,7 @@ _jsfunc_Wnd_9 : function ($0)
 	g_ctx_s[idxCanvas] = 0;
 	return 1;},
 
-_jsfunc_Wnd_10 : function ($0, $1)
+_jsfunc_Wnd_9 : function ($0, $1)
 {
 	var pTimer = $0;
 	var millisec = $1;
@@ -225,12 +208,12 @@ _jsfunc_Wnd_10 : function ($0, $1)
 	};
 	return setInterval( js_OnTimer, millisec );},
 
-_jsfunc_Wnd_11 : function ($0)
+_jsfunc_Wnd_10 : function ($0)
 {
 	var idTimer = $0;
 	clearInterval( idTimer );},
 
-_jsfunc_Wnd_12 : function ($0, $1, $2, $3)
+_jsfunc_Wnd_11 : function ($0, $1, $2, $3)
 {
 	var idxCanvas = $0;
 	var idxCanvas_wgl = $1;
@@ -430,7 +413,7 @@ _jsfunc_DC_5 : function ($0, $1, $2)
 	elm.style.border = "0px solid #000000";
 	elm.textContent = str;
 	document.body.appendChild(elm);
-	let sx = elm.clientWidth;
+	let sx = ctx.measureText(str).width;
 	_gjs_nwsGetTextExtent_sy = elm.clientHeight;
 	document.body.removeChild(elm);
 	return sx;},
@@ -451,6 +434,23 @@ _jsfunc_DC_7 : function ($0, $1, $2, $3, $4, $5)
 	ctx.strokeStyle = strCol;
 	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
 	ctx.stroke();},
+
+_jsfunc_DC_8 : function ($0, $1)
+{
+	var idxCanvas = $0;
+	var sizeFont = $1;
+	var sxFont = sizeFont / 2.0;
+	var ctx = g_ctx_s[idxCanvas];
+	{
+	var font_name = "MS Gothic";
+	ctx.font = "normal normal " + String(sizeFont) + "px " + font_name;
+	var sxTextX = ctx.measureText("X").width;
+	var ratio = sxTextX / sxFont;
+	var strFont = "normal normal " + String( sizeFont / ratio ) + "px " + font_name;
+	g_strFont_s[idxCanvas] = strFont;
+	ctx.font = strFont;
+	}
+	return 1;},
 
 _jsfunc_BaseWnd_1 : function ()
 {
