@@ -1210,7 +1210,6 @@ _jsfunc_NewEntry_9 : function ()
 	gjs_touch_mark_x = mx;
 	gjs_touch_mark_y = my;
 	if ( g_bTouchSupported ) {
-	console.log( "js_move_touch_mark(), gjs_typeCursor=" + gjs_typeCursor );
 	var tx = mx - 200 / 2;
 	var ty = my - 200 / 2;
 	let touch_mark = gjs_touch_mark_s[gjs_typeCursor];
@@ -1227,7 +1226,6 @@ _jsfunc_NewEntry_9 : function ()
 	}
 	js_set_raw_touch_mark_visibility = function( bVisible ) {
 	if ( g_bTouchSupported ) {
-	console.log( "js_set_raw_touch_mark_visibility(), gjs_typeCursor=" + gjs_typeCursor );
 	let touch_mark = gjs_touch_mark_s[gjs_typeCursor];
 	canvas_s = touch_mark.mjs_touch_mark_canvas_s;
 	if ( bVisible ) {
