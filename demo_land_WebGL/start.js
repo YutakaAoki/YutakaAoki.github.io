@@ -408,6 +408,7 @@ _jsfunc_DC_5 : function ($0, $1, $2)
 	let ctx = g_ctx_s[$0];
 	let str = Pointer_stringify_with_len($1, $2);
 	let elm = document.createElement("div");
+	elm.style["white-space"] = "nowrap";
 	elm.style.font = ctx.font;
 	elm.style.display = "inline-block";
 	elm.style.border = "0px solid #000000";
