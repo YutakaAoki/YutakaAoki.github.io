@@ -2000,10 +2000,10 @@ function get_filesize(url, callback) {
 
 function ya_aaa(size)
 {
-	console.log( "YA, From HEAD, the size of test.wasm is: "
+	console.log( "YA, From HEAD, the size of main.wasm is: "
 				 + size + " bytes." );
 	
-	fetch("test.wasm")
+	fetch("main.wasm")
 	.then( response => response.arrayBuffer() )
 	.then( buffer => WebAssembly.compile(buffer) )
 	.then( module => WebAssembly.instantiate(module, imports) )
@@ -2024,7 +2024,7 @@ function ya_aaa(size)
 
 /*
 window.onload = function() {
-	get_filesize( "test.wasm", ya_aaa );
+	get_filesize( "main.wasm", ya_aaa );
 }
 */
 
@@ -2097,7 +2097,7 @@ window.onload = function() {
 	div1.appendChild( span2 );
 	
 	
-	fetch("test.wasm")
+	fetch("main.wasm")
 	.then( async response => {
 		// 全バイト数(非圧縮の場合にのみ正しい値) :
 		// Apache の mod_gzip モジュールで gzip 圧縮されている場合、この値は圧縮後の値であって、

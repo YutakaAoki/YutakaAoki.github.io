@@ -13,7 +13,7 @@ var cacheList = [
 	"./icon-256.png",
 	"./icon-512.png",
 	
-	"./test.wasm",
+	"./main.wasm",
 	"./hogo.js",
 	"./start.js"
 ];
