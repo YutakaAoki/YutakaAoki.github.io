@@ -63,7 +63,7 @@ _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 	var zIndex = $10;
 	var border_width = $11;
 	var div_parent;
-	if ( idxParent == 0 ) {
+	if ( idxParent == ( - 1 ) ) {
 	div_parent = document.body;
 	}
 	else {
@@ -142,7 +142,7 @@ _jsfunc_Wnd_3 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 	whole_div.style.top = String(y) + "px";
 	whole_div.style.width = String(sx) + "px";
 	whole_div.style.height = String(sy) + "px";
-	if ( idxCanvas_wgl == 0 ) {
+	if ( idxCanvas_wgl == ( - 1 ) ) {
 	canvas.width = String(sx);
 	canvas.height = String(sy);
 	canvas.style.border = "0px solid #008080";
@@ -409,7 +409,8 @@ _jsfunc_DC_5 : function ($0, $1, $2)
 	let str = Pointer_stringify_with_len($1, $2);
 	let elm = document.createElement("div");
 	elm.style["white-space"] = "nowrap";
-	elm.style.font = ctx.font;
+	elm.style.font = g_strFont_s[$0];
+	ctx.font = g_strFont_s[$0];
 	elm.style.display = "inline-block";
 	elm.style.border = "0px solid #000000";
 	elm.textContent = str;
@@ -545,22 +546,22 @@ _jsfunc_TopWnd_3 : function ()
 	whole_div.appendChild( cancel_button );
 	g_open_dlg_obj.m_cancel_button = cancel_button;
 	file_input_tag.onclick = function(event) {
-	console.log( "file_input_tag.onclick() is coming. " );
+	console.log( "file_input_tag.onclick() has come. " );
 	}
 	file_input_tag.onblur = function(event) {
-	console.log( "file_input_tag.onblur() is coming. " );
+	console.log( "file_input_tag.onblur() has come. " );
 	}
 	file_input_tag.onfocus = function(event) {
-	console.log( "file_input_tag.onfocus() is coming. " );
+	console.log( "file_input_tag.onfocus() has come. " );
 	}
 	document.body.onfocus = function(event) {
-	console.log( "document.body.onfocus() is coming." );
+	console.log( "document.body.onfocus() has come." );
 	}
 	document.body.onblur = function(event) {
-	console.log( "document.body.onblur() is coming." );
+	console.log( "document.body.onblur() has come." );
 	}
 	file_input_tag.onchange = function(event) {
-	console.log( "file_input_tag.onchange() is coming. " );
+	console.log( "file_input_tag.onchange() has come. " );
 	g_open_dlg_obj.m_bOk = 1;
 	var file_list = event.target.files;
 	g_open_dlg_obj.m_file_list = file_list;
@@ -596,6 +597,13 @@ _jsfunc_TopWnd_6 : function ()
 	document.body.appendChild(atag);
 	atag.click();
 	document.body.removeChild(atag);},
+
+_jsfunc_TopWnd_7 : function ($0, $1)
+{
+	var idxCanvas = $0;
+	var zIndex = $1;
+	var whole_div = g_whole_div_s[idxCanvas];
+	whole_div.style.zIndex = String(zIndex);},
 
 _jsfunc_Image_1 : function ($0)
 {
