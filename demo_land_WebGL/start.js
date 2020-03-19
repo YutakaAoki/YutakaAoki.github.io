@@ -1379,12 +1379,13 @@ _jsfunc_NewEntry_24 : function ($0, $1)
 {
 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
-_jsfunc_main_1 : function ($0)
+_jsfunc_main_1 : function ($0, $1)
 {
 	var idxCanvas_wgl = $0;
 	var gl = g_ctx_s[idxCanvas_wgl];
 	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
 	var prg = g_prg;
+	var scroll = $1;
 	gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 	gl.clearColor(0.0, 0.0, 0.0, 0.0);
 	gl.clearDepth(1.0);
@@ -1517,7 +1518,18 @@ _jsfunc_main_7 : function ($0)
 	g_attStride[0] = 3;
 	g_attStride[1] = 4;},
 
-_jsfunc_main_8 : function ($0, $1)
+_jsfunc_main_8 : function ($0)
+{
+	var idxCanvas_wgl = $0;
+	var gl = g_ctx_s[idxCanvas_wgl];
+	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
+	g_my_pos_vbo = create_vbo2_dynamic(g_js_mesh3D);
+	g_my_col_vbo = create_vbo2_dynamic(g_js_color_array);
+	set_attribute( [g_my_pos_vbo, g_my_col_vbo], g_attLocation, g_attStride );
+	g_my_ibo = create_ibo2_dynamic(g_js_wgl_index_s);
+	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, g_my_ibo);},
+
+_jsfunc_main_9 : function ($0, $1)
 {
 	var mesh3d_addr = $0;
 	var color_array_addr = $1;
@@ -1533,7 +1545,7 @@ _jsfunc_main_8 : function ($0, $1)
 	4 * 50 * 300
 	);},
 
-_jsfunc_main_9 : function ($0, $1)
+_jsfunc_main_10 : function ($0, $1)
 {
 	var index_addr = $0;
 	var num_indices = $1;
@@ -1543,17 +1555,6 @@ _jsfunc_main_9 : function ($0, $1)
 	index_addr,
 	num_indices
 	);},
-
-_jsfunc_main_10 : function ($0)
-{
-	var idxCanvas_wgl = $0;
-	var gl = g_ctx_s[idxCanvas_wgl];
-	var canvas_wgl = g_canvas_s[idxCanvas_wgl];
-	g_my_pos_vbo = create_vbo2_dynamic(g_js_mesh3D);
-	g_my_col_vbo = create_vbo2_dynamic(g_js_color_array);
-	set_attribute( [g_my_pos_vbo, g_my_col_vbo], g_attLocation, g_attStride );
-	g_my_ibo = create_ibo2_dynamic(g_js_wgl_index_s);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, g_my_ibo);},
 
 _jsfunc_main_11 : function ()
 {
@@ -1891,18 +1892,21 @@ function Pointer_stringify_with_len( pTop, len ) {
 var		imports = {};
 
 
-/*
 var opts = {
-	initial : 2,
-	maximum : 100
+	initial : 2,		// 初期容量: 64KB 単位
+	//initial : 500,	// 初期容量: 64KB 単位
+	//initial : 0,		// 初期容量: 64KB 単位
+	
+	//maximum : 100		// 最大容量: 64KB 単位
+	maximum : 1000		// 最大容量: 64KB 単位
 };
+//console.log( opts );
 g_memory		= new WebAssembly.Memory(opts);
 g_memory.initial = 2;
-g_memory.maximum = 100;
+g_memory.maximum = 1000;
 
-console.log( opts );
-*/
 
+// gjs_cntGetCurMemory		= 0;
 
 
 imports.env = {
@@ -1924,7 +1928,16 @@ imports.env = {
 	
 	
 	js_get_current_memory : function() {
-	//	alert( "js_get_current_memory() is coming" );
+		/*
+		if( gjs_cntGetCurMemory == 0 ) {
+			alert( "js_get_current_memory() is coming, g_memory.buffer.byteLength=" +
+				   g_memory.buffer.byteLength + ", pages=" +
+				   (g_memory.buffer.byteLength / 65536)
+				 );
+			
+			gjs_cntGetCurMemory++;
+		}
+		*/
 		
 		return	g_memory.buffer.byteLength / 65536;
 	},
@@ -1957,7 +1970,7 @@ imports.env = {
 		return	code;
 	},
 	
-	
+	memory: g_memory
 	
 };
 
@@ -2218,7 +2231,7 @@ window.onload = function() {
 	.then( instance => {
 		g_instance	= instance;
 		g_exports	= instance.exports;
-		g_memory	= g_exports.memory;
+	//	g_memory	= g_exports.memory;
 		
 		
 		// 2020/02/25, for debug :

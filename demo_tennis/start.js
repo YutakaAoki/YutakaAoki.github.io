@@ -2057,18 +2057,21 @@ function Pointer_stringify_with_len( pTop, len ) {
 var		imports = {};
 
 
-/*
 var opts = {
-	initial : 2,
-	maximum : 100
+	initial : 2,		// 初期容量: 64KB 単位
+	//initial : 500,	// 初期容量: 64KB 単位
+	//initial : 0,		// 初期容量: 64KB 単位
+	
+	//maximum : 100		// 最大容量: 64KB 単位
+	maximum : 1000		// 最大容量: 64KB 単位
 };
+//console.log( opts );
 g_memory		= new WebAssembly.Memory(opts);
 g_memory.initial = 2;
-g_memory.maximum = 100;
+g_memory.maximum = 1000;
 
-console.log( opts );
-*/
 
+// gjs_cntGetCurMemory		= 0;
 
 
 imports.env = {
@@ -2090,7 +2093,16 @@ imports.env = {
 	
 	
 	js_get_current_memory : function() {
-	//	alert( "js_get_current_memory() is coming" );
+		/*
+		if( gjs_cntGetCurMemory == 0 ) {
+			alert( "js_get_current_memory() is coming, g_memory.buffer.byteLength=" +
+				   g_memory.buffer.byteLength + ", pages=" +
+				   (g_memory.buffer.byteLength / 65536)
+				 );
+			
+			gjs_cntGetCurMemory++;
+		}
+		*/
 		
 		return	g_memory.buffer.byteLength / 65536;
 	},
@@ -2123,7 +2135,7 @@ imports.env = {
 		return	code;
 	},
 	
-	
+	memory: g_memory
 	
 };
 
@@ -2384,7 +2396,7 @@ window.onload = function() {
 	.then( instance => {
 		g_instance	= instance;
 		g_exports	= instance.exports;
-		g_memory	= g_exports.memory;
+	//	g_memory	= g_exports.memory;
 		
 		
 		// 2020/02/25, for debug :
