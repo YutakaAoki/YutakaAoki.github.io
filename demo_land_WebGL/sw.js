@@ -56,6 +56,8 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
 	let		url			= e.request.url;
+	console.log( "sw, fetch, url=", url );
+	
 	var		bOnLine		= navigator.onLine;
 	let		bLocalHost	= 0;
 	{
@@ -63,21 +65,27 @@ self.addEventListener('fetch', function(e) {
 		let		bbb			= aaa[1].split( "/" );	// ["localhost:8080". "xxx". "yyy"]
 		let		ccc			= bbb[0].split( ":" );	// ["localhost", "8080"]
 		let		hostname	= ccc[0];				// "localhost" or "xxxx.com", etc
-		console.log( "aaa=", aaa );
-		console.log( "bbb=", bbb );
-		console.log( "ccc=", ccc );
-		console.log( "hostname=", hostname );
+	//	console.log( "aaa=", aaa );
+	//	console.log( "bbb=", bbb );
+	//	console.log( "ccc=", ccc );
+		console.log( "sw, fetch, hostname=", hostname );
 		if ( hostname === "localhost" ) {
 			bLocalHost	= 1;
 		}
 	}
-	console.log( "sw, Fetch Event, url=", url, ", bLocalHost=", bLocalHost, ", bOnLine=", bOnLine );
+	console.log( "sw, fetch, bLocalHost=", bLocalHost, ", bOnLine=", bOnLine );
 	
 	
 	if ( bLocalHost || bOnLine ) {
 		// when it is in localhost or online :
-		// Actually download data from the internet and store it in the local cache :
-		console.log( "sw, fetch, 1, Actually download data from the internet and store it in the local cache :", url );
+		if ( bLocalHost ) {
+			// Actually read data from the local file system and store it in the local cache :
+			console.log( "sw, fetch, 1, Actually read data from the local file system and store it in the local cache :", url );
+		}
+		else {
+			// Actually download data from the internet and store it in the local cache :
+			console.log( "sw, fetch, 1, Actually download data from the internet and store it in the local cache :", url );
+		}
 		
 		/*
 		caches.open(cacheStorageKey).then(function(cache) {
@@ -118,7 +126,7 @@ self.addEventListener('fetch', function(e) {
 		);
 	}
 	else {
-		console.log( "sw, fetch, 2 : ", url );
+		console.log( "sw, fetch, 2, I want to use cache : ", url );
 		
 		// when it is offline and not in localhost :
 		// Use the data cached previously in the local.

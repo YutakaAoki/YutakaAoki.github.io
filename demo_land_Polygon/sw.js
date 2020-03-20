@@ -55,22 +55,42 @@ self.addEventListener('activate', function(e) {
 })
 
 self.addEventListener('fetch', function(e) {
-	console.log('sw, 2019/12/05, Fetch event:', e.request.url);
+	let		url			= e.request.url;
+	console.log( "sw, fetch, url=", url );
 	
-	var bOnLine = navigator.onLine;
-	console.log('sw, Fetch event, bOnLine = ', bOnLine);
+	var		bOnLine		= navigator.onLine;
+	let		bLocalHost	= 0;
+	{
+		let		aaa			= url.split( "//" );	// ["http:", "localhost:8080/xxx/yyy"]
+		let		bbb			= aaa[1].split( "/" );	// ["localhost:8080". "xxx". "yyy"]
+		let		ccc			= bbb[0].split( ":" );	// ["localhost", "8080"]
+		let		hostname	= ccc[0];				// "localhost" or "xxxx.com", etc
+	//	console.log( "aaa=", aaa );
+	//	console.log( "bbb=", bbb );
+	//	console.log( "ccc=", ccc );
+		console.log( "sw, fetch, hostname=", hostname );
+		if ( hostname === "localhost" ) {
+			bLocalHost	= 1;
+		}
+	}
+	console.log( "sw, fetch, bLocalHost=", bLocalHost, ", bOnLine=", bOnLine );
 	
 	
-	if ( bOnLine ) {
-		// when it is online :
-		// Actually download data from the internet and store it in the local cache :
-		console.log( 'sw, Actually download data from the internet and store it in the local cache :',
-					 e.request.url );
+	if ( bLocalHost || bOnLine ) {
+		// when it is in localhost or online :
+		if ( bLocalHost ) {
+			// Actually read data from the local file system and store it in the local cache :
+			console.log( "sw, fetch, 1, Actually read data from the local file system and store it in the local cache :", url );
+		}
+		else {
+			// Actually download data from the internet and store it in the local cache :
+			console.log( "sw, fetch, 1, Actually download data from the internet and store it in the local cache :", url );
+		}
 		
 		/*
 		caches.open(cacheStorageKey).then(function(cache) {
 			e.respondWith(
-				cache.add(e.request.url).then(function(response) {
+				cache.add(url).then(function(response) {
 					return	response
 				})
 			);
@@ -86,10 +106,10 @@ self.addEventListener('fetch', function(e) {
 			caches.open(cacheStorageKey).then(function(cache) {
 				cache2	= cache;
 				
-				fetch(e.request.url);
+				fetch(url);
 			}).then(function(response) {
 				// if success :
-				cache2.put(e.request.url, response);
+				cache2.put(url, response);
 				
 				return	response;
 			})
@@ -106,19 +126,21 @@ self.addEventListener('fetch', function(e) {
 		);
 	}
 	else {
-		// when it is not online :
+		console.log( "sw, fetch, 2, I want to use cache : ", url );
+		
+		// when it is offline and not in localhost :
 		// Use the data cached previously in the local.
 		e.respondWith(
 			caches.match(e.request).then(function(response) {
 				if (response != null) {
 					// if the cache exists correspond to the requested file :
-					console.log('sw, Using cache for:', e.request.url);
+					console.log('sw, Using cache for:', url);
 					return response;
 				}
 				else {
 					// if the cache dose NOT exist correspond to the requested file :
-					console.log('sw, Actually download via fetch:', e.request.url);
-					return fetch(e.request.url);
+					console.log('sw, Actually download via fetch:', url);
+					return fetch(url);
 				}
 			})
 		);
