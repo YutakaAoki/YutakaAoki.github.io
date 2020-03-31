@@ -48,26 +48,32 @@ _jsfunc_basic_math_3 : function ($0, $1)
 	var y = $1;
 	return Math.pow( x, y );},
 
-_jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+_jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
 {
 	var idxCanvas = $0;
 	var idxParent = $1;
-	var x = $2;
-	var y = $3;
-	var sx = $4;
-	var sy = $5;
-	var client_org_x = $6;
-	var client_org_y = $7;
-	var client_sx = $8;
-	var client_sy = $9;
-	var zIndex = $10;
-	var border_width = $11;
+	var bNcChild = $2;
+	var x = $3;
+	var y = $4;
+	var sx = $5;
+	var sy = $6;
+	var client_org_x = $7;
+	var client_org_y = $8;
+	var client_sx = $9;
+	var client_sy = $10;
+	var zIndex = $11;
+	var border_width = $12;
 	var div_parent;
 	if ( idxParent == ( - 1 ) ) {
 	div_parent = document.body;
 	}
 	else {
+	if ( bNcChild ) {
+	div_parent = g_whole_div_s[idxParent];
+	}
+	else {
 	div_parent = g_client_div_s[idxParent];
+	}
 	}
 	var whole_div = document.createElement("div");
 	whole_div.width = String(sx);
@@ -123,7 +129,7 @@ _jsfunc_Wnd_2 : function ($0, $1, $2)
 	whole_div.style.left = String(x) + "px";
 	whole_div.style.top = String(y) + "px";},
 
-_jsfunc_Wnd_3 : function ($0, $1, $2, $3, $4, $5, $6, $7)
+_jsfunc_Wnd_3 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 {
 	var idxCanvas = $0;
 	var x = $1;
@@ -132,7 +138,10 @@ _jsfunc_Wnd_3 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 	var sy = $4;
 	var client_sx = $5;
 	var client_sy = $6;
-	var idxCanvas_wgl = $7;
+	var bClientPosChanged = $7;
+	var client_org_x = $8;
+	var client_org_y = $9;
+	var idxCanvas_wgl = $10;
 	var whole_div = g_whole_div_s[idxCanvas];
 	var canvas = g_canvas_s[idxCanvas];
 	var client_div = g_client_div_s[idxCanvas];
@@ -166,29 +175,27 @@ _jsfunc_Wnd_3 : function ($0, $1, $2, $3, $4, $5, $6, $7)
 	canvas_wgl.height = String(client_sy);
 	canvas_wgl.style.width = String(client_sx) + "px";
 	canvas_wgl.style.height = String(client_sy) + "px";
+	}
+	if ( bClientPosChanged ) {
+	client_div.style.left = String(client_org_x) + "px";
+	client_div.style.top = String(client_org_y) + "px";
 	}},
 
-_jsfunc_Wnd_4 : function ($0, $1, $2)
-{
-	var whole_div = g_whole_div_s[$0];
-	whole_div.style.left = String($1) + "px";
-	whole_div.style.top = String($2) + "px";},
-
-_jsfunc_Wnd_5 : function ()
+_jsfunc_Wnd_4 : function ()
 {
 	console.log( "CWnd::OnLButtonDown(), call wasm_UnfocusHiddenInputTag()" );},
 
-_jsfunc_Wnd_6 : function ($0)
+_jsfunc_Wnd_5 : function ($0)
 {
 	var ctx = g_ctx_s[$0];
 	ctx.save();},
 
-_jsfunc_Wnd_7 : function ($0)
+_jsfunc_Wnd_6 : function ($0)
 {
 	var ctx = g_ctx_s[$0];
 	ctx.restore();},
 
-_jsfunc_Wnd_8 : function ($0)
+_jsfunc_Wnd_7 : function ($0)
 {
 	var idxCanvas = $0;
 	var whole_div = g_whole_div_s[idxCanvas];
@@ -199,7 +206,7 @@ _jsfunc_Wnd_8 : function ($0)
 	g_ctx_s[idxCanvas] = 0;
 	return 1;},
 
-_jsfunc_Wnd_9 : function ($0, $1)
+_jsfunc_Wnd_8 : function ($0, $1)
 {
 	var pTimer = $0;
 	var millisec = $1;
@@ -208,12 +215,12 @@ _jsfunc_Wnd_9 : function ($0, $1)
 	};
 	return setInterval( js_OnTimer, millisec );},
 
-_jsfunc_Wnd_10 : function ($0)
+_jsfunc_Wnd_9 : function ($0)
 {
 	var idTimer = $0;
 	clearInterval( idTimer );},
 
-_jsfunc_Wnd_11 : function ($0, $1, $2, $3)
+_jsfunc_Wnd_10 : function ($0, $1, $2, $3)
 {
 	var idxCanvas = $0;
 	var idxCanvas_wgl = $1;
