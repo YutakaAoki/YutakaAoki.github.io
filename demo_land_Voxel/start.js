@@ -1075,6 +1075,14 @@ _jsfunc_NewEntry_9 : function ()
 	}
 	);
 	}
+	document.addEventListener( 'wheel',
+	js_OnWheel,
+	{
+	once: false,
+	passive: false,
+	capture: true
+	}
+	);
 	function is_ignore_key(key) {
 	if ( key == 8 ||
 	key == 0x20 ||
@@ -1305,6 +1313,17 @@ _jsfunc_NewEntry_9 : function ()
 	touch.pageY * g_scaling,
 	g_scaling * 1000
 	);
+	if ( bProcessed ) {
+	e.preventDefault();
+	e.stopPropagation();
+	}
+	}
+	function js_OnWheel(e) {
+	js_MyPrint( "js_OnWheel is coming" );
+	var bProcessed = g_exports.c_OnWheel(
+	e.deltaY
+	);
+	js_MyPrint( "js_OnWheel: " + bProcessed );
 	if ( bProcessed ) {
 	e.preventDefault();
 	e.stopPropagation();
