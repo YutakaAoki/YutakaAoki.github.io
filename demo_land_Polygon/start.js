@@ -414,17 +414,11 @@ _jsfunc_DC_5 : function ($0, $1, $2)
 {
 	let ctx = g_ctx_s[$0];
 	let str = Pointer_stringify_with_len($1, $2);
-	let elm = document.createElement("div");
-	elm.style["white-space"] = "nowrap";
-	elm.style.font = g_strFont_s[$0];
+	gjs_text_measure_elm.style.font = g_strFont_s[$0];
 	ctx.font = g_strFont_s[$0];
-	elm.style.display = "inline-block";
-	elm.style.border = "0px solid #000000";
-	elm.textContent = str;
-	document.body.appendChild(elm);
+	gjs_text_measure_elm.textContent = str;
 	let sx = ctx.measureText(str).width;
-	_gjs_nwsGetTextExtent_sy = elm.clientHeight;
-	document.body.removeChild(elm);
+	_gjs_nwsGetTextExtent_sy = gjs_text_measure_elm.clientHeight;
 	return sx;},
 
 _jsfunc_DC_6 : function ()
@@ -732,6 +726,18 @@ _jsfunc_NewEntry_2 : function ($0, $1, $2)
 
 _jsfunc_NewEntry_3 : function ()
 {
+	gjs_text_measure_elm = document.createElement("div");
+	gjs_text_measure_elm.style["white-space"] = "nowrap";
+	gjs_text_measure_elm.style.display = "inline-block";
+	gjs_text_measure_elm.style.border = "1px solid #00FF00";
+	gjs_text_measure_elm.style.position = "absolute";
+	gjs_text_measure_elm.style.left = "100000px";
+	gjs_text_measure_elm.style.top = "0px";
+	gjs_text_measure_elm.style.visibility = "hidden";
+	document.body.appendChild(gjs_text_measure_elm);},
+
+_jsfunc_NewEntry_4 : function ()
+{
 	js_genshi_line = function(ctx, x1, y1, x2, y2, strCol, width) {
 	ctx.beginPath();
 	ctx.lineWidth = width;
@@ -968,7 +974,7 @@ _jsfunc_NewEntry_3 : function ()
 	gjs_touch_mark_s[i] = new touch_mark_ctor( i );
 	}},
 
-_jsfunc_NewEntry_4 : function ()
+_jsfunc_NewEntry_5 : function ()
 {
 	g_bIME = 0;
 	g_bComposStarted = 0;
@@ -1010,16 +1016,16 @@ _jsfunc_NewEntry_4 : function ()
 	document.body.appendChild(g_input_tag);
 	g_input_tag.focus();},
 
-_jsfunc_NewEntry_5 : function ()
+_jsfunc_NewEntry_6 : function ()
 {
 	g_outarea = document.getElementById( "outarea" );
 	g_js_img_hash = {};},
 
-_jsfunc_NewEntry_6 : function ()
+_jsfunc_NewEntry_7 : function ()
 {
 	g_scaling = 1.0;},
 
-_jsfunc_NewEntry_7 : function ()
+_jsfunc_NewEntry_8 : function ()
 {
 	var canvas = document.createElement("canvas");
 	var ctx = canvas.getContext("2d");
@@ -1028,7 +1034,7 @@ _jsfunc_NewEntry_7 : function ()
 	js_MyPrint( "font_check, width of font 'X' = " + sxTextX );
 	js_MyPrint( "sxTextX / 16.0 = " + (sxTextX / 16.0) );},
 
-_jsfunc_NewEntry_8 : function ()
+_jsfunc_NewEntry_9 : function ()
 {
 	g_canvas_s = new Array(200 );
 	g_whole_div_s = new Array(200 );
@@ -1036,7 +1042,7 @@ _jsfunc_NewEntry_8 : function ()
 	g_client_div_s = new Array(200 );
 	g_strFont_s = new Array(200 );},
 
-_jsfunc_NewEntry_9 : function ()
+_jsfunc_NewEntry_10 : function ()
 {
 	g_js_bInputInputEvent = 0;
 	g_input_tag.addEventListener( 'keydown', js_keydown, {passive: false} );
@@ -1330,7 +1336,7 @@ _jsfunc_NewEntry_9 : function ()
 	}
 	}},
 
-_jsfunc_NewEntry_10 : function ()
+_jsfunc_NewEntry_11 : function ()
 {
 	count = 0;
 	function js_OnMainTimer() {
@@ -1338,7 +1344,7 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	setInterval(js_OnMainTimer, 20);},
 
-_jsfunc_NewEntry_11 : function ($0)
+_jsfunc_NewEntry_12 : function ($0)
 {
 	var bEnable = $0;
 	if ( gjs_bTouchMarkEnable ) {
@@ -1348,60 +1354,60 @@ _jsfunc_NewEntry_11 : function ($0)
 	}
 	gjs_bTouchMarkEnable = bEnable;},
 
-_jsfunc_NewEntry_12 : function ()
+_jsfunc_NewEntry_13 : function ()
 {
 	g_bComposStarted = 1;},
 
-_jsfunc_NewEntry_13 : function ()
+_jsfunc_NewEntry_14 : function ()
 {
 	g_bComposStarted = 0;},
 
-_jsfunc_NewEntry_14 : function ($0)
+_jsfunc_NewEntry_15 : function ($0)
 {
 	return g_js_ime_unicode_s[$0];},
 
-_jsfunc_NewEntry_15 : function ()
+_jsfunc_NewEntry_16 : function ()
 {
 	js_set_delay_input_tag_caret_goto_btm();},
 
-_jsfunc_NewEntry_16 : function ($0)
+_jsfunc_NewEntry_17 : function ($0)
 {
 	g_bIME = $0;},
 
-_jsfunc_NewEntry_17 : function ()
+_jsfunc_NewEntry_18 : function ()
 {
 	g_input_tag.style["background-color"] = "#ffffff";
 	g_input_tag.style.left = "220px";},
 
-_jsfunc_NewEntry_18 : function ()
+_jsfunc_NewEntry_19 : function ()
 {
 	g_input_tag.style.left = "-10000px";},
 
-_jsfunc_NewEntry_19 : function ($0)
+_jsfunc_NewEntry_20 : function ($0)
 {
 	var str1 = Pointer_stringify($0);
 	g_outarea.value += str1;
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_20 : function ($0)
+_jsfunc_NewEntry_21 : function ($0)
 {
 	g_outarea.value += String($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_21 : function ($0)
+_jsfunc_NewEntry_22 : function ($0)
 {
 	g_outarea.value += String.fromCharCode($0);
 	g_outarea.scrollTop = g_outarea.scrollHeight;},
 
-_jsfunc_NewEntry_22 : function ($0, $1)
+_jsfunc_NewEntry_23 : function ($0, $1)
 {
 	alert( Pointer_stringify($0) + String($1) );},
 
-_jsfunc_NewEntry_23 : function ()
+_jsfunc_NewEntry_24 : function ()
 {
 	alert( "abort() is called." );},
 
-_jsfunc_NewEntry_24 : function ($0, $1)
+_jsfunc_NewEntry_25 : function ($0, $1)
 {
 	js_MyPrint( String($0) + ", " + Pointer_stringify($1) );},
 
