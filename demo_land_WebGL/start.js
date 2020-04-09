@@ -1325,11 +1325,9 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	}
 	function js_OnWheel(e) {
-	js_MyPrint( "js_OnWheel is coming" );
 	var bProcessed = g_exports.c_OnWheel(
 	e.deltaY
 	);
-	js_MyPrint( "js_OnWheel: " + bProcessed );
 	if ( bProcessed ) {
 	e.preventDefault();
 	e.stopPropagation();
