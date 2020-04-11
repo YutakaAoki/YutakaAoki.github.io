@@ -79,6 +79,7 @@ _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
 	whole_div.width = String(sx);
 	whole_div.height = String(sy);
 	whole_div.style.border = "0px solid #0080FF";
+	whole_div.style.overflow = "hidden";
 	whole_div.style.position = "absolute";
 	whole_div.style.left = String(x) + "px";
 	whole_div.style.top = String(y) + "px";
@@ -1054,6 +1055,7 @@ _jsfunc_NewEntry_10 : function ()
 	document.addEventListener( 'mousemove', js_mousemove, {passive: false} );
 	document.addEventListener( 'mousedown', js_mousedown, {passive: false} );
 	document.addEventListener( 'mouseup', js_mouseup, {passive: false} );
+	document.addEventListener( 'dblclick', js_dblclick, {passive: false} );
 	}
 	else {
 	document.addEventListener( 'touchstart',
@@ -1089,6 +1091,7 @@ _jsfunc_NewEntry_10 : function ()
 	capture: true
 	}
 	);
+	window.onresize = js_OnResizeSandbox;
 	function is_ignore_key(key) {
 	if ( key == 8 ||
 	key == 0x20 ||
@@ -1203,6 +1206,17 @@ _jsfunc_NewEntry_10 : function ()
 	};
 	function js_mousedown(e) {
 	var bProcessed = g_exports.c_mousedown(
+	e.clientX * g_scaling,
+	e.clientY * g_scaling,
+	e.button
+	);
+	if ( bProcessed ) {
+	e.preventDefault();
+	e.stopPropagation();
+	}
+	}
+	function js_dblclick(e) {
+	var bProcessed = g_exports.c_dblclick(
 	e.clientX * g_scaling,
 	e.clientY * g_scaling,
 	e.button
@@ -1332,6 +1346,9 @@ _jsfunc_NewEntry_10 : function ()
 	e.preventDefault();
 	e.stopPropagation();
 	}
+	}
+	function js_OnResizeSandbox(e) {
+	g_exports.c_OnResizeSandbox();
 	}},
 
 _jsfunc_NewEntry_11 : function ()

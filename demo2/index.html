@@ -25,21 +25,31 @@
   <br>
   <div>Network: <span id="network_status" class="">Offline</span></div>
   <script type="text/javascript">
-	if ( navigator.serviceWorker != null ) {
-	  navigator.serviceWorker.register( 'sw.js' )
-	  .then(function(registration) {
-		// registration worked
-		console.log('from main, sw, Registration of ServiceWorker has succeeded.');
-		console.log('from main, sw, Registered events at scope: ',
-					registration.scope);
-		console.log('from main, sw, force to registration.update()');
-		registration.update();
-	  });
+	let		bLocalHost	= 0;
+	{
+		console.log( "from main, sw, location.hostname=", location.hostname );
+		if ( location.hostname === "localhost" ) {
+			bLocalHost	= 1;
+		}
 	}
-	// fetch('data.json')
-	var statusEl = document.querySelector('#network_status');
+	if ( bLocalHost || navigator.onLine ) {
+		// url is localhost (during developing), or computer has network :
+		if ( navigator.serviceWorker != null ) {
+			console.log( "from main, sw, now register ServiceWorker." );
+			navigator.serviceWorker.register( "sw.js" ).then(
+				function(registration) {
+					// registration succeeded :
+					console.log( "from main, sw, Registration of ServiceWorker has succeeded." );
+					
+					console.log( "from main, sw, force to registration.update()" );
+					registration.update();
+				}
+			);
+		}
+	}
 	if ( navigator.onLine ) {
-	  statusEl.innerText = 'Online';
+		let statusElem = document.querySelector('#network_status');
+		statusElem.innerText = "Online";
 	}
   </script>
 

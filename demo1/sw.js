@@ -132,6 +132,8 @@ self.addEventListener('fetch', function(e) {
 		// Use the data cached previously in the local.
 		e.respondWith(
 			caches.match(e.request).then(function(response) {
+				console.log( "sw, fetch, 3, response=", response );
+				
 				if (response != null) {
 					// if the cache exists correspond to the requested file :
 					console.log('sw, Using cache for:', url);
