@@ -111,10 +111,6 @@ _jsfunc_Wnd_1 : function ($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
 	new_client_div.style.overflow = "hidden";
 	whole_div.appendChild(new_client_div);
 	var ctx = canvas.getContext("2d");
-	ctx.fillStyle = "#80ffff";
-	ctx.fillRect(0, 0, 100, 100);
-	ctx.strokeStyle = "#bb00bb";
-	ctx.strokeRect(0, 0, 100, 100);
 	g_whole_div_s[idxCanvas] = whole_div;
 	g_canvas_s[idxCanvas] = canvas;
 	g_client_div_s[idxCanvas] = new_client_div;
