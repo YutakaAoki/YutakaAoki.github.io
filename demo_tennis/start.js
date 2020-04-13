@@ -976,6 +976,7 @@ _jsfunc_NewEntry_5 : function ()
 	g_bIME = 0;
 	g_bComposStarted = 0;
 	g_input_tag = null;
+	gjs_bRButtonUpProcessd = 0;
 	js_make_input_tag_caret_goto_btm = function() {
 	var len = g_input_tag.value.length;
 	g_input_tag.setSelectionRange(len, len);
@@ -1088,6 +1089,7 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	);
 	window.onresize = js_OnResizeSandbox;
+	window.oncontextmenu = js_OnContextMenu;
 	function is_ignore_key(key) {
 	if ( key == 8 ||
 	key == 0x20 ||
@@ -1232,6 +1234,11 @@ _jsfunc_NewEntry_10 : function ()
 	e.preventDefault();
 	e.stopPropagation();
 	}
+	else {
+	}
+	if ( e.button == 2 ) {
+	gjs_bRButtonUpProcessd = bProcessed;
+	}
 	}
 	function js_mousemove(e) {
 	var bProcessed = g_exports.c_mousemove(
@@ -1345,6 +1352,13 @@ _jsfunc_NewEntry_10 : function ()
 	}
 	function js_OnResizeSandbox(e) {
 	g_exports.c_OnResizeSandbox();
+	}
+	function js_OnContextMenu(e) {
+	js_MyPrint( "js_OnContextMenu() has come" );
+	if ( gjs_bRButtonUpProcessd ) {
+	e.preventDefault();
+	}
+	gjs_bRButtonUpProcessd = 0;
 	}},
 
 _jsfunc_NewEntry_11 : function ()
