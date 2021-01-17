@@ -1651,6 +1651,14 @@ _jsfunc_NewEntry_17 : function ()
 	if ( !(numTouch2 > 0) ) {
 	return 0;
 	}
+	let idAction = 0;
+	{
+	let changedTouches = e.changedTouches;
+	if ( changedTouches.length > 0 ) {
+	let touch = changedTouches[0];
+	idAction = touch.identifier;
+	}
+	}
 	let addrMem = g_exports.c_malloc( numTouch2 * 4 * 3 );
 	let i32arr = new Int32Array(g_memory.buffer, addrMem, numTouch2 * 3);
 	js_multi_touch_push_points(i32arr, 0, e.touches);
@@ -1661,7 +1669,8 @@ _jsfunc_NewEntry_17 : function ()
 	let bProcessed = g_exports.c_touch_multi(
 	addrMem,
 	numTouch2,
-	action
+	action,
+	idAction
 	);
 	g_exports.c_free( addrMem );
 	return bProcessed;
