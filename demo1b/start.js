@@ -1297,7 +1297,6 @@ _jsfunc_NewEntry_16 : function ()
 _jsfunc_NewEntry_17 : function ()
 {
 	js_SetMouseHandlers = function(bCaptureFlg) {
-	console.log( "js_SetMouseHandlers(), bCaptureFlg=", bCaptureFlg );
 	if ( !g_bTouchSupported ) {
 	document.addEventListener( 'mousemove', js_mousemove, {passive: false, capture: bCaptureFlg} );
 	document.addEventListener( 'mousedown', js_mousedown, {passive: false, capture: bCaptureFlg} );
@@ -1363,7 +1362,6 @@ _jsfunc_NewEntry_17 : function ()
 	return "0x" + a.toString(16).toUpperCase() + "(" + String.fromCharCode(a) + ")";
 	}
 	js_keypress_whole = function(e) {
-	console.log( "js_keypress_whole(), charCode=", js_test_ToHexStr( e.charCode ) );
 	let rr = g_exports.c_keypress_whole( e.charCode );
 	if ( rr ) {
 	e.preventDefault();
@@ -1509,7 +1507,6 @@ _jsfunc_NewEntry_17 : function ()
 	let rr = g_exports.c_keyup( key );
 	}
 	js_keydown_whole = function(e) {
-	js_MyPrint( "js_keydown_whole has come: e.keyCode=" + e.keyCode + ", loc=" + e.location + ", sft=" + e.shiftKey );
 	let key = e.keyCode;
 	let bCapsLock = e.getModifierState && e.getModifierState( 'CapsLock' );
 	let bNumLock = e.getModifierState && e.getModifierState( 'NumLock' );
@@ -1635,7 +1632,6 @@ _jsfunc_NewEntry_17 : function ()
 	}
 	function js_multi_touch_push_points(i32arr, idxStart, touches) {
 	let numTouch = touches.length;
-	console.log( "js_multi_touch_push_points, numTouch = ", numTouch );
 	let idxArr = idxStart;
 	for ( let i = 0; i < numTouch; i++ ) {
 	let touch = touches[i];
@@ -1645,16 +1641,6 @@ _jsfunc_NewEntry_17 : function ()
 	}
 	}
 	function js_multi_touch(e, action) {
-	console.log( "js_multi_touch has come." );
-	console.log( "e.touches = ", e.touches );
-	console.log( "e.changedTouches = ", e.changedTouches );
-	console.log( "typeof e.touches = ", typeof e.touches );
-	console.log( "typeof e.changedTouches = ", typeof e.changedTouches );
-	console.log( "js_multi_touch, " +
-	", e.touches.length=", e.touches.length,
-	", e.changedTouches.length=", e.changedTouches.length,
-	", e.targetTouches.length=", e.targetTouches.length
-	);
 	let numTouch2;
 	if ( action == 1 ) {
 	numTouch2 = e.touches.length + e.changedTouches.length;
@@ -1662,12 +1648,10 @@ _jsfunc_NewEntry_17 : function ()
 	else {
 	numTouch2 = e.touches.length;
 	}
-	console.log( "js_multi_touch, numTouch2=" + numTouch2 );
 	if ( !(numTouch2 > 0) ) {
 	return 0;
 	}
 	let addrMem = g_exports.c_malloc( numTouch2 * 4 * 3 );
-	console.log( "js_multi_touch_push_points, addrMem = ", addrMem );
 	let i32arr = new Int32Array(g_memory.buffer, addrMem, numTouch2 * 3);
 	js_multi_touch_push_points(i32arr, 0, e.touches);
 	if ( action == 1 ) {
