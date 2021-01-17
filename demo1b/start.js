@@ -1633,39 +1633,70 @@ _jsfunc_NewEntry_17 : function ()
 	}
 	}
 	}
+	function js_multi_touch_push_points(i32arr, idxStart, touches) {
+	let numTouch = touches.length;
+	console.log( "js_multi_touch_push_points, numTouch = ", numTouch );
+	let idxArr = idxStart;
+	for ( let i = 0; i < numTouch; i++ ) {
+	let touch = touches[i];
+	i32arr[idxArr++] = touch.clientX * g_scaling;
+	i32arr[idxArr++] = touch.clientY * g_scaling;
+	i32arr[idxArr++] = touch.identifier;
+	}
+	}
+	function js_multi_touch(e, action) {
+	console.log( "js_multi_touch has come." );
+	console.log( "e.touches = ", e.touches );
+	console.log( "e.changedTouches = ", e.changedTouches );
+	console.log( "typeof e.touches = ", typeof e.touches );
+	console.log( "typeof e.changedTouches = ", typeof e.changedTouches );
+	console.log( "js_multi_touch, " +
+	", e.touches.length=", e.touches.length,
+	", e.changedTouches.length=", e.changedTouches.length,
+	", e.targetTouches.length=", e.targetTouches.length
+	);
+	let numTouch2;
+	if ( action == 1 ) {
+	numTouch2 = e.touches.length + e.changedTouches.length;
+	}
+	else {
+	numTouch2 = e.touches.length;
+	}
+	console.log( "js_multi_touch, numTouch2=" + numTouch2 );
+	if ( !(numTouch2 > 0) ) {
+	return 0;
+	}
+	let addrMem = g_exports.c_malloc( numTouch2 * 4 * 3 );
+	console.log( "js_multi_touch_push_points, addrMem = ", addrMem );
+	let i32arr = new Int32Array(g_memory.buffer, addrMem, numTouch2 * 3);
+	js_multi_touch_push_points(i32arr, 0, e.touches);
+	if ( action == 1 ) {
+	let idx = e.touches.length;
+	js_multi_touch_push_points(i32arr, idx, e.changedTouches);
+	}
+	let bProcessed = g_exports.c_touch_multi(
+	addrMem,
+	numTouch2,
+	action
+	);
+	g_exports.c_free( addrMem );
+	return bProcessed;
+	}
 	function js_touchstart(e) {
 	let numTouch = e.touches.length;
-	let touch = e.touches[0];
-	console.log( "js_touchstart, numTouch = ", numTouch );
 	if ( !(numTouch > 0) ) {
-	return;
+	return 0;
 	}
-	let addrMem = g_exports.c_malloc( numTouch * 4 * 3 );
-	console.log( "js_touchstart, addrMem = ", addrMem );
-	let i32arr = new Int32Array(g_memory.buffer, addrMem, numTouch * 3);
-	let idxArr = 0;
-	for ( let i = 0; i < numTouch; i++ ) {
-	let touch2 = e.touches[i];
-	i32arr[idxArr++] = touch2.clientX * g_scaling;
-	i32arr[idxArr++] = touch2.clientY * g_scaling;
-	i32arr[idxArr++] = touch2.identifier;
-	}
-	g_exports.c_touch_test(
-	addrMem,
-	numTouch,
-	0
-	);
+	{
+	let touch = e.touches[0];
 	let mx = touch.clientX * g_scaling;
 	let my = touch.clientY * g_scaling;
 	if ( gjs_bTouchMarkEnable ) {
 	js_move_touch_mark(mx, my);
 	js_set_raw_touch_mark_visibility( 1 );
 	}
-	let bProcessed = g_exports.c_touch_one_core(
-	mx,
-	my,
-	0
-	);
+	}
+	let bProcessed = js_multi_touch(e, 0 );
 	if ( bProcessed ) {
 	e.preventDefault();
 	e.stopPropagation();
@@ -1675,11 +1706,7 @@ _jsfunc_NewEntry_17 : function ()
 	if ( gjs_bTouchMarkEnable ) {
 	js_set_raw_touch_mark_visibility( 0 );
 	}
-	let bProcessed = g_exports.c_touch_one_core(
-	0,
-	0,
-	1
-	);
+	let bProcessed = js_multi_touch(e, 1 );
 	if ( bProcessed ) {
 	e.preventDefault();
 	e.stopPropagation();
@@ -1693,11 +1720,7 @@ _jsfunc_NewEntry_17 : function ()
 	js_move_touch_mark(mx, my);
 	js_set_raw_touch_mark_visibility( 1 );
 	}
-	let bProcessed = g_exports.c_touch_one_core(
-	mx,
-	my,
-	2
-	);
+	let bProcessed = js_multi_touch(e, 2 );
 	if ( bProcessed ) {
 	e.preventDefault();
 	e.stopPropagation();
