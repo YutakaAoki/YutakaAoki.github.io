@@ -1634,7 +1634,27 @@ _jsfunc_NewEntry_17 : function ()
 	}
 	}
 	function js_touchstart(e) {
+	let numTouch = e.touches.length;
 	let touch = e.touches[0];
+	console.log( "js_touchstart, numTouch = ", numTouch );
+	if ( !(numTouch > 0) ) {
+	return;
+	}
+	let addrMem = g_exports.c_malloc( numTouch * 4 * 3 );
+	console.log( "js_touchstart, addrMem = ", addrMem );
+	let i32arr = new Int32Array(g_memory.buffer, addrMem, numTouch * 3);
+	let idxArr = 0;
+	for ( let i = 0; i < numTouch; i++ ) {
+	let touch2 = e.touches[i];
+	i32arr[idxArr++] = touch2.clientX * g_scaling;
+	i32arr[idxArr++] = touch2.clientY * g_scaling;
+	i32arr[idxArr++] = touch2.identifier;
+	}
+	g_exports.c_touch_test(
+	addrMem,
+	numTouch,
+	0
+	);
 	let mx = touch.clientX * g_scaling;
 	let my = touch.clientY * g_scaling;
 	if ( gjs_bTouchMarkEnable ) {
