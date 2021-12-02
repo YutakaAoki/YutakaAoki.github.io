@@ -3,6 +3,11 @@
 <HEAD>
 <TITLE>Web Drum by NOWSMARTSOFT</TITLE>
 <script>
+	/*
+		NOWSMARTSOFT presents.
+		
+		COPYRIGHT (C) NOWSMARTSOFT.
+	*/
 	var context = null;
 	
 	const ID_BASS	= 0;
@@ -23,7 +28,7 @@
 		}
 		catch(e) {
 			context = null;
-			alert("このブラウザではWeb Audio APIがサポートされていません。");
+			alert("Web Audio API is not supported in this browser.");
 		}
 		
 	  	console.log( "init, 2, context=" + context );
@@ -52,7 +57,7 @@
 				},
 				function()
 				{
-					alert("音声ファイルの読み込みに失敗しました。");
+					alert( "failed sound data '" + url + "'" );
 				});
 		}
 	  	console.log( "MyLoad, 7" );
@@ -69,7 +74,7 @@
 		var source = context.createBufferSource();
 		source.buffer = bufAudio[idData];
 		source.connect(context.destination);
-		source.start(0); // 同じ音声ならstartだけでも良い？
+		source.start(0);	// 二度目以降はstartでもいいのかも。
 	}
 	
 	function MyInit()
