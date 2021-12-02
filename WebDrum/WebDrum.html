@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Web Drum by NOWSMARTSOFT</TITLE>
+<script>
+	var context = null;
+	
+	const ID_BASS	= 0;
+	const ID_SNARE	= 1;
+	const ID_TOM1	= 2;
+	const ID_TOM2	= 3;
+	const ID_TOM3	= 4;
+	
+	let		bufAudio	= [];		// 添え字は、ID_BASS, ID_SNARE など。
+
+	function init()
+	{
+	  	console.log( "init, 1" );
+	  	
+		try {
+			window.AudioContext = window.AudioContext || window.webkitAudioContext;
+			context = new AudioContext();
+		}
+		catch(e) {
+			context = null;
+			alert("このブラウザではWeb Audio APIがサポートされていません。");
+		}
+		
+	  	console.log( "init, 2, context=" + context );
+	}
+
+	function MyLoad(idData, url)
+	{
+	  	console.log( "MyLoad, 1" );
+	  	
+		if (!context) { return; }
+		
+	  	console.log( "MyLoad, 2" );
+		
+		var request = new XMLHttpRequest();
+	  	console.log( "MyLoad, 3" );
+		request.open('GET', url, true);
+	  	console.log( "MyLoad, 4" );
+		request.responseType = 'arraybuffer';
+	  	console.log( "MyLoad, 5" );
+		request.onload = function() {
+	  		console.log( "MyLoad, 6" );
+			context.decodeAudioData(
+				request.response,
+				function(buffer) {
+					bufAudio[idData]	= buffer;
+				},
+				function()
+				{
+					alert("音声ファイルの読み込みに失敗しました。");
+				});
+		}
+	  	console.log( "MyLoad, 7" );
+		request.send();
+	  	console.log( "MyLoad, 8" );
+	}
+
+	function playAudio(idData)
+	{
+		if ( bufAudio[idData] == null ) {
+			return;
+		}
+		
+		var source = context.createBufferSource();
+		source.buffer = bufAudio[idData];
+		source.connect(context.destination);
+		source.start(0); // 同じ音声ならstartだけでも良い？
+	}
+	
+	function MyInit()
+	{
+		if ( context == null ) {
+			init();
+			
+			MyLoad( ID_BASS, "BassDrum.mp3" );
+			MyLoad( ID_SNARE, "SnareDrum.mp3" );
+			MyLoad( ID_TOM1, "Tom1.mp3" );
+			MyLoad( ID_TOM2, "Tom2.mp3" );
+			MyLoad( ID_TOM3, "Tom3.mp3" );
+		}
+	}
+</script>
+</HEAD>
+<body onload="MyInit()">
+
+<H1 class=title>Web Drum by NOWSMARTSOFT.</H1>
+
+<button onclick="playAudio(ID_BASS);">BassDrum</button> &nbsp; b<br>
+<button onclick="playAudio(ID_SNARE);">SnareDrum</button> &nbsp; s<br>
+<button onclick="playAudio(ID_TOM1);">Tom1</button> &nbsp; z<br>
+<button onclick="playAudio(ID_TOM2);">Tom2</button> &nbsp; x<br>
+<button onclick="playAudio(ID_TOM3);">Tom3</button> &nbsp; c<br>
+
+<script>
+
+
+document.addEventListener('keypress', (e) => {
+	var keyName = e.key;
+	
+	console.log(`keypress:${keyName}`);
+	
+	if ( keyName == "b" ) {
+		playAudio(ID_BASS);
+	}
+	else if ( keyName == "s" ) {
+		playAudio(ID_SNARE);
+	}
+	else if ( keyName == "z" ) {
+		playAudio(ID_TOM1);
+	}
+	else if ( keyName == "x" ) {
+		playAudio(ID_TOM2);
+	}
+	else if ( keyName == "c" ) {
+		playAudio(ID_TOM3);
+	}
+	
+	
+});
+</script>
+
+
+</BODY>
+</HTML>
