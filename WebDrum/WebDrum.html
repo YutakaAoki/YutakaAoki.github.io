@@ -36,7 +36,7 @@
 
 	function MyLoad(idData, url)
 	{
-	  	console.log( "MyLoad, 1" );
+	  	console.log( "MyLoad, 1, url = " + url );
 	  	
 		if (!context) { return; }
 		
@@ -107,7 +107,7 @@
 document.addEventListener('keypress', (e) => {
 	var keyName = e.key;
 	
-	console.log(`keypress:${keyName}`);
+	// console.log(`keypress:${keyName}`);
 	
 	if ( keyName == "b" ) {
 		playAudio(ID_BASS);
