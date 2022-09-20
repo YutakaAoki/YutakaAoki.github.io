@@ -2427,7 +2427,7 @@ _jsfunc_main_5 : function ()
 	--gjs_cnt_packet_s;
 	if ( g_exports.c_get_continue_to_play_flag() ) {
 	let curTime = audioCtx.currentTime;
-	if ( g_timeNextPacket < curTime + (g_delta_time * 0.7) ) {
+	if ( g_timeNextPacket < curTime + (g_delta_time * 0.1) ) {
 	g_timeNextPacket = curTime + g_delta_time * 2;
 	}
 	yoyaku_packet_sound( g_timeNextPacket );
