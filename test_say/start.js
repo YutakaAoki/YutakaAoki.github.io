@@ -2398,7 +2398,7 @@ _jsfunc_main_5 : function ()
 	let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 	let channels = 1;
 	console.log( "audioCtx.sampleRate = ", audioCtx.sampleRate );
-	let g_delta_time = 0.2;
+	let g_delta_time = 0.05;
 	let g_buf_max = 2;
 	let g_timeWholeFirst;
 	let g_timeNextPacket;
@@ -2428,7 +2428,7 @@ _jsfunc_main_5 : function ()
 	if ( g_exports.c_get_continue_to_play_flag() ) {
 	let curTime = audioCtx.currentTime;
 	if ( g_timeNextPacket < curTime + (g_delta_time * 0.1) ) {
-	g_timeNextPacket = curTime + g_delta_time * 2;
+	g_timeNextPacket = curTime + g_delta_time * g_buf_max;
 	}
 	yoyaku_packet_sound( g_timeNextPacket );
 	g_timeNextPacket += g_delta_time;
@@ -2443,7 +2443,7 @@ _jsfunc_main_5 : function ()
 	function start_my_packet_sound() {
 	g_timeWholeFirst = audioCtx.currentTime;
 	console.log( "g_timeWholeFirst = ", g_timeWholeFirst );
-	let t = g_timeWholeFirst + 0.2;
+	let t = g_timeWholeFirst + 0.1;
 	g_timeNextPacket = t + g_delta_time * g_buf_max;
 	let i;
 	for ( i = 0; i < g_buf_max; i++ ) {
